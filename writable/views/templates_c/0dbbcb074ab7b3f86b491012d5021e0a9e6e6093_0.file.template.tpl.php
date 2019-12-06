@@ -1,3 +1,29 @@
+<?php
+/* Smarty version 3.1.34-dev-7, created on 2019-12-06 13:07:17
+  from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.34-dev-7',
+  'unifunc' => 'content_5deaa6e5338f17_85082783',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
+    array (
+      0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
+      1 => 1575659172,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5deaa6e5338f17_85082783 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_loadInheritance();
+$_smarty_tpl->inheritance->init($_smarty_tpl, false);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +39,17 @@
 	<!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
 
-    [[foreach from=$header.stylesheets item=file]]
-        <link rel="stylesheet" type="text/css" href="[[$file]]">
-    [[/foreach]]
+    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['header']->value['stylesheets'], 'file');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['file']->value) {
+?>
+        <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['file']->value;?>
+">
+    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/Finance/favicon.ico/apple-icon-57x57.png">
@@ -119,14 +153,49 @@
     </div>
 
     <main role="main" class="container">
-        [[block name="ContentBody"]]Content Area[[/block]]
+        <?php 
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9846120195deaa6e53378d3_40012594', "ContentBody");
+?>
+
     </main>
 
-    <script src="/libs/jquery/js/jquery.min.js"></script>
-    <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/js/Finance/nav.js"></script>
-    [[foreach from=$footer.javascripts item=file]]
-        <script src="[[$file]]"></script>
-    [[/foreach]]
+    <?php echo '<script'; ?>
+ src="/libs/jquery/js/jquery.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="/libs/bootstrap/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="/js/Finance/nav.js"><?php echo '</script'; ?>
+>
+    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['footer']->value['javascripts'], 'file');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['file']->value) {
+?>
+        <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['file']->value;?>
+"><?php echo '</script'; ?>
+>
+    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
-</html>
+</html><?php }
+/* {block "ContentBody"} */
+class Block_9846120195deaa6e53378d3_40012594 extends Smarty_Internal_Block
+{
+public $subBlocks = array (
+  'ContentBody' => 
+  array (
+    0 => 'Block_9846120195deaa6e53378d3_40012594',
+  ),
+);
+public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
+?>
+Content Area<?php
+}
+}
+/* {/block "ContentBody"} */
+}

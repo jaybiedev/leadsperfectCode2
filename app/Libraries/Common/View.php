@@ -1,21 +1,40 @@
 <?php
 namespace App\Libraries\Common;
 
+use CodeIgniter\Config\Config;
+
 class View 
 {
     private $SmartyLib;
 
     public $page_title;
     public $baseUrl;
-    public $module;
+
+    private $Environment;
+    private $stylesheets = [];
+    private $javascripts = [];
+    private $global_stylesheets = [];
+    private $global_javascripts = [];
 
     function __construct()
     {
         $this->SmartyLib = new SmartyLib();
+
+        // @todo: need to get baseUrl from Config/App
         $this->baseUrl = ($_SERVER['SERVER_PORT'] == '80' ? 'http://' : 'https://') . 
             $_SERVER['HTTP_HOST'] . 
             str_replace($_SERVER['PATH_INFO'], "", $_SERVER['REQUEST_URI']);
-        $this->module = $this->getModule();
+   }
+
+    public function getEnvironment()
+    {
+        // lazy load Environment object
+        if ($this->Environment == null)
+        {
+            $this->Environment = new Environment();
+        }
+
+        return $this->Environment;
     }
 
 
@@ -118,12 +137,13 @@ class View
         }
 
         // autoload module based css
-        $file = (FCPATH . "css/" . $this->module. ".css");
+        $modulecss = "css/" . $this->getEnvironment()->getProductModulePath() . '/' . $this->getEnvironment()->page . ".css";
+        $file = (FCPATH . $modulecss);
         if (is_file($file))
-            $stylesheets[sha1($file)] = basename($file);
+            $stylesheets[sha1($file)] = $modulecss;
 
         array_walk($stylesheets, function(&$value, $key) { 
-            $value = $this->baseUrl . '/css/'. $value ; 
+            $value = $this->baseUrl . '/'. $value ; 
         });
 
         return $stylesheets;
@@ -146,28 +166,18 @@ class View
             $javascripts[sha1($file)] = basename($file);
         }
 
-        // autoload module based javascript
-        $file = (FCPATH . "js/" . $this->module. ".js");
+        // autoload /js/[Product]/[module].js based javascript
+        $modulejs = "js/" . $this->getEnvironment()->getProductModulePath() . '/'. $this->getEnvironment()->page . ".js";
+        $file = (FCPATH . $modulejs);
         if (is_file($file))
-            $javascripts[sha1($file)] = basename($file);
+            $javascripts[sha1($file)] = $modulejs;
 
         array_walk($javascripts, function(&$value, $key) { 
-            $value = $this->baseUrl . '/js/'. $value ; 
+            $value = $this->baseUrl . '/' . $value ; 
         });
 
         return $javascripts;
 
-    }
-
-    private function getModule()
-    {
-        $module = null;
-        $pathInfo = explode("/", $_SERVER['PATH_INFO']);
-
-        if (count($pathInfo) > 0)
-            $module = $pathInfo[1];
-
-        return $module;
     }
 
 }
