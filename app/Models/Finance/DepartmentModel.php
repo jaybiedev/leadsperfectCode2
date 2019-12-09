@@ -4,5 +4,6 @@ use App\Models\BaseModel;
 class DepartmentModel extends BaseModel 
 {
     protected $table = 'department';
-    protected $allowedFields = ['name'];
+    protected $allowedFields = ['department'];
+    protected $returnType = 'App\Entities\Finance\Department';
 }

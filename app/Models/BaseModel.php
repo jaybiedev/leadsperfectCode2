@@ -37,4 +37,18 @@ abstract class BaseModel extends Model
 
             parent::__construct();
         }
+
+        public function findAllArray()
+        {
+            if ($this->returnType == 'array')
+                return parent::findAll();
+
+            $tempReturnType = $this->tempReturnType;
+            $this->tempReturnType = 'array';
+
+            $items = parent::findAll();
+            $this->tempReturnType = $tempReturnType;
+
+            return $items;
+        }
 }

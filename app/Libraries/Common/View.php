@@ -7,7 +7,9 @@ class View
 {
     private $SmartyLib;
 
-    public $page_title;
+    public $pageTitle;
+    public $pageHeader;
+    public $pageDescription;
     public $baseUrl;
 
     private $Environment;
@@ -47,12 +49,34 @@ class View
     }
     
     
-    public function setPageTitle($title) {
-        $this->page_title = $title;
+    public function setPageTitle($title) 
+    {
+        $this->pageTitle = $title;
     }
 
-    public function getPageTitle() {
-        return $this->page_title;
+    public function getPageTitle() 
+    {
+        return $this->pageTitle;
+    }
+
+    public function setPageHeader($header) 
+    {
+        $this->pageHeader = $header;
+    }
+
+    public function getPageHeader() 
+    {
+        return $this->pageHeader;
+    }
+
+    public function setPageDescription($description) 
+    {
+        $this->pageDescription = $description;
+    }
+
+    public function getPageDescription() 
+    {
+        return $this->pageDescription;
     }
 
     public function render($view, $data=array(), $return_as_string=false) 
@@ -62,6 +86,15 @@ class View
         //}
 
         //$data['Helper'] = $this->Helper;
+
+        if ($this->pageTitle == null) 
+        {
+            if ($this->pageHeader != null)
+                $this->pageTitle = $this->pageHeader;
+            else
+            $this->pageTitle = $this->getEnvironment()->product;
+        }
+
         $data['View'] = $this;
         $data['page_id'] = basename($view, ".tpl");
 
@@ -103,10 +136,31 @@ class View
 
     }
 
+    public function renderJsonDataTable(array $data, int $draw=1, int $recordsFiltered=-1)
+    {
+        $dataTable = array(
+                "draw"=> $draw,
+                "recordsTotal" => count($data),
+                "recordsFiltered" => $recordsFiltered == -1 ? count($data) : $recordsFiltered,
+                'data'=>$data,
+        );
+        return json_encode($dataTable);
+    }
+
+    public function renderJsonFail($message=null, $data=[])
+    {
+        // header
+        return $this->renderJson($data, false, $message);
+    }
+
+    public function renderJsonSuccess($message=null, $data=[])
+    {
+        return $this->renderJson($data, true, $message);
+    }
+
     public function renderJson($data, $success, $message) {
         $render = array('data'=>$data, 'success'=>$success, 'message'=>$message);
-        echo json_encode($render);
-        exit();
+        return json_encode($render);
     }
 
     // View Stuff

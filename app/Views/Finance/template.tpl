@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login Page</title>
-   <!--Made with love by Mutiullah Samim -->
-   
-	<!--Bootsrap 4 CDN-->
+	<title>[[$View->pageTitle]]</title>
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
-    
-    <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
-
-	<!--Custom styles-->
+	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
-
     [[foreach from=$header.stylesheets item=file]]
         <link rel="stylesheet" type="text/css" href="[[$file]]">
     [[/foreach]]
@@ -36,8 +29,7 @@
     <meta name="msapplication-TileImage" content="/assets/Finance/favicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">    
 </head>
-<body>
-
+<body ng-app="FinanceApplication" ng-controller="FinanceCtrl as ctrl" ng-cloak>
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
         <a class="navbar-brand" href="#">
             <div class="logo wrapper">
@@ -119,12 +111,42 @@
     </div>
 
     <main role="main" class="container">
+        [[if $View->pageHeader != null]]
+            <div class="page-title">[[$View->pageHeader]]</div>
+        [[/if]]
+        [[if $View->pageDescription != null]]
+            <div class="page-description hidden">[[$View->pageDescription]]</div>
+        [[/if]]
         [[block name="ContentBody"]]Content Area[[/block]]
     </main>
 
+    <div id="[[$modalTitle]]" class="modal fade modal-form" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">[[$modalTitle]]</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    [[block name="ModalBody"]]Modal Body Area[[/block]]
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="/libs/jquery/js/jquery.min.js"></script>
+    <script src="/libs/popper/js/popper.min.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/libs/datatable/datatables.min.js"></script>
+    <script src="/libs/angular/angular.min.js"></script>
+    <script src="/libs/angular/angular-animate.min.js"></script>
+
+    <script src="/libs/tools/Finance/js/angular.app.js"></script>
+    <script src="/libs/tools/Finance/js/angular.controller.js"></script>
     <script src="/js/Finance/nav.js"></script>
+
     [[foreach from=$footer.javascripts item=file]]
         <script src="[[$file]]"></script>
     [[/foreach]]

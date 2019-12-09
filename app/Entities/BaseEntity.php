@@ -1,9 +1,12 @@
 <?php namespace App\Entities;
 
-abstract class BaseEntity
+use CodeIgniter\Entity;
+
+class BaseEntity extends Entity
 {
-    public function __construct()
+    public function __construct(array $data = null)
     {
+        parent::__construct($data);
         //
     }
 }

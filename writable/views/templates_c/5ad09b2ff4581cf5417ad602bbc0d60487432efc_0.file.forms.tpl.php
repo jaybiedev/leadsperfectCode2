@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2019-12-06 13:09:01
+/* Smarty version 3.1.34-dev-7, created on 2019-12-07 11:07:54
   from '/opt/lampp/htdocs/jgm/app/Views/Common/Standards/forms.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5deaa74dc4e830_34100980',
+  'unifunc' => 'content_5debdc6a9cd8a1_36057151',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,25 +20,25 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5deaa74dc4e830_34100980 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5debdc6a9cd8a1_36057151 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 <!-- required header wrapper -->
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17251226845deaa74dc4d9d1_59517999', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1055886605debdc6a9cc9e2_56815522', "ContentBody");
 ?>
 
 <!-- end of included block tag --><?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, "../../Common/template.tpl");
 }
 /* {block "ContentBody"} */
-class Block_17251226845deaa74dc4d9d1_59517999 extends Smarty_Internal_Block
+class Block_1055886605debdc6a9cc9e2_56815522 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_17251226845deaa74dc4d9d1_59517999',
+    0 => 'Block_1055886605debdc6a9cc9e2_56815522',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

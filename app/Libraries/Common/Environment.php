@@ -6,7 +6,7 @@ class Environment
 
     public $product = null;
     public $module = null;
-    public $page = null;
+    public $page = "index";
 
     public function __construct() 
     {
@@ -25,7 +25,8 @@ class Environment
         {
             $this->product = $pathInfo[1];
             $this->module = $pathInfo[2];
-            $this->page = $pathInfo[3];
+            if (!empty($pathInfo[3]))
+                $this->page = $pathInfo[3];
         }
     }
 
