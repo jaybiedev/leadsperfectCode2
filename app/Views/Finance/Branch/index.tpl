@@ -1,6 +1,6 @@
 [[extends file="Finance/template.tpl"]]
 [[block name="ContentBody"]]
-      <table id="[[$View->pageTitle]]" class="dataTable table table-striped" style="width:100%">
+      <table id="manage-branch-datatable" class="data-table table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
@@ -22,7 +22,7 @@
 
     <div class="datatable-action-control-wrapper">
         <div class="checkbox">
-            <label><input type="checkbox" value=""> Show deleted records</label>
+            <label><input type="checkbox" value="" id="manage-branch-datatable-includeDeleted"> Show deleted records</label>
         </div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#[[$View->modalTitle]]">
             <i class="fa fa-home"></i> Add New

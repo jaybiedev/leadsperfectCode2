@@ -122,8 +122,17 @@ class Upgrade
 
         foreach ($tables as $table)
         {
-            $fields = $this->db->getFieldNames($table);
+            $tableDictionay = $this->db->getFieldData($table);
+            $fields = [];
+            $tableDictionayFields = [];
+            foreach ($tableDictionay as $field)
+            {
+                $fields[] = $field->name;
+                $tableDictionayFields[$field->name] = $field;
+            }
+
             $audit_sql = null;
+
             if (!in_array('date_created', $fields))
                 $audit_sql .= " ALTER TABLE {$table} ADD COLUMN date_created TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW();";
 
@@ -133,7 +142,7 @@ class Upgrade
                 $audit_sql .= " ALTER TABLE {$table} ADD COLUMN date_modified TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW();";
 
             if (!in_array('date_deleted', $fields))
-                $audit_sql .= " ALTER TABLE {$table} ADD COLUMN date_deleted TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW();";
+                $audit_sql .= " ALTER TABLE {$table} ADD COLUMN date_deleted TIMESTAMP WITHOUT TIME ZONE DEFAULT NULL;";
 
             if (!in_array('user_id_created', $fields))
                 $audit_sql .= " ALTER TABLE {$table} ADD COLUMN user_id_created INT DEFAULT NULL;";
@@ -147,12 +156,18 @@ class Upgrade
             if (!empty($audit_sql))
                 $this->db->query($audit_sql);
 
-            if (in_array('enable', $fields))
+            if (in_array('enable', $fields) && !in_array('date_deleted', $fields))
             {
                 if ($table == 'cache')
                     continue;
+                
+                $enableField = $tableDictionayFields['enable'];
 
-                $sql = "UPDATE {$table} SET date_deleted = NOW() WHERE (enable = 'N' OR enable='f') AND date_deleted IS NULL;";
+                if (strtolower($enableField->type) == 'boolean')
+                    $sql = "UPDATE {$table} SET date_deleted = NOW() WHERE NOT enable AND date_deleted IS NULL;";
+                else
+                    $sql = "UPDATE {$table} SET date_deleted = NOW() WHERE enable='N' AND date_deleted IS NULL;";
+
                 // $sql .= " ALTER TABLE {$table} DROP COLUMN enable";
                 $this->db->query($sql);
             }
