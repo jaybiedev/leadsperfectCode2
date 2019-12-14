@@ -20,29 +20,26 @@ class Branch extends BaseController
     public function get()
     {
         $meta = $this->request->getGet();
-        $start = $meta['start'] ?: 0;
-        $length = $meta['length'] ?: 10;
-        $BranchModel = new BranchModel();   
-        $data = [];
 
-        $order = $meta['order'][0];
-        $order_field = $order['column'] > 0 ? $meta['columns'][$order['column']]['data'] : 'branch';
-        $order_direction = $order['dir'];
+        $BranchModel = new BranchModel();   
+        $DataTable = new \App\Libraries\Common\DataTable($meta, $BranchModel, 'branch');
+    
+        $data = [];
 
         if (!empty($meta['id']))
         {
             $data = $BranchModel->find($meta['id']);
         }
-        elseif (!empty($meta['search']['value']))
+        elseif (!empty($DataTable->searchValue))
         {
-            $search = $meta['search']['value'];
-            $data = $BranchModel->like(['lower(branch)' => '%' . strtolower($search) . '%'])
-                                ->orderBy("LOWER({$order_field})", $order_direction)
-                                ->findAllArray($length, $start);
+            $data = $BranchModel->like($DataTable->getSearchableLike())
+                                ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+                                ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
-            $data = $BranchModel->orderBy("LOWER({$order_field})", $order_direction)->findAllArray($length, $start);
+            $data = $BranchModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+                                ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 
         $recordsTotal = $BranchModel->countAllResults();
@@ -61,91 +58,7 @@ class Branch extends BaseController
         //die;
         
         return $this->View->renderJsonDataTable($data, $recordsTotal);
-        /*
-        Array
-        (
-            [draw] => 1
-            [columns] => Array
-                (
-                    [0] => Array
-                        (
-                            [data] => branch_id
-                            [name] => 
-                            [searchable] => true
-                            [orderable] => true
-                            [search] => Array
-                                (
-                                    [value] => 
-                                    [regex] => false
-                                )
-
-                        )
-
-                    [1] => Array
-                        (
-                            [data] => branch
-                            [name] => 
-                            [searchable] => true
-                            [orderable] => true
-                            [search] => Array
-                                (
-                                    [value] => 
-                                    [regex] => false
-                                )
-
-                        )
-
-                    [2] => Array
-                        (
-                            [data] => branch_code
-                            [name] => 
-                            [searchable] => true
-                            [orderable] => true
-                            [search] => Array
-                                (
-                                    [value] => 
-                                    [regex] => false
-                                )
-
-                        )
-
-                    [3] => Array
-                        (
-                            [data] => branch_address
-                            [name] => 
-                            [searchable] => true
-                            [orderable] => true
-                            [search] => Array
-                                (
-                                    [value] => 
-                                    [regex] => false
-                                )
-
-                        )
-
-                )
-
-            [order] => Array
-                (
-                    [0] => Array
-                        (
-                            [column] => 0
-                            [dir] => asc
-                        )
-
-                )
-
-            [start] => 0
-            [length] => 10
-            [search] => Array
-                (
-                    [value] => 
-                    [regex] => false
-                )
-
-            [_] => 1576300710725
-        )
-
+/*
 
         $json = '{
             "draw": 1,
