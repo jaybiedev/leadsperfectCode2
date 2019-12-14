@@ -1,4 +1,4 @@
-<?php namespace App\Models\Finance;
+<?php namespace App\Models\Payroll;
 use App\Models\BaseModel;
 
 class DepartmentModel extends BaseModel 

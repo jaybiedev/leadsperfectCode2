@@ -10,6 +10,7 @@ class View
     public $pageTitle;
     public $pageHeader;
     public $pageDescription;
+    public $modalTitle;
     public $baseUrl;
 
     private $Environment;
@@ -21,11 +22,7 @@ class View
     function __construct()
     {
         $this->SmartyLib = new SmartyLib();
-
-        // @todo: need to get baseUrl from Config/App
-        $this->baseUrl = ($_SERVER['SERVER_PORT'] == '80' ? 'http://' : 'https://') . 
-            $_SERVER['HTTP_HOST'] . 
-            str_replace($_SERVER['PATH_INFO'], "", $_SERVER['REQUEST_URI']);
+        $this->baseUrl = base_url();
    }
 
     public function getEnvironment()
@@ -79,12 +76,27 @@ class View
         return $this->pageDescription;
     }
 
+    public function setModalTitle($modalTitle) 
+    {
+        $this->modalTitle = $modalTitle;
+    }
+
+    public function getModalTitle() 
+    {
+        return $this->modalTitle;
+    }
+
     public function render($view, $data=array(), $return_as_string=false) 
     {
-        //if (empty($data['menu'])) {
-        //    $data['menu'] = Logic\Menu::getMenu($this->CI->router->fetch_class());
-        //}
-
+        if (empty($data['menu'])) 
+        {
+            $data['menu'] = null;
+            if (is_file(APPPATH . 'Models/' . ucwords($this->getEnvironment()->product) . '/MenuModel.php'))
+            {
+                $MenuModel = new \App\Models\Finance\MenuModel();
+                $data['menu'] = $MenuModel->getMenu();
+            }
+        }
         //$data['Helper'] = $this->Helper;
 
         if ($this->pageTitle == null) 
@@ -136,12 +148,11 @@ class View
 
     }
 
-    public function renderJsonDataTable(array $data, int $draw=1, int $recordsFiltered=-1)
+    public function renderJsonDataTable(array $data, int $recordsTotal=-1)
     {
         $dataTable = array(
-                "draw"=> $draw,
-                "recordsTotal" => count($data),
-                "recordsFiltered" => $recordsFiltered == -1 ? count($data) : $recordsFiltered,
+                "recordsFiltered" => $recordsTotal,
+                "recordsTotal" => $recordsTotal == -1 ? count($data) : $recordsTotal,
                 'data'=>$data,
         );
         return json_encode($dataTable);

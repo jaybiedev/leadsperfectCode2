@@ -1,26 +1,27 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2019-12-08 23:25:17
+/* Smarty version 3.1.34-dev-7, created on 2019-12-13 18:08:48
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5deddabd3daca5_50663137',
+  'unifunc' => 'content_5df42810ae1904_64742882',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1575869098,
+      1 => 1576282127,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5deddabd3daca5_50663137 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5df42810ae1904_64742882 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -76,6 +77,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['menu']->value, 'entry', false, NULL, 'entry', array (
+));
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['entry']->value) {
+?>
+                    <li class="nav-item <?php if ($_smarty_tpl->tpl_vars['entry']->value->children != null) {?>dropdown<?php }?>">
+                        <a href="<?php echo $_smarty_tpl->tpl_vars['entry']->value->slug;?>
+" class="nav-link dropdown-toggle" <?php if ($_smarty_tpl->tpl_vars['entry']->value->children != null) {?>data-toggle="dropdown" aria-haspopup="true"<?php }?>  aria-expanded="false" id="<?php echo $_smarty_tpl->tpl_vars['entry']->value->path;?>
+"><?php echo $_smarty_tpl->tpl_vars['entry']->value->menu;?>
+</a>
+                        <?php if ($_smarty_tpl->tpl_vars['entry']->value->children != null) {?>
+                            <?php $_smarty_tpl->_subTemplateRender("file:../Common/_recursive_ul.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('child'=>$_smarty_tpl->tpl_vars['entry']->value->children,'parent'=>$_smarty_tpl->tpl_vars['entry']->value,'depth'=>2), 0, true);
+?>
+                        <?php }?>
+                    </li>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+<!--
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -135,6 +157,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         </li>
                     </ul>
                 </li>
+-->                
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <div class="form-group has-search">
@@ -155,31 +178,33 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_7214060865deddabd3d8802_02037831', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14103596025df42810ade8e1_85255454', "ContentBody");
 ?>
 
     </main>
 
-    <div id="<?php echo $_smarty_tpl->tpl_vars['modalTitle']->value;?>
+    <?php if ($_smarty_tpl->tpl_vars['View']->value->modalTitle != null) {?>
+        <div id="<?php echo $_smarty_tpl->tpl_vars['View']->value->modalTitle;?>
 " class="modal fade modal-form" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><?php echo $_smarty_tpl->tpl_vars['modalTitle']->value;?>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><?php echo $_smarty_tpl->tpl_vars['View']->value->modalTitle;?>
 </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1518472355deddabd3d9825_14500432', "ModalBody");
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <?php 
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10152192375df42810ae0452_56024414', "ModalBody");
 ?>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php }?>
 
     <?php echo '<script'; ?>
  src="/libs/jquery/js/jquery.min.js"><?php echo '</script'; ?>
@@ -226,12 +251,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_7214060865deddabd3d8802_02037831 extends Smarty_Internal_Block
+class Block_14103596025df42810ade8e1_85255454 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_7214060865deddabd3d8802_02037831',
+    0 => 'Block_14103596025df42810ade8e1_85255454',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -241,12 +266,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_1518472355deddabd3d9825_14500432 extends Smarty_Internal_Block
+class Block_10152192375df42810ae0452_56024414 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_1518472355deddabd3d9825_14500432',
+    0 => 'Block_10152192375df42810ae0452_56024414',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

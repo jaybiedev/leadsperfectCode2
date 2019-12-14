@@ -74,8 +74,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('', 'Common/Home::index');
 $routes->get('common/forms', 'Common/Standards::forms');
-$routes->get('finance/deparment', 'Finance/Department::index');
+$routes->get('finance/branch', 'Finance/Branch::index');
 $routes->get('finance/user', 'Finance/User::index');
+$routes->get('finance/upgrade', 'Finance/Upgrade::index');
+
+
+$routes->get('payroll/deparment', 'Finance/Department::index');
 
 /**
  * --------------------------------------------------------------------

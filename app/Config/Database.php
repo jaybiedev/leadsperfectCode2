@@ -30,12 +30,12 @@ class Database extends \CodeIgniter\Database\Config
 	 * @var array
 	 */
 	public $default = [
-		'DSN'      => 'pgsql:host=192.168.64.2;port=5432;dbname=db1;user=rute;password=rootpaz',
-		'hostname' => '192.168.64.2',
-		'username' => 'rute',
-		'password' => 'rootpaz',
-		'database' => 'db1',
-		'DBDriver' => 'Postgre',
+		'DSN'      => '',
+		'hostname' => '',
+		'username' => '',
+		'password' => '',
+		'database' => '',
+		'DBDriver' => '',
 		'DBPrefix' => '',
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),
@@ -59,10 +59,10 @@ class Database extends \CodeIgniter\Database\Config
 	 */
 	public $tests = [
 		'DSN'      => '',
-		'hostname' => '127.0.0.1',
-		'username' => 'rute',
-		'password' => 'rootpaz',
-		'database' => 'db1',
+		'hostname' => '',
+		'username' => '',
+		'password' => '',
+		'database' => '',
 		'DBDriver' => '',
 		'DBPrefix' => 'db_',  // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE.
 		'pConnect' => false,

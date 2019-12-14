@@ -17,16 +17,15 @@ class Environment
 
     private function load()
     {
-        $pathmodule = null;
-
-        $pathInfo = explode("/", $_SERVER['PATH_INFO']);
+        $pathInfo = explode("/", uri_string());
 
         if (count($pathInfo) > 0)
         {
-            $this->product = $pathInfo[1];
-            $this->module = $pathInfo[2];
-            if (!empty($pathInfo[3]))
-                $this->page = $pathInfo[3];
+            $this->product = $pathInfo[0];
+            if (!empty($pathInfo[1]))
+                $this->module = $pathInfo[1];
+            if (!empty($pathInfo[2]))
+                $this->page = $pathInfo[2];
         }
     }
 

@@ -8,7 +8,7 @@ class User extends BaseController
 	public function index()
 	{
         $User = new UserModel();
-        return view("Finance/User/login.tpl");
+        return $this->View->render("Finance/User/login.tpl");
 		//return view('welcome_message');
 	}
 

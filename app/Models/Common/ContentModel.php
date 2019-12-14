@@ -12,7 +12,7 @@ class ContentModel extends BaseModel
 
         protected $allowedFields = ['content', 'content_type'];
 
-        protected $useTimestamps = false;
+        protected $useTimestamps = true;
 
         protected $validationRules    = [];
         protected $validationMessages = [];

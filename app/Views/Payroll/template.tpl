@@ -41,15 +41,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                [[foreach name=entry item=entry from=$menu]]
-                    <li class="nav-item [[if $entry->children neq null]]dropdown[[/if]]">
-                        <a href="[[$entry->slug]]" class="nav-link dropdown-toggle" [[if $entry->children neq null]]data-toggle="dropdown" aria-haspopup="true"[[/if]]  aria-expanded="false" id="[[$entry->path]]">[[$entry->menu]]</a>
-                        [[if $entry->children neq null]]
-                            [[include file="../Common/_recursive_ul.tpl" child=$entry->children parent=$entry depth=2]]
-                        [[/if]]
-                    </li>
-                [[/foreach]]
-<!--
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -109,7 +100,6 @@
                         </li>
                     </ul>
                 </li>
--->                
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <div class="form-group has-search">
