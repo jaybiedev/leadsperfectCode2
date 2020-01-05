@@ -1,3 +1,22 @@
 .error  {
     color: red;
 }
+
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 9px 1px;
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-item .disabled {
+    color: #666;
+}
+.dropdown-item i {
+    padding-right: 4px;
+}
+
+.pull-right#user-settings .dropdown-menu {
+    left:auto;
+    right: 0;
+}

@@ -113,6 +113,9 @@ body
 .navbar-dark .navbar-nav .nav-link {
     color: rgba(255,255,255,.85) !important;
 }
+.navbar-nav {
+    margin-top:20px;
+}
 a {
     color: darkblue;
 }

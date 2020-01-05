@@ -2,6 +2,7 @@
 use App\Controllers\BaseController;
 
 use App\Libraries\Finance\Authenticate as AuthenticateLib;
+use App\Libraries\Finance\Security;
 
 class Authenticate extends FinanceBaseController
 {
@@ -40,6 +41,7 @@ class Authenticate extends FinanceBaseController
             $data = ["User" => ["id"=>$User->admin_id, 
                 "username" => $User->username, 
                 "name" => $User->name], 
+                "isAdmin" => Security::isAdmin(),
                 "redirectTo" => base_url() . "/" . $redirectTo];
 
             return $this->View->renderJsonSuccess("authenticated", $data);

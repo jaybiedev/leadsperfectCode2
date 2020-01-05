@@ -8,6 +8,8 @@ class User extends BaseEntity
     public $username;
     public $name;
     public $mpassword;
+    public $usergroup;
+    public $enable;
     public $password_hash;
     public $date_created;
     public $date_updated;

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2019-12-31 16:55:39
+/* Smarty version 3.1.34-dev-7, created on 2020-01-04 22:44:52
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e0bd1ebaf6800_74813496',
+  'unifunc' => 'content_5e1169c4a63847_26724772',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1577832935,
+      1 => 1578199490,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5e0bd1ebaf6800_74813496 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e1169c4a63847_26724772 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -33,6 +33,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/Common/style.css">
     <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
     <link rel="stylesheet" type="text/css" href="../css/Common/forms.css">
     <?php
@@ -69,7 +70,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 <body ng-app="FinanceApplication" ng-controller="<?php echo $_smarty_tpl->tpl_vars['View']->value->moduleID;?>
 Ctrl" ng-cloak>
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="<?php echo $_smarty_tpl->tpl_vars['View']->value->productUrl;?>
+">
             <div class="logo wrapper">
                 <img src="/assets/Finance/logo.png" class="fit-image" />
             </div>
@@ -99,6 +101,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['entry']->value) {
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+            </ul>
 <!--
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -159,14 +162,32 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         </li>
                     </ul>
                 </li>
--->                
+                
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
+-->            
+            <form class="form-inline mt-2 mt-md-0 hidden">
                 <div class="form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
                 <input type="text" class="form-control" placeholder="Search">
                 </div>
             </form>
+
+            <ul class="nav pull-right mt-2 mt-md-0" id="user-settings">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff">
+                    <b class="fa fa-user-circle fa-2x"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item disabled">
+                            Welcome, User
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/user/preferences"><i class="fa fa-cog"></i> Preferences</a></li>
+                        <li class="dropdown-item"><a href="/help/support"><i class="fa fa-file-invoice"></i> Accounting</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/finance/authenticate/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -180,7 +201,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15128456165e0bd1ebaf1dc5_67553826', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21340191515e1169c4a603a9_83667055', "ContentBody");
 ?>
 
     </main>
@@ -199,7 +220,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15128456165e0bd1eb
                     </div>
                     <div class="modal-body">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3242585585e0bd1ebaf3d43_32901761', "ModalBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15472684795e1169c4a61f97_82712536', "ModalBody");
 ?>
 
                     </div>
@@ -259,12 +280,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_15128456165e0bd1ebaf1dc5_67553826 extends Smarty_Internal_Block
+class Block_21340191515e1169c4a603a9_83667055 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_15128456165e0bd1ebaf1dc5_67553826',
+    0 => 'Block_21340191515e1169c4a603a9_83667055',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -274,12 +295,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_3242585585e0bd1ebaf3d43_32901761 extends Smarty_Internal_Block
+class Block_15472684795e1169c4a61f97_82712536 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_3242585585e0bd1ebaf3d43_32901761',
+    0 => 'Block_15472684795e1169c4a61f97_82712536',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

@@ -27,7 +27,13 @@ class Authenticate
 
     public static function registerUserSession($Session, $User)
     {
-        $UserInfo = ["id"=>$User->admin_id, "username" => $User->username, "name" => $User->name];
+        
+        $UserInfo = ["id"=>$User->admin_id, 
+                    "username" => $User->username, 
+                    "name" => $User->name,
+                    "usergroup"=>[$User->usergroup],
+                    "branches"=>\App\Libraries\Finance\User::getBranches($User),
+                    "adminrights"=>\App\Libraries\Finance\User::getAdminRights($User)];
 
         $Session->set("User", $UserInfo);
         return true;

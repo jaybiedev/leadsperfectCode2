@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/Common/style.css">
     <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
     <link rel="stylesheet" type="text/css" href="../css/Common/forms.css">
     [[foreach from=$header.stylesheets item=file]]
@@ -32,7 +33,7 @@
 </head>
 <body ng-app="FinanceApplication" ng-controller="[[$View->moduleID]]Ctrl" ng-cloak>
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="[[$View->productUrl]]">
             <div class="logo wrapper">
                 <img src="/assets/Finance/logo.png" class="fit-image" />
             </div>
@@ -50,6 +51,7 @@
                         [[/if]]
                     </li>
                 [[/foreach]]
+            </ul>
 <!--
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -110,14 +112,32 @@
                         </li>
                     </ul>
                 </li>
--->                
+                
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
+-->            
+            <form class="form-inline mt-2 mt-md-0 hidden">
                 <div class="form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
                 <input type="text" class="form-control" placeholder="Search">
                 </div>
             </form>
+
+            <ul class="nav pull-right mt-2 mt-md-0" id="user-settings">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff">
+                    <b class="fa fa-user-circle fa-2x"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item disabled">
+                            Welcome, User
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/user/preferences"><i class="fa fa-cog"></i> Preferences</a></li>
+                        <li class="dropdown-item"><a href="/help/support"><i class="fa fa-file-invoice"></i> Accounting</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/finance/authenticate/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 

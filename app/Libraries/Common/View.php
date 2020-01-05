@@ -14,6 +14,7 @@ class View
     public $modalID;
     public $baseUrl;
     public $moduleID;
+    public $productUrl;
 
     private $Environment;
     private $stylesheets = [];
@@ -25,6 +26,7 @@ class View
     {
         $this->SmartyLib = new SmartyLib();
         $this->baseUrl = base_url();
+        $this->productUrl = base_url() . "/" . $this->getEnvironment()->product;
    }
 
     public function getEnvironment()
