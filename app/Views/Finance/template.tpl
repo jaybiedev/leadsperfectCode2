@@ -32,17 +32,17 @@
     <meta name="theme-color" content="#ffffff">    
 </head>
 <body ng-app="FinanceApplication" ng-controller="[[$View->moduleID]]Ctrl" ng-cloak>
-    <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
+    <div class="navbar navbar-expand-md navbar-bottom-bordered mb-4" role="navigation">
         <a class="navbar-brand" href="[[$View->productUrl]]">
             <div class="logo wrapper">
                 <img src="/assets/Finance/logo.png" class="fit-image" />
             </div>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav top-level">
                 [[foreach name=entry item=entry from=$menu]]
                     <li class="nav-item [[if $entry->children neq null]]dropdown[[/if]]">
                         <a href="[[$entry->slug]]" class="nav-link dropdown-toggle" [[if $entry->children neq null]]data-toggle="dropdown" aria-haspopup="true"[[/if]]  aria-expanded="false" id="[[$entry->path]]">[[$entry->menu]]</a>
@@ -124,7 +124,7 @@
 
             <ul class="nav pull-right mt-2 mt-md-0" id="user-settings">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <b class="fa fa-user-circle fa-2x"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item disabled">

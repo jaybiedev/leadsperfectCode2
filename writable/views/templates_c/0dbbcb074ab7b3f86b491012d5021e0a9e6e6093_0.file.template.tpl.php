@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-01-04 22:44:52
+/* Smarty version 3.1.34-dev-7, created on 2020-01-05 11:33:49
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e1169c4a63847_26724772',
+  'unifunc' => 'content_5e121dfd6f1975_70382230',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1578199490,
+      1 => 1578245605,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5e1169c4a63847_26724772 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e121dfd6f1975_70382230 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -69,7 +69,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </head>
 <body ng-app="FinanceApplication" ng-controller="<?php echo $_smarty_tpl->tpl_vars['View']->value->moduleID;?>
 Ctrl" ng-cloak>
-    <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
+    <div class="navbar navbar-expand-md navbar-bottom-bordered mb-4" role="navigation">
         <a class="navbar-brand" href="<?php echo $_smarty_tpl->tpl_vars['View']->value->productUrl;?>
 ">
             <div class="logo wrapper">
@@ -77,10 +77,10 @@ Ctrl" ng-cloak>
             </div>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav top-level">
                 <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['menu']->value, 'entry', false, NULL, 'entry', array (
 ));
@@ -174,7 +174,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
             <ul class="nav pull-right mt-2 mt-md-0" id="user-settings">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <b class="fa fa-user-circle fa-2x"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item disabled">
@@ -201,7 +201,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21340191515e1169c4a603a9_83667055', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10880315e121dfd6ee501_65224567', "ContentBody");
 ?>
 
     </main>
@@ -220,7 +220,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21340191515e1169c4
                     </div>
                     <div class="modal-body">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15472684795e1169c4a61f97_82712536', "ModalBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17401881095e121dfd6f01f8_96413816', "ModalBody");
 ?>
 
                     </div>
@@ -280,12 +280,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_21340191515e1169c4a603a9_83667055 extends Smarty_Internal_Block
+class Block_10880315e121dfd6ee501_65224567 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_21340191515e1169c4a603a9_83667055',
+    0 => 'Block_10880315e121dfd6ee501_65224567',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -295,12 +295,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_15472684795e1169c4a61f97_82712536 extends Smarty_Internal_Block
+class Block_17401881095e121dfd6f01f8_96413816 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_15472684795e1169c4a61f97_82712536',
+    0 => 'Block_17401881095e121dfd6f01f8_96413816',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

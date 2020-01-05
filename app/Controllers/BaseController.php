@@ -70,7 +70,7 @@ class BaseController extends Controller
 			$product = $Environment->product;
 			// redirect()->to($product . "/" . $p); 
 
-			header("location:/" . $product . "/" . $p);
+			header("location:/" . $product . "/" . str_replace("_", "",$p));
 			exit;
 		}
 	}

@@ -45,6 +45,24 @@ body
     font-weight: 100;
     font-style: normal;
 }
+.navbar.navbar-bottom-bordered {
+    border-bottom: 1px solid #ccc;
+    line-height: 1;
+    padding: 0px 10px;
+}
+
+.navbar.navbar-bottom-bordered ul.top-level li a {
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.navbar.navbar-bottom-bordered ul.n-level li a {
+    font-weight: initial;
+    font-size: 0.95em;
+    text-transform: none;
+}
 
 .navbar .dropdown-toggle, .navbar .dropdown-menu a {
     cursor: pointer;
@@ -86,7 +104,7 @@ body
     padding-right: 20px;
 }
 .logo.wrapper img{
-    height: 50px;
+    height: 40px;
 }
 .fit-image{
     object-fit: cover;
