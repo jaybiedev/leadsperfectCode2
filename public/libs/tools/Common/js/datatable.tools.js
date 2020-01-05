@@ -37,13 +37,39 @@ function DataTableTools(selector) {
     };
 
     this.init = function(custom_settings) {
+
+        var self = this;
         $.extend( this.settings, custom_settings);
 
         this.settings.ajax.data.includeDeleted = this.isIncludeDeleted();
+
+        if (typeof custom_settings.onRowEdit == 'function') {
+            //this.settings.fnRowCallback = funftion(settings, json) {
+            //
+            //}
+            this.settings.fnCreatedRow = function(nRow, aData, iDataIndex ) {
+            // Bold the grade for all 'A' grade browsers
+            $(nRow).click(function(){
+                custom_settings.onRowEdit(aData);
+                });
+            };
+            /*
+            this.settings.fnDrawCallback = function(settings) {
+                // var api = this.api();
+                // api.rows( {page:'current'} ).data()
+                debugger;
+                $(self.selector).find("tbody tr").on('click', function () {
+                    //var data = self.datatable.row( this ).data();
+                    debugger;
+                    //alert( 'You clicked on '+data[0]+'\'s row' );
+                });
+            };
+            */
+        }
+
         this.datatable = $(this.selector).DataTable(this.settings);
         this.toggleIncludeDeleted();
         $(self.selector + " tbody").show();
-
     }
 
     this.refresh =  function()

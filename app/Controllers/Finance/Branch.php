@@ -1,23 +1,39 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
-
+use App\Helpers\Utils;
 use App\Models\Finance\BranchModel;
 
-class Branch extends BaseController
+class Branch extends FinanceBaseController
 {
 	public function index()
 	{
-            /*
-            $BranchModel = new BranchModel();          
-            $data = $BranchModel->find(null);
-            */
-          
-            $this->View->setPageHeader('Manage Branches');
-            return $this->View->render('Finance/Branch/index.tpl');
-            // return view('Branch/index.php');
-	}
-
+        /*
+        $BranchModel = new BranchModel();          
+        $data = $BranchModel->find(null);
+        */
+        
+        $this->View->setPageHeader('Manage Branches');
+        $this->View->setModalTitle('Edit Branch');
+        return $this->View->render('Finance/Branch/index.tpl');
+        // return view('Branch/index.php');
+    }
+    
     public function get()
+    {
+        $meta = $this->request->getGet();
+
+        $BranchModel = new BranchModel();   
+        $data = [];
+
+        if (!empty($meta['branch_id']))
+        {
+            $data = $BranchModel->find((int)$meta['branch_id'])->populate();
+        }
+
+       return  $this->View->renderJsonSuccess(null, $data);
+    }
+
+    public function getDataTable()
     {
         $meta = $this->request->getGet();
 
@@ -26,11 +42,7 @@ class Branch extends BaseController
     
         $data = [];
 
-        if (!empty($meta['id']))
-        {
-            $data = $BranchModel->find($meta['id']);
-        }
-        elseif (!empty($DataTable->searchValue))
+        if (!empty($DataTable->searchValue))
         {
             $data = $BranchModel->like($DataTable->getSearchableLike())
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
@@ -84,11 +96,11 @@ class Branch extends BaseController
 
     public function post()
     {
-        $id = $this->request->getPost('id');
+        $branch_id = $this->request->getPost('branch_id');
         $BranchModel = new BranchModel();
         
-        $Branch = $BranchModel->first($id);
-        if (!empty($id) && empty($Branch->id))
+        $Branch = $BranchModel->first($branch_id);
+        if (!empty($id) && empty($Branch->branch_id))
         {
             return $this->View->renderJsonFail();
         }

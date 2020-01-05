@@ -27,11 +27,13 @@ class BaseEntity extends Entity
                 continue;
                 
             $property = $refl->getProperty($attribute);
-
+ 
             if ($property instanceof \ReflectionProperty) 
             {
                 $property->setValue($this, $value);
             }
         }
+
+        return $this;
     }
 }

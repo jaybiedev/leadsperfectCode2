@@ -3,15 +3,14 @@ use App\Controllers\BaseController;
 
 use App\Models\Finance\UserModel;
 
-class User extends BaseController
+class User extends FinanceBaseController
 {
 	public function index()
 	{
         $User = new UserModel();
-        return $this->View->render("Finance/User/login.tpl");
+        return $this->View->render("Finance/User/profile.tpl");
 		//return view('welcome_message');
 	}
 
-	//--------------------------------------------------------------------
 
 }

@@ -35,4 +35,8 @@ class Environment
         return $path;
     }
 
+    public function getSlug()
+    {
+        return $this->product . '/' . $this->module;
+    }
 }

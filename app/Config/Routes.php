@@ -76,6 +76,7 @@ $routes->get('', 'Common/Home::index');
 $routes->get('common/forms', 'Common/Standards::forms');
 $routes->get('finance/branch', 'Finance/Branch::index');
 $routes->get('finance/user', 'Finance/User::index');
+$routes->get('finance/authenticate', 'Finance/Authenticate::index');
 $routes->get('finance/upgrade', 'Finance/Upgrade::index');
 
 

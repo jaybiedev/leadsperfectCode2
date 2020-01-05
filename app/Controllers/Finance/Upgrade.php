@@ -1,7 +1,7 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
 
-class Upgrade extends BaseController
+class Upgrade extends FinanceBaseController
 {
 
     public function index()

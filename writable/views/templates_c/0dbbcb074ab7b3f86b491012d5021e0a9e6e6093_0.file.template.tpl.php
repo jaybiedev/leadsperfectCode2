@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2019-12-14 09:31:18
+/* Smarty version 3.1.34-dev-7, created on 2019-12-31 16:55:39
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5df500465f9805_28884883',
+  'unifunc' => 'content_5e0bd1ebaf6800_74813496',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1576337474,
+      1 => 1577832935,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5df500465f9805_28884883 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e0bd1ebaf6800_74813496 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -34,6 +34,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/Common/forms.css">
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['header']->value['stylesheets'], 'file');
 if ($_from !== null) {
@@ -65,7 +66,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <meta name="msapplication-TileImage" content="/assets/Finance/favicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">    
 </head>
-<body ng-app="FinanceApplication" ng-controller="FinanceCtrl as ctrl" ng-cloak>
+<body ng-app="FinanceApplication" ng-controller="<?php echo $_smarty_tpl->tpl_vars['View']->value->moduleID;?>
+Ctrl" ng-cloak>
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
         <a class="navbar-brand" href="#">
             <div class="logo wrapper">
@@ -178,13 +180,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12172983035df500465f5f17_37336262', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15128456165e0bd1ebaf1dc5_67553826', "ContentBody");
 ?>
 
     </main>
 
-    <?php if ($_smarty_tpl->tpl_vars['View']->value->modalTitle != null) {?>
-        <div id="<?php echo $_smarty_tpl->tpl_vars['View']->value->modalTitle;?>
+    <?php if ($_smarty_tpl->tpl_vars['View']->value->modalID != null) {?>
+        <div id="<?php echo $_smarty_tpl->tpl_vars['View']->value->modalID;?>
 " class="modal fade modal-form" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -197,7 +199,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12172983035df50046
                     </div>
                     <div class="modal-body">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11429861735df500465f80f9_10216770', "ModalBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3242585585e0bd1ebaf3d43_32901761', "ModalBody");
 ?>
 
                     </div>
@@ -232,6 +234,9 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11429861735df50046
  src="/libs/tools/Finance/js/angular.controller.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
+ src="/js/Common/angular.directives.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
  src="/libs/tools/Common/js/datatable.tools.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
@@ -254,12 +259,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_12172983035df500465f5f17_37336262 extends Smarty_Internal_Block
+class Block_15128456165e0bd1ebaf1dc5_67553826 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_12172983035df500465f5f17_37336262',
+    0 => 'Block_15128456165e0bd1ebaf1dc5_67553826',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -269,12 +274,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_11429861735df500465f80f9_10216770 extends Smarty_Internal_Block
+class Block_3242585585e0bd1ebaf3d43_32901761 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_11429861735df500465f80f9_10216770',
+    0 => 'Block_3242585585e0bd1ebaf3d43_32901761',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

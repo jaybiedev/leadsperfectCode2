@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/Common/forms.css">
     [[foreach from=$header.stylesheets item=file]]
         <link rel="stylesheet" type="text/css" href="[[$file]]">
     [[/foreach]]
@@ -29,7 +30,7 @@
     <meta name="msapplication-TileImage" content="/assets/Finance/favicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">    
 </head>
-<body ng-app="FinanceApplication" ng-controller="FinanceCtrl as ctrl" ng-cloak>
+<body ng-app="FinanceApplication" ng-controller="[[$View->moduleID]]Ctrl" ng-cloak>
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
         <a class="navbar-brand" href="#">
             <div class="logo wrapper">
@@ -130,8 +131,8 @@
         [[block name="ContentBody"]]Content Area[[/block]]
     </main>
 
-    [[if $View->modalTitle neq null]]
-        <div id="[[$View->modalTitle]]" class="modal fade modal-form" tabindex="-1" role="dialog">
+    [[if $View->modalID neq null]]
+        <div id="[[$View->modalID]]" class="modal fade modal-form" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -157,6 +158,7 @@
 
     <script src="/libs/tools/Finance/js/angular.app.js"></script>
     <script src="/libs/tools/Finance/js/angular.controller.js"></script>
+    <script src="/js/Common/angular.directives.js"></script>
     <script src="/libs/tools/Common/js/datatable.tools.js"></script>
     <script src="/js/Finance/nav.js"></script>
 

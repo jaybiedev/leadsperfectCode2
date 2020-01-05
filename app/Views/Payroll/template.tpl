@@ -120,8 +120,8 @@
         [[block name="ContentBody"]]Content Area[[/block]]
     </main>
 
-    [[if $View->modalTitle neq null]]
-        <div id="[[$View->modalTitle]]" class="modal fade modal-form" tabindex="-1" role="dialog">
+    [[if $View->modalID neq null]]
+        <div id="[[$View->modalID]]" class="modal fade modal-form" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

@@ -11,7 +11,9 @@ class View
     public $pageHeader;
     public $pageDescription;
     public $modalTitle;
+    public $modalID;
     public $baseUrl;
+    public $moduleID;
 
     private $Environment;
     private $stylesheets = [];
@@ -79,6 +81,7 @@ class View
     public function setModalTitle($modalTitle) 
     {
         $this->modalTitle = $modalTitle;
+        $this->modalID = str_replace(" ", "", $this->modalTitle);
     }
 
     public function getModalTitle() 
@@ -104,8 +107,14 @@ class View
             if ($this->pageHeader != null)
                 $this->pageTitle = $this->pageHeader;
             else
-            $this->pageTitle = $this->getEnvironment()->product;
+                $this->pageTitle = $this->getEnvironment()->product;
         }
+
+        if (empty($this->moduleID))
+        {
+            $this->moduleID = $this->getEnvironment()->module;
+        }
+
 
         $data['View'] = $this;
         $data['page_id'] = basename($view, ".tpl");
@@ -171,7 +180,8 @@ class View
 
     public function renderJson($data, $success, $message) {
         $render = array('data'=>$data, 'success'=>$success, 'message'=>$message);
-        return json_encode($render);
+        echo json_encode($render);
+        exit;
     }
 
     // View Stuff

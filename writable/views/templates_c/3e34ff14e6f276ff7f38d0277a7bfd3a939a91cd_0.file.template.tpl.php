@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2019-12-07 11:07:52
+/* Smarty version 3.1.34-dev-7, created on 2020-01-04 17:45:44
   from '/opt/lampp/htdocs/jgm/app/Views/Common/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5debdc6856c5c8_17196691',
+  'unifunc' => 'content_5e1123a8be73f4_58937810',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3e34ff14e6f276ff7f38d0277a7bfd3a939a91cd' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Common/template.tpl',
-      1 => 1575662518,
+      1 => 1578181286,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5debdc6856c5c8_17196691 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e1123a8be73f4_58937810 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -30,6 +30,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 	<title>JGM Finance Corporation</title>
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/Common/style.css">
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['header']->value['stylesheets'], 'file');
 if ($_from !== null) {
@@ -66,12 +67,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php echo '<script'; ?>
  src="/libs/bootstrap/js/bootstrap.min.js"><?php echo '</script'; ?>
 >
+    <?php echo '<script'; ?>
+ src="/libs/tools/Common/js/Utils.js"><?php echo '</script'; ?>
+>
 
 </head>
 <body>
 <div class="container">
     <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11863747845debdc68568e39_00460484', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2708555445e1123a8be5163_22207740', "ContentBody");
 ?>
 
 </div>
@@ -91,12 +95,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_11863747845debdc68568e39_00460484 extends Smarty_Internal_Block
+class Block_2708555445e1123a8be5163_22207740 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_11863747845debdc68568e39_00460484',
+    0 => 'Block_2708555445e1123a8be5163_22207740',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

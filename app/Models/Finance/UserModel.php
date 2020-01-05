@@ -4,16 +4,26 @@ use App\Models\BaseModel;
 
 class UserModel extends BaseModel
 {
-        protected $table      = 'users';
-        protected $primaryKey = 'id';
+        protected $table      = 'admin';
+        protected $primaryKey = 'admin_id';
 
-        protected $returnType = 'array';
+        protected $returnType = 'App\Entities\Finance\User';
         protected $useSoftDeletes = true;
 
-        protected $allowedFields = ['name', 'email'];
+        protected $allowedFields = ['name', 'username', 'mpassword'];
 
         protected $useTimestamps = false;
 
         protected $validationRules    = [];
         protected $validationMessages = [];
+
+        public static function getRights()
+        {
+            //
+        }
+    
+        public static function getBranches($User)
+        {
+    
+        }
 }

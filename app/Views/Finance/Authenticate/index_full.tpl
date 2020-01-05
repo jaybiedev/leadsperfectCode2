@@ -4,7 +4,8 @@
 	<title>Login Page</title>
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/Finance/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/Common/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/Finance/login.css">
     
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/Finance/favicon.ico/apple-icon-57x57.png">
@@ -27,6 +28,8 @@
 
     <script src="/libs/jquery/js/jquery.min.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/Finance/authenticate/authenticate.js"></script>
+	<script src="/libs/tools/Common/js/Utils.js"></script>
 
 </head>
 <body>
@@ -34,10 +37,11 @@
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
             <div class="logo wrapper">
-                <img src="/assets/logo.png" class="fit-image" />
+                <img src="/assets/Finance/logo.png" class="fit-image" />
             </div>
 			<div class="card-header">
 				<h3>Sign In</h3>
+				<div class="error" id="login-error"></div>
                 <!--
 				<div class="d-flex justify-content-end social_icon">
 					<span><i class="fab fa-facebook-square"></i></span>
@@ -47,25 +51,25 @@
                 -->
 			</div>
 			<div class="card-body">
-				<form>
+				<form id="frm-authenticate">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username">
+						<input type="text" id="username" class="form-control" placeholder="username">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password">
+						<input type="password" id="password" class="form-control" placeholder="password">
 					</div>
 					<div class="row align-items-center remember">
 						<input type="checkbox">Remember Me
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn">
+						<input type="submit" value="Login" id="authenticate-btn" class="btn float-right login_btn">
 					</div>
 				</form>
 			</div>

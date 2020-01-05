@@ -17,7 +17,7 @@ abstract class BaseModel extends Model
         */
 
         protected $DBGroup = 'default';
-        protected $primaryKey = 'id';
+        protected $primaryKey = 'branch_id';
 
         protected $returnType = 'array';
         protected $useSoftDeletes = true;

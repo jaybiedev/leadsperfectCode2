@@ -4,6 +4,7 @@
 	<title>JGM Finance Corporation</title>
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/Common/style.css">
     [[foreach from=$header.stylesheets item=file]]
         <link rel="stylesheet" type="text/css" href="[[$file]]">
     [[/foreach]]
@@ -28,6 +29,7 @@
 
     <script src="/libs/jquery/js/jquery.min.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/libs/tools/Common/js/Utils.js"></script>
 
 </head>
 <body>

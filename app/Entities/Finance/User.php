@@ -4,9 +4,10 @@ use App\Entities\BaseEntity;
 
 class User extends BaseEntity
 {
-    public $id;
+    public $admin_id;
     public $username;
-    public $email;
+    public $name;
+    public $mpassword;
     public $password_hash;
     public $date_created;
     public $date_updated;
@@ -19,9 +20,10 @@ class User extends BaseEntity
         return $this;
     }
 
-    public function createdOn($format = ‘Y-m-d’)
+    public function createdOn($format = "Y-m-d")
     {
-        $date = new DateTime($this->created_at);
+        $date = new \DateTime($this->created_at);
         return $date->format($format);
     }
+
 }
