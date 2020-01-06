@@ -1,7 +1,13 @@
 .error  {
     color: red;
 }
-
+.margin-center {
+    margin-left:auto;
+    margin-right:auto;
+}
+.margin-left-auto {
+    margin-left:auto; 
+}
 .dropdown-menu .divider {
     height: 1px;
     margin: 9px 1px;
@@ -15,8 +21,32 @@
 .dropdown-item i {
     padding-right: 4px;
 }
+#main-nav div ul li:nth-child(5) ul,
+#main-nav div ul li:nth-child(6) ul
+{
+    right: 0;
+    left: unset;
+}
+#main-nav .dropdown-menu {
+    border-radius: 0 0 0.25em 0.25em;
+}
 
-.pull-right#user-settings .dropdown-menu {
+ul#user-settings .dropdown-menu {
     left:auto;
     right: 0;
+    margin-top: 10px;
+}
+
+.dataTables_wrapper .dt-buttons.btn-group {
+    display: inline-block;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right;
+}
+
+@media (min-width: 768px) {
+    ul#user-settings {
+        margin-left: 50px;
+    }
 }

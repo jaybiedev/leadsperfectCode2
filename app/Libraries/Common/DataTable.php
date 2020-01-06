@@ -16,10 +16,10 @@ class DataTable
     public $orderFieldType;
     public $Model;
 
-    function __construct($meta=[], $Model=null, $default_order_field=null)
+    function __construct($meta=[], $Model=null, $default_order_field=null, $dataType=null)
     {
         $this->setModel($Model);
-        $this->setDefaultOrderField($default_order_field);
+        $this->setDefaultOrderField($default_order_field, $dataType);
         $this->load($meta);
     }
 
@@ -77,7 +77,7 @@ class DataTable
     public function getOrderByLower()
     {
         $order_field = $this->orderField;
-        $can_lower = !in_array($this->orderFieldType, ['int', 'bigint', 'float', 'double', 'boolean']);
+        $can_lower = !in_array($this->orderFieldType, ['int', 'bigint', 'float', 'double', 'numeric', 'boolean']);
 
         if (empty($order_field))
             $order_field = $this->defaultOrderField;

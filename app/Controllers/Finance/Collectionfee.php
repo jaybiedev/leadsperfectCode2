@@ -1,27 +1,27 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
-use App\Models\Finance\AccountClassModel;
+use App\Models\Finance\CollectionFeeModel;
 
-class AccountClass extends FinanceBaseController
+class CollectionFee extends FinanceBaseController
 {
 	public function index()
 	{   
-        $this->View->setPageHeader('Manage Account Classifications');
-        $this->View->setModalTitle('Edit AccountClass');
-        return $this->View->render('Finance/AccountClass/index.tpl');
+        $this->View->setPageHeader('Manage Fees');
+        $this->View->setModalTitle('Edit Fees');
+        return $this->View->render('Finance/CollectionFee/index.tpl');
     }
     
     public function get()
     {
         $meta = $this->request->getGet();
 
-        $AccountClassModel = new AccountClassModel();   
+        $CollectionFeeModel = new CollectionFeeModel();   
         $data = [];
 
-        if (!empty($meta['account_class_id']))
+        if (!empty($meta['feetable_id']))
         {
-            $data = $AccountClassModel->find((int)$meta['account_class_id'])->populate();
+            $data = $CollectionFeeModel->find((int)$meta['feetable_id'])->populate();
         }
 
        return  $this->View->renderJsonSuccess(null, $data);
@@ -31,44 +31,44 @@ class AccountClass extends FinanceBaseController
     {
         $meta = $this->request->getGet();
 
-        $AccountClassModel = new AccountClassModel();   
-        $DataTable = new \App\Libraries\Common\DataTable($meta, $AccountClassModel, 'account_class');
+        $CollectionFeeModel = new CollectionFeeModel();   
+        $DataTable = new \App\Libraries\Common\DataTable($meta, $CollectionFeeModel, 'afrom', 'numeric');
     
         $data = [];
 
         if (!empty($DataTable->searchValue))
         {
-            $data = $AccountClassModel->like($DataTable->getSearchableLike())
+            $data = $CollectionFeeModel->like($DataTable->getSearchableLike())
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
-            $data = $AccountClassModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+            $data = $CollectionFeeModel->where("type", "C")->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 
-        $recordsTotal = $AccountClassModel->countAllResults();
+        $recordsTotal = $CollectionFeeModel->countAllResults();
         
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
 
     public function post()
     {
-        $AccountClass_id = $this->request->getPost('accountclass_id');
-        $AccountClassModel = new AccountClassModel();
+        $feetable_id = $this->request->getPost('feetable_id');
+        $CollectionFeeModel = new CollectionFeeModel();
         
-        $AccountClass = $AccountClassModel->first($accountclass_id);
-        if (!empty($id) && empty($AccountClass->accountclass_id))
+        $CollectionFee = $CollectionFeeModel->first($feetable_id);
+        if (!empty($id) && empty($CollectionFee->feetable_id))
         {
             return $this->View->renderJsonFail();
         }
 
-        $AccountClass = new \App\Entities\Finance\AccountClass();
+        $CollectionFee = new \App\Entities\Finance\CollectionFee();
 
         $meta = $this->request->getPost();
-        $AccountClass->fill($meta);
-        $AccountClassModel->save($AccountClass);
+        $CollectionFee->fill($meta);
+        $CollectionFeeModel->save($CollectionFee);
 
         return $this->View->renderJsonSuccess();
     }
@@ -81,8 +81,8 @@ class AccountClass extends FinanceBaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $AccountClassModel = new AccountClassModel();
-            $AccountClass = $AccountClassModel->delete($id);
+            $CollectionFeeModel = new CollectionFeeModel();
+            $CollectionFee = $CollectionFeeModel->delete($id);
         });
         return $this->View->renderJsonSuccess();
     }
@@ -95,10 +95,10 @@ class AccountClass extends FinanceBaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $AccountClass = new \App\Entities\Finance\AccountClass();
-            $AccountClass->date_deleted = null;
-            $AccountClassModel = new AccountClassModel();
-            $AccountClass = $AccountClassModel->save($AccountClass);
+            $CollectionFee = new \App\Entities\Finance\CollectionFee();
+            $CollectionFee->date_deleted = null;
+            $CollectionFeeModel = new CollectionFeeModel();
+            $CollectionFee = $CollectionFeeModel->save($CollectionFee);
         });
         return $this->View->renderJsonSuccess();
     }

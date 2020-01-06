@@ -1,27 +1,27 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
-use App\Models\Finance\AccountClassModel;
+use App\Models\Finance\BankcardModel;
 
-class AccountClass extends FinanceBaseController
+class Bankcard extends FinanceBaseController
 {
 	public function index()
 	{   
-        $this->View->setPageHeader('Manage Account Classifications');
-        $this->View->setModalTitle('Edit AccountClass');
-        return $this->View->render('Finance/AccountClass/index.tpl');
+        $this->View->setPageHeader('Manage Partners');
+        $this->View->setModalTitle('Edit Partner');
+        return $this->View->render('Finance/Bankcard/index.tpl');
     }
     
     public function get()
     {
         $meta = $this->request->getGet();
 
-        $AccountClassModel = new AccountClassModel();   
+        $BankcardModel = new BankcardModel();   
         $data = [];
 
-        if (!empty($meta['account_class_id']))
+        if (!empty($meta['bankcard_id']))
         {
-            $data = $AccountClassModel->find((int)$meta['account_class_id'])->populate();
+            $data = $BankcardModel->find((int)$meta['bankcard_id'])->populate();
         }
 
        return  $this->View->renderJsonSuccess(null, $data);
@@ -31,44 +31,44 @@ class AccountClass extends FinanceBaseController
     {
         $meta = $this->request->getGet();
 
-        $AccountClassModel = new AccountClassModel();   
-        $DataTable = new \App\Libraries\Common\DataTable($meta, $AccountClassModel, 'account_class');
+        $BankcardModel = new BankcardModel();   
+        $DataTable = new \App\Libraries\Common\DataTable($meta, $BankcardModel, 'bankcard');
     
         $data = [];
 
         if (!empty($DataTable->searchValue))
         {
-            $data = $AccountClassModel->like($DataTable->getSearchableLike())
+            $data = $BankcardModel->like($DataTable->getSearchableLike())
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
-            $data = $AccountClassModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+            $data = $BankcardModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 
-        $recordsTotal = $AccountClassModel->countAllResults();
+        $recordsTotal = $BankcardModel->countAllResults();
         
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
 
     public function post()
     {
-        $AccountClass_id = $this->request->getPost('accountclass_id');
-        $AccountClassModel = new AccountClassModel();
+        $AccountClass_id = $this->request->getPost('bankcard_id');
+        $BankcardModel = new BankcardModel();
         
-        $AccountClass = $AccountClassModel->first($accountclass_id);
-        if (!empty($id) && empty($AccountClass->accountclass_id))
+        $Bankcard = $BankcardModel->first($bankcard_id);
+        if (!empty($id) && empty($Bankcard->bankcard_id))
         {
             return $this->View->renderJsonFail();
         }
 
-        $AccountClass = new \App\Entities\Finance\AccountClass();
+        $Bankcard = new \App\Entities\Finance\Bankcard();
 
         $meta = $this->request->getPost();
-        $AccountClass->fill($meta);
-        $AccountClassModel->save($AccountClass);
+        $Bankcard->fill($meta);
+        $BankcardModel->save($Bankcard);
 
         return $this->View->renderJsonSuccess();
     }
@@ -81,8 +81,8 @@ class AccountClass extends FinanceBaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $AccountClassModel = new AccountClassModel();
-            $AccountClass = $AccountClassModel->delete($id);
+            $BankcardModel = new BankcardModel();
+            $Bankcard = $BankcardModel->delete($id);
         });
         return $this->View->renderJsonSuccess();
     }
@@ -95,10 +95,10 @@ class AccountClass extends FinanceBaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $AccountClass = new \App\Entities\Finance\AccountClass();
-            $AccountClass->date_deleted = null;
-            $AccountClassModel = new AccountClassModel();
-            $AccountClass = $AccountClassModel->save($AccountClass);
+            $Bankcard = new \App\Entities\Finance\Bankcard();
+            $Bankcard->date_deleted = null;
+            $BankcardModel = new BankcardModel();
+            $Bankcard = $BankcardModel->save($Bankcard);
         });
         return $this->View->renderJsonSuccess();
     }
