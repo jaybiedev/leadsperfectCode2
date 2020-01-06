@@ -75,7 +75,9 @@ $routes->setAutoRoute(true);
 $routes->get('', 'Common/Home::index');
 $routes->get('common/forms', 'Common/Standards::forms');
 
-$routes->get('finance/bankcard', 'Finance/Bankcard::index');
+$routes->get('finance/accountgroup', 'Finance/Accountgroup::index');
+$routes->get('finance/loantype', 'Finance/Loantype::index');
+$routes->get('finance/partner', 'Finance/Partner::index');
 $routes->get('finance/collectionfee', 'Finance/Collectionfee::index');
 $routes->get('finance/clientbank', 'Finance/Clientbank::index');
 $routes->get('finance/accountclass', 'Finance/Accountclass::index');

@@ -1,27 +1,27 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
-use App\Models\Finance\BankcardModel;
+use App\Models\Finance\LoanTypeModel;
 
-class Bankcard extends FinanceBaseController
+class Loantype extends FinanceBaseController
 {
 	public function index()
 	{   
-        $this->View->setPageHeader('Manage Partners');
-        $this->View->setModalTitle('Edit Partner');
-        return $this->View->render('Finance/Bankcard/index.tpl');
+        $this->View->setPageHeader('Manage Loan Types');
+        $this->View->setModalTitle('Edit loan type');
+        return $this->View->render('Finance/LoanType/index.tpl');
     }
     
     public function get()
     {
         $meta = $this->request->getGet();
 
-        $BankcardModel = new BankcardModel();   
+        $LoanTypeModel = new LoanTypeModel();   
         $data = [];
 
-        if (!empty($meta['bankcard_id']))
+        if (!empty($meta['loan_type_id']))
         {
-            $data = $BankcardModel->find((int)$meta['bankcard_id'])->populate();
+            $data = $LoanTypeModel->find((int)$meta['loan_type_id'])->populate();
         }
 
        return  $this->View->renderJsonSuccess(null, $data);
@@ -31,44 +31,44 @@ class Bankcard extends FinanceBaseController
     {
         $meta = $this->request->getGet();
 
-        $BankcardModel = new BankcardModel();   
-        $DataTable = new \App\Libraries\Common\DataTable($meta, $BankcardModel, 'bankcard');
+        $LoanTypeModel = new LoanTypeModel();   
+        $DataTable = new \App\Libraries\Common\DataTable($meta, $LoanTypeModel, 'loan_type');
     
         $data = [];
 
         if (!empty($DataTable->searchValue))
         {
-            $data = $BankcardModel->like($DataTable->getSearchableLike())
+            $data = $LoanTypeModel->like($DataTable->getSearchableLike())
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
-            $data = $BankcardModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+            $data = $LoanTypeModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 
-        $recordsTotal = $BankcardModel->countAllResults();
+        $recordsTotal = $LoanTypeModel->countAllResults();
         
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
 
     public function post()
     {
-        $AccountClass_id = $this->request->getPost('bankcard_id');
-        $BankcardModel = new BankcardModel();
+        $loan_type_id = $this->request->getPost('loan_type_id');
+        $LoanTypeModel = new LoanTypeModel();
         
-        $Bankcard = $BankcardModel->first($bankcard_id);
-        if (!empty($id) && empty($Bankcard->bankcard_id))
+        $LoanType = $LoanTypeModel->first($loan_type_id);
+        if (!empty($id) && empty($LoanType->loan_type_id))
         {
             return $this->View->renderJsonFail();
         }
 
-        $Bankcard = new \App\Entities\Finance\Bankcard();
+        $LoanType = new \App\Entities\Finance\LoanType();
 
         $meta = $this->request->getPost();
-        $Bankcard->fill($meta);
-        $BankcardModel->save($Bankcard);
+        $LoanType->fill($meta);
+        $LoanTypeModel->save($LoanType);
 
         return $this->View->renderJsonSuccess();
     }
@@ -81,8 +81,8 @@ class Bankcard extends FinanceBaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $BankcardModel = new BankcardModel();
-            $Bankcard = $BankcardModel->delete($id);
+            $LoanTypeModel = new LoanTypeModel();
+            $LoanType = $LoanTypeModel->delete($id);
         });
         return $this->View->renderJsonSuccess();
     }
@@ -95,10 +95,10 @@ class Bankcard extends FinanceBaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $Bankcard = new \App\Entities\Finance\Bankcard();
-            $Bankcard->date_deleted = null;
-            $BankcardModel = new BankcardModel();
-            $Bankcard = $BankcardModel->save($Bankcard);
+            $LoanType = new \App\Entities\Finance\LoanType();
+            $LoanType->date_deleted = null;
+            $LoanTypeModel = new LoanTypeModel();
+            $LoanType = $LoanTypeModel->save($LoanType);
         });
         return $this->View->renderJsonSuccess();
     }

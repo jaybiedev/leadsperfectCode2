@@ -19,7 +19,7 @@ $(document).ready(function() {
     })
 });
 
-var Manageaccountclass = {
+var ManageAccountclass = {
      account_class_id: null,
 }
 
@@ -67,7 +67,7 @@ app.controller('accountclassCtrl', function($scope, $http) {
     
     };
 
-    $scope.saveaccountclass = function() {
+    $scope.saveAccountClass = function() {
     	debugger;
     };
 });

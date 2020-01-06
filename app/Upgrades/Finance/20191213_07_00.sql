@@ -30,7 +30,7 @@ INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Browse Pena
 INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Collection Fee Table','?p=collectionfee','Top.Finance.File.Collection_Fee','Top.Finance.File','100');
 INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Service Charge Table','?p=servicecharge','Top.Finance.File.Service_Charge','Top.Finance.File','110');
 INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Branches','finance/branch','Top.Finance.File.Branches','Top.Finance.File','120');
-INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Partners','?p=province','Top.Finance.File.Partners','Top.Finance.File','130');
+INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Partners','/finance/partner','Top.Finance.File.Partners','Top.Finance.File','130');
 INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Loan Type','?p=loan_type','Top.Finance.File.Loan_Type','Top.Finance.File','140');
 INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Account Classification','?p=account_class','Top.Finance.File.Account_Classification','Top.Finance.File','150');
 INSERT INTO menu (menu, slug, path,parent_path, sort_order) values ('Loans','?p=loan.releasing.browse','Top.Finance.Loans','Top.Finance','160');
