@@ -1,6 +1,8 @@
 <?php
 namespace App\Libraries\Common;
 
+use App\Helpers\Utils;
+use App\Models\Common\MenuModel;
 use CodeIgniter\Config\Config;
 
 class View 
@@ -96,11 +98,8 @@ class View
         if (empty($data['menu'])) 
         {
             $data['menu'] = null;
-            if (is_file(APPPATH . 'Models/' . ucwords($this->getEnvironment()->product) . '/MenuModel.php'))
-            {
-                $MenuModel = new \App\Models\Finance\MenuModel();
-                $data['menu'] = $MenuModel->getMenu();
-            }
+            $MenuModel = new MenuModel();
+            $data['menu'] = $MenuModel->getMenuTree("Top." . ucwords($this->getEnvironment()->product), '{1}', 'sort_order');
         }
         //$data['Helper'] = $this->Helper;
 

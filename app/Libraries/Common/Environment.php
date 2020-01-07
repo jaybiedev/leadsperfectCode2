@@ -32,6 +32,11 @@ class Environment
     public function getProductModulePath()
     {
         $path = ucwords($this->product) . '/' . $this->module;
+
+        // hack to handle cashposition
+        if (strtolower($this->product) == 'cash')
+            $path = 'Finance/' . $this->module;
+
         return $path;
     }
 

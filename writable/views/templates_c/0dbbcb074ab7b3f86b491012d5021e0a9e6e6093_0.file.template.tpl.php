@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-01-05 20:45:17
+/* Smarty version 3.1.34-dev-7, created on 2020-01-06 21:59:11
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e129f3d023e81_30298414',
+  'unifunc' => 'content_5e14020f261281_80655633',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1578278657,
+      1 => 1578369550,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5e129f3d023e81_30298414 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e14020f261281_80655633 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -33,9 +33,9 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/Common/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/Common/forms.css">
+    <link rel="stylesheet" type="text/css" href="/css/Common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/Finance/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/Common/forms.css">
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['header']->value['stylesheets'], 'file');
 if ($_from !== null) {
@@ -182,7 +182,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         </li>
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/user/preferences"><i class="fa fa-cog"></i> Preferences</a></li>
-                        <li class="dropdown-item"><a href="/help/support"><i class="fa fa-file-invoice"></i> Accounting</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-ruble-sign"></i> Pensioner Login</a></li>
+                        <li class="dropdown-item"><a href="/cash"><i class="fa fa-money-bill-wave"></i> Cash Position</a></li>
+                        <li class="dropdown-item"><a href="/payroll"><i class="fa fa-file-invoice"></i> Payroll</a></li>
+                        <li class="dropdown-item"><a href="/admin"><i class="fa fa-landmark"></i> Administration</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/finance/authenticate/logout"><i class="fa fa-power-off"></i> Logout</a></li>
                     </ul>
@@ -201,7 +205,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6514278965e129f3d020601_68091000', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8890155455e14020f25e3e9_07933164', "ContentBody");
 ?>
 
     </main>
@@ -220,7 +224,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6514278965e129f3d0
                     </div>
                     <div class="modal-body">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11416295535e129f3d022703_92763147', "ModalBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12460155765e14020f25fe29_27470585', "ModalBody");
 ?>
 
                     </div>
@@ -280,12 +284,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_6514278965e129f3d020601_68091000 extends Smarty_Internal_Block
+class Block_8890155455e14020f25e3e9_07933164 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_6514278965e129f3d020601_68091000',
+    0 => 'Block_8890155455e14020f25e3e9_07933164',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -295,12 +299,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_11416295535e129f3d022703_92763147 extends Smarty_Internal_Block
+class Block_12460155765e14020f25fe29_27470585 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_11416295535e129f3d022703_92763147',
+    0 => 'Block_12460155765e14020f25fe29_27470585',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

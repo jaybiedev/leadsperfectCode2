@@ -5,9 +5,9 @@
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/Common/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/Finance/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/Common/forms.css">
+    <link rel="stylesheet" type="text/css" href="/css/Common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/Finance/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/Common/forms.css">
     [[foreach from=$header.stylesheets item=file]]
         <link rel="stylesheet" type="text/css" href="[[$file]]">
     [[/foreach]]
@@ -132,7 +132,11 @@
                         </li>
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/user/preferences"><i class="fa fa-cog"></i> Preferences</a></li>
-                        <li class="dropdown-item"><a href="/help/support"><i class="fa fa-file-invoice"></i> Accounting</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-ruble-sign"></i> Pensioner Login</a></li>
+                        <li class="dropdown-item"><a href="/cash"><i class="fa fa-money-bill-wave"></i> Cash Position</a></li>
+                        <li class="dropdown-item"><a href="/payroll"><i class="fa fa-file-invoice"></i> Payroll</a></li>
+                        <li class="dropdown-item"><a href="/admin"><i class="fa fa-landmark"></i> Administration</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/finance/authenticate/logout"><i class="fa fa-power-off"></i> Logout</a></li>
                     </ul>

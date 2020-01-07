@@ -7,7 +7,7 @@ class Home extends FinanceBaseController
 
     public function index()
     {
-        var_dump(Authenticate::isLogged($this->Session));
+        $this->View->setPageTitle("JGM Finance");
         return $this->View->render("Finance/Home/index.tpl");
     }
 }

@@ -20,6 +20,7 @@
 }
 .dropdown-item i {
     padding-right: 4px;
+    width: 20px;
 }
 #main-nav div ul li:nth-child(5) ul,
 #main-nav div ul li:nth-child(6) ul

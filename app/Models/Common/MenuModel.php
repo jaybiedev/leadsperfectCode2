@@ -12,8 +12,36 @@ class MenuModel extends BaseModel
 
     protected $allowedFields = ['menu', 'path', 'sliug', 'parent_path', 'sort_order'];
 
-    protected $useTimestamps = true;    
+    protected $useTimestamps = true;
+
+    public function getMenuTree($path = 'Top', $depth=null, $sort_order='path')
+    {
+        $sql = "SELECT * FROM menu
+             WHERE path ~ '{$path}.*{$depth}' 
+             ORDER BY {$sort_order}";
+        $query = $this->db->query($sql);
+
+        $menuArray = [];   
+        foreach ($query->getResult('App\Entities\Common\Menu') as $Menu) 
+        {
+            $Menu->populate();
+            if (empty($Menu->path))
+                continue;
+            
+            $submenu = $this->getMenuTree($Menu->path, $depth);
+            if (!empty($submenu))
+                $Menu->children = $submenu;
+
+            $menuArray[$Menu->menu] = $Menu;
+        }
+        
+        return $menuArray;
+    }
     
+
+    /**
+     * for mysql, not using ltree.  Path is text dot delimited
+     */
     public function getMenu($route = null) {
 
         $top = 'Top.' . ucwords($route);

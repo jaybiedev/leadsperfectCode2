@@ -75,12 +75,17 @@ $routes->setAutoRoute(true);
 $routes->get('', 'Common/Home::index');
 $routes->get('common/forms', 'Common/Standards::forms');
 
+$routes->get('cash', 'Finance/Home::index');
+$routes->get('cash/branch', 'Finance/Branch::index');
+$routes->get('cash/bank', 'Finance/Bank::index');
+
+$routes->get('finance/account', 'Finance/Account::index');
+$routes->get('finance/accountclass', 'Finance/Accountclass::index');
 $routes->get('finance/accountgroup', 'Finance/Accountgroup::index');
 $routes->get('finance/loantype', 'Finance/Loantype::index');
 $routes->get('finance/partner', 'Finance/Partner::index');
 $routes->get('finance/collectionfee', 'Finance/Collectionfee::index');
 $routes->get('finance/clientbank', 'Finance/Clientbank::index');
-$routes->get('finance/accountclass', 'Finance/Accountclass::index');
 $routes->get('finance/branch', 'Finance/Branch::index');
 $routes->get('finance/user', 'Finance/User::index');
 $routes->get('finance/authenticate', 'Finance/Authenticate::index');
