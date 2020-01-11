@@ -149,3 +149,22 @@ a {
 main.container {
     margin-bottom: 50px;
 }
+
+.home-module-cards a{
+    text-decoration: none;
+}
+
+.home-module-cards .card {
+    margin: 20px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5), 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+.home-module-cards .card:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.9), 0 2px 10px 0 rgba(0, 0, 0, 0.9);
+}
+
+.home-module-cards .module-icon  {
+    padding: 10px;
+    color: #190445;
+    background-color: #FFC312;
+}

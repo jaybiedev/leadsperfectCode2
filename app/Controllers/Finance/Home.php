@@ -7,7 +7,10 @@ class Home extends FinanceBaseController
 
     public function index()
     {
+        $data = [];
+
+
         $this->View->setPageTitle("JGM Finance");
-        return $this->View->render("Finance/Home/index.tpl");
+        return $this->View->render("Finance/Home/index.tpl", $data);
     }
 }

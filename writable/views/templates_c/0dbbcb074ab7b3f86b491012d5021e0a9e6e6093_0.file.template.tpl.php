@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-01-06 21:59:11
+/* Smarty version 3.1.34-dev-7, created on 2020-01-11 11:42:41
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e14020f261281_80655633',
+  'unifunc' => 'content_5e1a091192ec81_31320103',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1578369550,
+      1 => 1578764559,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5e14020f261281_80655633 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e1a091192ec81_31320103 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -183,6 +183,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/user/preferences"><i class="fa fa-cog"></i> Preferences</a></li>
                         <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-piggy-bank"></i> Finance</a></li>
                         <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-ruble-sign"></i> Pensioner Login</a></li>
                         <li class="dropdown-item"><a href="/cash"><i class="fa fa-money-bill-wave"></i> Cash Position</a></li>
                         <li class="dropdown-item"><a href="/payroll"><i class="fa fa-file-invoice"></i> Payroll</a></li>
@@ -205,7 +206,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8890155455e14020f25e3e9_07933164', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5988827085e1a09119273b7_72125732', "ContentBody");
 ?>
 
     </main>
@@ -224,7 +225,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8890155455e14020f2
                     </div>
                     <div class="modal-body">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12460155765e14020f25fe29_27470585', "ModalBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6014460135e1a091192c480_42608113', "ModalBody");
 ?>
 
                     </div>
@@ -284,12 +285,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_8890155455e14020f25e3e9_07933164 extends Smarty_Internal_Block
+class Block_5988827085e1a09119273b7_72125732 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_8890155455e14020f25e3e9_07933164',
+    0 => 'Block_5988827085e1a09119273b7_72125732',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -299,12 +300,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_12460155765e14020f25fe29_27470585 extends Smarty_Internal_Block
+class Block_6014460135e1a091192c480_42608113 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_12460155765e14020f25fe29_27470585',
+    0 => 'Block_6014460135e1a091192c480_42608113',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

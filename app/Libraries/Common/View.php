@@ -98,8 +98,12 @@ class View
         if (empty($data['menu'])) 
         {
             $data['menu'] = null;
-            $MenuModel = new MenuModel();
-            $data['menu'] = $MenuModel->getMenuTree("Top." . ucwords($this->getEnvironment()->product), '{1}', 'sort_order');
+            $product = $this->getEnvironment()->product;
+            if (!empty($product))
+            {
+                $MenuModel = new MenuModel();
+                $data['menu'] = $MenuModel->getMenuTree("Top." . ucwords($product), '{1}', 'sort_order');
+            }
         }
         //$data['Helper'] = $this->Helper;
 
@@ -253,7 +257,6 @@ class View
         });
 
         return $javascripts;
-
     }
 
 }

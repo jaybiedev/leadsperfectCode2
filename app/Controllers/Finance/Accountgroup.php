@@ -39,12 +39,14 @@ class AccountGroup extends FinanceBaseController
         if (!empty($DataTable->searchValue))
         {
             $data = $AccountGroupModel->like($DataTable->getSearchableLike())
+                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id")
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
             $data = $AccountGroupModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id")
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 

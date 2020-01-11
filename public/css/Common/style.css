@@ -46,6 +46,10 @@ ul#user-settings .dropdown-menu {
     float: right;
 }
 
+.btn.btn-outline {
+    border: 1px solid #ccc;
+}
+
 @media (min-width: 768px) {
     ul#user-settings {
         margin-left: 50px;

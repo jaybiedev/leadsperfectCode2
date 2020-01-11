@@ -6,7 +6,7 @@ $(document).ready(function() {
             "columns": [
                 { "data": "account_group_id", "visible": false },
                 { "data": "account_group" },
-                { "data": "account_class_id" }
+                { "data": "account_class" }
             ],
             onRowEdit : function(data) {
                 var scope = angular.element("body[ng-controller='account_groupCtrl']").scope();

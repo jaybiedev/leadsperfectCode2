@@ -7,8 +7,8 @@ $(document).ready(function() {
                 { "data": "account_id", "visible": false },
                 { "data": "account" },
                 { "data": "account_code" },
-                { "data": "account_group_id" },
-                { "data": "branch_id" },
+                { "data": "account_group" },
+                { "data": "branch" },
                 { "data": "account_status" },
             ],
             onRowEdit : function(data) {

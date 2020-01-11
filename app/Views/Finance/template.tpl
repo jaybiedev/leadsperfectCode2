@@ -133,6 +133,7 @@
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/user/preferences"><i class="fa fa-cog"></i> Preferences</a></li>
                         <li class="divider"></li>
+                        <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-piggy-bank"></i> Finance</a></li>
                         <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-ruble-sign"></i> Pensioner Login</a></li>
                         <li class="dropdown-item"><a href="/cash"><i class="fa fa-money-bill-wave"></i> Cash Position</a></li>
                         <li class="dropdown-item"><a href="/payroll"><i class="fa fa-file-invoice"></i> Payroll</a></li>

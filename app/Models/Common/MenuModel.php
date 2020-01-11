@@ -18,7 +18,9 @@ class MenuModel extends BaseModel
     {
         $sql = "SELECT * FROM menu
              WHERE path ~ '{$path}.*{$depth}' 
+                AND date_deleted IS NULL
              ORDER BY {$sort_order}";
+
         $query = $this->db->query($sql);
 
         $menuArray = [];   
@@ -28,10 +30,12 @@ class MenuModel extends BaseModel
             if (empty($Menu->path))
                 continue;
             
-            $submenu = $this->getMenuTree($Menu->path, $depth);
-            if (!empty($submenu))
-                $Menu->children = $submenu;
-
+            if ($depth != '{1,1}')
+            {
+                $submenu = $this->getMenuTree($Menu->path, $depth);
+                if (!empty($submenu))
+                    $Menu->children = $submenu;
+            }
             $menuArray[$Menu->menu] = $Menu;
         }
         

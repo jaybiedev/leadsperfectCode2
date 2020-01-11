@@ -51,4 +51,5 @@ abstract class BaseModel extends Model
 
             return $items;
         }
+
 }

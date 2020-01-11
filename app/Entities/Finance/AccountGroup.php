@@ -6,4 +6,6 @@ class AccountGroup extends BaseEntity
 {
     public $account_group_id;
     public $account_group;
+
+    //public $account_class;
 }

@@ -2,6 +2,7 @@
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
 use App\Models\Finance\AccountModel;
+use App\Entities\Finance\Account as AccountEntity;
 
 class Account extends FinanceBaseController
 {
@@ -18,7 +19,14 @@ class Account extends FinanceBaseController
             $page_header = 'New Account';
 
         $this->View->setPageHeader($page_header);
-        return $this->View->render('Finance/Account/edit.tpl');
+
+        $Account = new AccountEntity();
+        $Account->gender = 'F';
+        $Account->age = 34;
+        $Account->branch_id = 32;
+        $Account->civil_status = 'M';
+        $data['aAccount'] = $Account;
+        return $this->View->render('Finance/Account/edit.tpl', $data);
     }
 
     public function browse()
@@ -55,12 +63,16 @@ class Account extends FinanceBaseController
         if (!empty($DataTable->searchValue))
         {
             $data = $AccountModel->like($DataTable->getSearchableLike())
+                                ->join("account_group", "account.account_group_id=account_group.account_group_id")
+                                ->join("branch", "account.branch_id=branch.branch_id")
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
             $data = $AccountModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+                                ->join("account_group", "account.account_group_id=account_group.account_group_id")
+                                ->join("branch", "account.branch_id=branch.branch_id")
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 

@@ -1,4 +1,4 @@
 [[extends file="Finance/template.tpl"]]
 [[block name="ContentBody"]]
-    Welcome
+   Welcome to Finance
 [[/block]]

@@ -7,16 +7,30 @@ class Home extends BaseController
 {
 	public function index()
 	{
+		$ContentModel = new ContentModel();
 		if (AuthenticateLib::isLogged($this->Session))
 		{
-			$this->redirectTo($this->Session->get("redirectTo"));
+			$data = ["items"=>[]];
+			$moduleClass = getenv("moduleClass");
+			
+			if (!empty($moduleClass))
+			{
+				$data['modules'] = $moduleClass::getModules();
+			}
+
+			// $this->redirectTo($this->Session->get("redirectTo"));
+			// $Content = $ContentModel->where('identifier', 'HOME')
+			// 					->where('content_type', 'HTML')->first()->populate();
+			// $data['content'] = $Content->content;
+			// return $this->View->render("Common/content.tpl", $data);
+			return $this->View->render("Finance/Home/homepage.tpl", $data);
+		}
+		else
+		{
+			$loginUrl = getenv('loginUrl');
+			$this->redirectTo($loginUrl . "?redirectTo=/");
 		}
 
-		$ContentModel = new ContentModel();
-		$Content = $ContentModel->where('content_type', 'HTML')->first()->populate();
-		$data['content'] = $Content->content;
-
-		return $this->View->render("Common/content.tpl", $data);
 	}
 
 	public function logout()
