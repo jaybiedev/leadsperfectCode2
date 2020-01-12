@@ -72,7 +72,7 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 		 *   ];
 		 */
 		$classmap = [
-			'Smarty' => APPPATH .'ThirdParty/smarty/libs/Smarty.class.php',
+			'Smarty' => APPPATH .'ThirdParty/smartyLib/smarty/libs/Smarty.class.php',
 		];
 
 		//--------------------------------------------------------------------

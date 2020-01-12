@@ -17,8 +17,8 @@ class SmartyLib extends \Smarty
             ->setCompileDir($smarty_compile_dir)
             ->setCacheDir($smarty_cache_dir)
             ->setTemplateDir(APPPATH . 'Views')
-            ->setPluginsDir(array(APPPATH . 'ThirdParty/smarty/libs/plugins',
-            APPPATH . 'ThirdParty/smarty/plugins'));
+            ->setPluginsDir(array(APPPATH . 'ThirdParty/smartyLib/smarty/libs/plugins',
+            APPPATH . 'ThirdParty/smartyLib/custom_plugins'));
 
         if ( ! is_writable( $this->compile_dir ) )
         {
