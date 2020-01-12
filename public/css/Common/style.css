@@ -55,3 +55,46 @@ ul#user-settings .dropdown-menu {
         margin-left: 50px;
     }
 }
+
+/* messages */
+.msg {
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: .25em;
+}
+.msg .msg-header .msg-title {
+    font-weight: bold;
+}
+
+.msg.msg-info {
+    border: 1px solid #6BB8E1;
+    background-color: #D0ECFB;
+}
+.msg.msg-info i,.msg.msg-info .msg-title {
+    color: #2E82BF;
+}
+
+.msg.msg-error {
+    border: 1px solid #A02813;
+    background-color: #F9B2BE;
+}
+.msg.msg-error i,.msg.msg-error .msg-title {
+    color: #A02813;
+}
+
+.msg.msg-warning {
+    border: 1px solid #FFC300;
+    background-color: #F9E79F;
+}
+.msg.msg-warning i,.msg.msg-warning .msg-title {
+    color: #EA9F24;
+}
+
+.msg.msg-success {
+    border: 1px solid #24A820;
+    background-color: #DEF5DD;
+}
+.msg.msg-success i,.msg.msg-success .msg-title {
+    color: #24A820;
+}

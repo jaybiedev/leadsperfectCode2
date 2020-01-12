@@ -8,13 +8,18 @@
         height: 100%;
     }
     .home-module-cards .card {
-        opacity: 0.75;
+        opacity: 0.85;
     }
     .navbar.navbar-bottom-bordered {
         border-bottom: none;
     }
     .navbar-brand  {
         background-color:transparent !important;
+    }
+    @media only screen and (min-width: 800px) {
+        .home-module-cards {
+            margin-top:200px;
+        }
     }
     </style>
     <div class="row home-module-cards">
