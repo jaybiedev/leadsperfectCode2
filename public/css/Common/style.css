@@ -98,3 +98,20 @@ ul#user-settings .dropdown-menu {
 .msg.msg-success i,.msg.msg-success .msg-title {
     color: #24A820;
 }
+
+.search-results {
+    margin: 25px 0;
+}
+
+.search-results article {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 15px 25px;
+    margin-top: 10px;
+}
+.search-results article .excerpt {
+    border-left: 1px solid #dadada;
+}
+.search-results .search-result ul { padding-left: 0 !important; list-style: none;  }
+.search-results article:hover{
+    background-color: #efefef;
+}

@@ -14,17 +14,27 @@ class Account extends FinanceBaseController
     
     public function edit()
 	{
+        $meta = $this->request->getGet();
+        $AccountModel = new AccountModel();   
+        $Account = new AccountEntity();
         $page_header = 'Edit Account';
-        if (true) // add
+        if (empty($meta['uid'])) // add
+        {
             $page_header = 'New Account';
+        }
+        else
+        {
+            $Account = $AccountModel->find((int)$meta['uid'])->populate();
+        }
 
         $this->View->setPageHeader($page_header);
-
+        /*
         $Account = new AccountEntity();
         $Account->gender = 'F';
         $Account->age = 34;
         $Account->branch_id = 32;
         $Account->civil_status = 'M';
+        */
         $data['aAccount'] = $Account;
         return $this->View->render('Finance/Account/edit.tpl', $data);
     }
@@ -39,13 +49,25 @@ class Account extends FinanceBaseController
     public function get()
     {
         $meta = $this->request->getGet();
-
-        $AccountModel = new AccountModel();   
+ 
         $data = [];
 
-        if (!empty($meta['account_id']))
+        if (!empty($meta['searchKey']))
         {
-            $data = $AccountModel->find((int)$meta['account_id'])->populate();
+            $offset = 0;
+            $limit = 20;
+            $AccountModel = new AccountModel();
+            //$data = $AccountModel->find((int)$meta['account_id'])->populate();
+            $searchKey = $meta['searchKey'];
+
+            if (!empty($meta['offset']))
+                $offset = (int)$meta['offset'];
+
+            $data = $AccountModel->like('account', $searchKey)
+                    ->join("account_group", "account.account_group_id=account_group.account_group_id")
+                    ->join("branch", "account.branch_id=branch.branch_id")
+                    ->orderBy('account')
+                    ->findAllArray($limit, $offset);
         }
 
        return  $this->View->renderJsonSuccess(null, $data);
