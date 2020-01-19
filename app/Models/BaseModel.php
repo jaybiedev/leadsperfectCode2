@@ -52,4 +52,28 @@ abstract class BaseModel extends Model
             return $items;
         }
 
+        /**
+         * field and searchValue or field={field=>value,...} array
+         * each field is tied with OR 
+         */
+        public function ilike($field, string $match = '')
+        {
+            $insensitiveSearch = true;
+            $escape = null;
+            $side = 'both';
+            return $this->orLike($field ,$match , $side, $escape, $insensitiveSearch);
+        }
+
+        /**
+         * field and searchValue or field={field=>value,...} array
+         * each field is tied with AND 
+         */
+        public function ilikeAnd($field, string $match = '')
+        {
+            $insensitiveSearch = true;
+            $escape = null;
+            $side = 'both';
+            return $this->like($field ,$match , $side, $escape, $insensitiveSearch);
+        }
+
 }

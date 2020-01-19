@@ -15,16 +15,18 @@ class Account extends FinanceBaseController
     public function edit()
 	{
         $meta = $this->request->getGet();
+        $account_id = $this->request->uri->getSegment(4);
+
         $AccountModel = new AccountModel();   
         $Account = new AccountEntity();
         $page_header = 'Edit Account';
-        if (empty($meta['uid'])) // add
+        if (empty($account_id)) // add
         {
             $page_header = 'New Account';
         }
         else
         {
-            $Account = $AccountModel->find((int)$meta['uid'])->populate();
+            $Account = $AccountModel->find((int)$account_id)->populate();
         }
 
         $this->View->setPageHeader($page_header);
@@ -49,27 +51,34 @@ class Account extends FinanceBaseController
     public function get()
     {
         $meta = $this->request->getGet();
- 
         $data = [];
 
-        if (!empty($meta['searchKey']))
-        {
-            $offset = 0;
-            $limit = 20;
-            $AccountModel = new AccountModel();
-            //$data = $AccountModel->find((int)$meta['account_id'])->populate();
-            $searchKey = $meta['searchKey'];
+        if (empty($meta['searchKey']))
+            return  $this->View->renderJsonSuccess(null, $data);
 
-            if (!empty($meta['offset']))
-                $offset = (int)$meta['offset'];
+        $offset = 0;
+        $limit = 20;
+        $AccountModel = new AccountModel();
+        //$data = $AccountModel->find((int)$meta['account_id'])->populate();
+        $searchKey = $meta['searchKey'];
+        $fieldValuePair = array('account'=>$searchKey,
+                'member'=>$searchKey,
+                'lastname'=>$searchKey,
+                'firstname'=>$searchKey
+            );
 
-            $data = $AccountModel->like('account', $searchKey)
-                    ->join("account_group", "account.account_group_id=account_group.account_group_id")
-                    ->join("branch", "account.branch_id=branch.branch_id")
-                    ->orderBy('account')
-                    ->findAllArray($limit, $offset);
-        }
+        if (!empty($meta['offset']))
+            $offset = (int)$meta['offset'];
 
+        if (!empty($meta['searchField']))
+            $fieldValuePair = array($meta['searchField']=>$searchKey);
+
+        $data = $AccountModel->ilike($fieldValuePair)
+                ->join("account_group", "account.account_group_id=account_group.account_group_id")
+                ->join("branch", "account.branch_id=branch.branch_id")
+                ->orderBy('account')
+                ->findAllArray($limit, $offset);
+       
        return  $this->View->renderJsonSuccess(null, $data);
     }
 

@@ -9,7 +9,7 @@ app.controller('accountCtrl', function($scope, $http, $timeout) {
     $scope.Data = {
             url:'/finance/account',
             searchKey : '', 
-            searchField:'',
+            searchField:'account',
             searchResult: [
                 /*
                 {account_id: '1', account: 'Sample1', 'date':'2020-01-20', 
