@@ -2,10 +2,10 @@
 /*
  * Smarty plugin
  * -------------------------------------------------------------
- * File:     function.genderdropdown.php
+ * File:     function.civilstatusdropdown.php
  * Type:     function
- * Name:     sitedropdown
- * Purpose:  widget for sitedropdown
+ * Name:     civilstatusdropdown
+ * Purpose:  widget for civilstatusdropdown
  * -------------------------------------------------------------
  */
 function smarty_function_civilstatusdropdown($params, $content)

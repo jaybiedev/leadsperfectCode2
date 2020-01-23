@@ -115,3 +115,23 @@ ul#user-settings .dropdown-menu {
 .search-results article:hover{
     background-color: #efefef;
 }
+
+form .lbl {
+    font-weight: 550;
+}
+
+.nav .nav-link.active {
+    background-color: #efefef;
+}
+
+.form-control.inline {
+    display:inline-block!important;
+}
+.form-control.datepicker {
+    width: 80%!important;
+    display:inline-block;
+}
+.ui-datepicker-trigger {
+    background-color: transparent;
+    border: none;
+}

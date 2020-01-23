@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>[[$View->pageTitle]]</title>
+    <link rel="stylesheet" href="/libs/jquery/css/jquery-ui.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
@@ -175,6 +176,7 @@
     [[/if]]
 
     <script src="/libs/jquery/js/jquery.min.js"></script>
+    <script src="/libs/jquery/js/jquery-ui.min.js"></script>
     <script src="/libs/popper/js/popper.min.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="/libs/datatable/datatables.min.js"></script>
@@ -185,6 +187,7 @@
     <script src="/libs/tools/Finance/js/angular.controller.js"></script>
     <script src="/js/Common/angular.directives.js"></script>
     <script src="/libs/tools/Common/js/datatable.tools.js"></script>
+    <script src="/libs/tools/Common/js/Utils.js"></script>
     <script src="/js/Finance/nav.js"></script>
 
     [[foreach from=$footer.javascripts item=file]]

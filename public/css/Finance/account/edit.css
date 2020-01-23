@@ -1,0 +1,46 @@
+main.container {
+    margin-left:40px;
+    margin-right:40px;
+    max-width: fit-content;
+}
+
+main.container  form, 
+main.container  form .form-control {
+    font-size: 0.9rem;
+}
+.p-10 {
+    width:10%;
+}
+.p-15 {
+    width:15%;
+}
+.p-25 {
+    width:25%;
+}
+.p-35 {
+    width:35%;
+}
+.p-40 {
+    width:40%;
+}
+.p-50 {
+    width:50%;
+}
+.p-33 {
+    width:33%;
+}
+.p-32 {
+    width:32%;
+}
+.pad-left-20px {
+    padding-left:20px;
+}
+.pad-left-50px {
+    padding-left:50px;
+}
+.tdr {
+    padding-left:20px;
+}
+.tdl {
+    padding-right: 10px;
+}

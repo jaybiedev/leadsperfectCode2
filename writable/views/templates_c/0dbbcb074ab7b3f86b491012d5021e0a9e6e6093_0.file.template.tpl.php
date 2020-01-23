@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-01-11 11:42:41
+/* Smarty version 3.1.34-dev-7, created on 2020-01-21 21:31:37
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e1a091192ec81_31320103',
+  'unifunc' => 'content_5e27c219626458_72830793',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1578764559,
+      1 => 1579663895,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5e1a091192ec81_31320103 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e27c219626458_72830793 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -30,6 +30,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 <head>
 	<title><?php echo $_smarty_tpl->tpl_vars['View']->value->pageTitle;?>
 </title>
+    <link rel="stylesheet" href="/libs/jquery/css/jquery-ui.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
@@ -206,7 +207,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5988827085e1a09119273b7_72125732', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11571826975e27c2196211d8_33032758', "ContentBody");
 ?>
 
     </main>
@@ -225,7 +226,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5988827085e1a09119
                     </div>
                     <div class="modal-body">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6014460135e1a091192c480_42608113', "ModalBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12178781355e27c219624372_02052877', "ModalBody");
 ?>
 
                     </div>
@@ -236,6 +237,9 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6014460135e1a09119
 
     <?php echo '<script'; ?>
  src="/libs/jquery/js/jquery.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="/libs/jquery/js/jquery-ui.min.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  src="/libs/popper/js/popper.min.js"><?php echo '</script'; ?>
@@ -266,6 +270,9 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6014460135e1a09119
  src="/libs/tools/Common/js/datatable.tools.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
+ src="/libs/tools/Common/js/Utils.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
  src="/js/Finance/nav.js"><?php echo '</script'; ?>
 >
 
@@ -285,12 +292,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_5988827085e1a09119273b7_72125732 extends Smarty_Internal_Block
+class Block_11571826975e27c2196211d8_33032758 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_5988827085e1a09119273b7_72125732',
+    0 => 'Block_11571826975e27c2196211d8_33032758',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -300,12 +307,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_6014460135e1a091192c480_42608113 extends Smarty_Internal_Block
+class Block_12178781355e27c219624372_02052877 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_6014460135e1a091192c480_42608113',
+    0 => 'Block_12178781355e27c219624372_02052877',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

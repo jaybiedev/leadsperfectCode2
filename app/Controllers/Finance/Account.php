@@ -11,11 +11,19 @@ class Account extends FinanceBaseController
         $this->View->setPageHeader('Search Accounts');
         return $this->View->render('Finance/Account/index.tpl');
     }
+
+    public function save($meta, $account_id) {
+        var_dump($account_id);
+        Utils::pprint_r($meta);
+        die;
+    }
     
     public function edit()
 	{
-        $meta = $this->request->getGet();
         $account_id = $this->request->uri->getSegment(4);
+        if ($this->isPost()) {
+            $account_id =$this->save($this->request->getPost('account'), $account_id);
+        }
 
         $AccountModel = new AccountModel();   
         $Account = new AccountEntity();

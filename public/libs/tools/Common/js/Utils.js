@@ -1,3 +1,11 @@
+$(document).ready(function() {
+    $('.datepicker').datepicker({
+        dateFormat: "mm/dd/yy",
+        showOn: "both", 
+        buttonText: "<i class='fa fa-calendar-alt'></i>"
+    });
+});
+
 var CommonUtils = {
     encrypt : function(data) {
         return window.btoa(data);
