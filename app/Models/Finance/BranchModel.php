@@ -18,7 +18,7 @@ class BranchModel extends BaseModel
 
         if (!isset($userBranches[$key]) || empty($userBranches[$key]))
         {
-            $branches = $this->findAll(); // @todo
+            $branches = $this->orderBy('branch', 'asc')->findAll(); // @todo
             $userBranches[$key] = $branches;
         }
         

@@ -1,2 +1,2 @@
-INSERT INTO partner (partner_id, partner, date_deleted) (SELECT partner_id, partner, date_deleted FROM partner) ON CONFLICT ON CONSTRAINT partner_partner_key DO NOTHING; 
+INSERT INTO partner (partner_id, partner, date_deleted) (SELECT bankcard_id, bankcard, date_deleted FROM bankcard) ON CONFLICT ON CONSTRAINT partner_partner_key DO NOTHING; 
 UPDATE branch SET partner_id=province WHERE partner_id IS NULL AND province IS NOT NULL AND province > 0; 

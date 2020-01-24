@@ -3,10 +3,10 @@
     <form method="POST" action="" id="frm-account-edit">
         <div class="row">
             <div class="form-group col-6">
-                <input type="text" class="form-control" id="account" placeholder="Account Name" value="[[$aAccount->account]]">
+                <input type="text" class="form-control" id="account" name="account[account]"  placeholder="Account Name" value="[[$aAccount->account]]">
             </div>
             <div class="form-group col-4">
-                [[branchdropdown name="branch_id" selected=$aAccount->branch_id]]
+                [[branchdropdown name="account[branch_id]" selected=$aAccount->branch_id]]
             </div>
             <div class="col-2"></div>
        </div>

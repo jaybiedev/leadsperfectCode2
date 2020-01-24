@@ -1,1 +1,3 @@
-Audit
+<p> 
+    [[$aAccount->audit]]
+</p>

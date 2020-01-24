@@ -1,5 +1,5 @@
 
-CREATE TABLE public.partner (
+CREATE TABLE IF NOT EXISTS public.partner (
     partner_id integer NOT NULL,
     partner text NOT NULL,
     date_created timestamp without time zone,
@@ -15,15 +15,13 @@ CREATE TABLE public.partner (
 -- Name: partner_partner_id_seq; Type: SEQUENCE; Schema: public; Owner: rute
 --
 
-CREATE SEQUENCE public.partner_partner_id_seq
+CREATE SEQUENCE IF NOT EXISTS public.partner_partner_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.partner_partner_id_seq OWNER TO rute;
 
 --
 -- Name: partner_partner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rute

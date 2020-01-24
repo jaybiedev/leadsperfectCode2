@@ -13,16 +13,42 @@ class Account extends FinanceBaseController
     }
 
     public function save($meta, $account_id) {
-        var_dump($account_id);
-        Utils::pprint_r($meta);
-        die;
+        $AccountModel = new AccountModel();
+
+        if (!empty($account_id)) {      
+            $result = $AccountModel->update($account_id, $meta);
+        }
+        else {
+            // check for duplicates.. until indexed unique
+            $found = $AccountModel->where(['LOWER(account)'=>strtolower($meta['account']),
+                        'branch_id'=>$meta['branch_id'],
+                        'sss'=>$meta['sss']])
+                  ->first();
+
+            if (!empty($found) && is_object($found)) {
+                $found->populate();
+                throw new \Exception("Account already exists <a href='/finance/account/edit/" . $found->account_id ."'/>Here</a>");
+            }
+
+            $result = $AccountModel->insert($meta);
+            $account_id = $AccountModel->getInsertID();
+        }
+        
+        if (!$result) {
+            throw new \Exception("Failed to save account information.");
+        }
+
+        return $account_id;
     }
     
     public function edit()
 	{
         $account_id = $this->request->uri->getSegment(4);
         if ($this->isPost()) {
-            $account_id =$this->save($this->request->getPost('account'), $account_id);
+            $_account_id =$this->save($this->request->getPost('account'), $account_id);
+            if (empty($account_id)) {
+                $this->redirectTo("/finance/account/edit/" . $_account_id);
+            }
         }
 
         $AccountModel = new AccountModel();   
@@ -82,8 +108,8 @@ class Account extends FinanceBaseController
             $fieldValuePair = array($meta['searchField']=>$searchKey);
 
         $data = $AccountModel->ilike($fieldValuePair)
-                ->join("account_group", "account.account_group_id=account_group.account_group_id")
-                ->join("branch", "account.branch_id=branch.branch_id")
+                ->join("account_group", "account.account_group_id=account_group.account_group_id", "left")
+                ->join("branch", "account.branch_id=branch.branch_id", "left")
                 ->orderBy('account')
                 ->findAllArray($limit, $offset);
        
