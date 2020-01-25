@@ -45,6 +45,28 @@ body
     font-weight: 100;
     font-style: normal;
 }
+
+/* make scss */
+.btn-primary, 
+.page-item.active .page-link {
+    background-color: #260643;
+    border-color: #260643;
+}
+
+.btn-primary:hover, 
+.page-item.active .page-link:hover {
+    background-color: #5C3E76;
+    border-color: #5C3E76;
+}
+
+i.fa {
+    color:#260643;
+}
+
+i.fa:hover {
+    color:#5C3E76;
+}
+
 .navbar.navbar-bottom-bordered {
     border-bottom: 1px solid #ccc;
     line-height: 1;
@@ -167,4 +189,55 @@ main.container {
     padding: 10px;
     color: #190445;
     background-color: #FFC312;
+}
+
+.report-filter-icons {
+    position: absolute;
+    right: 80px;
+    top: 75px;
+}
+.report-filter-icons i {
+    padding-left: 10px;
+    font-size: 1.5em;
+}
+.report-filter-wrapper {
+    min-width:400px;
+    border-left: 2px solid #ccc;
+    position: absolute;
+    right: 0;
+    min-height: 100%;
+    top: 51px;
+    background-color: #fffeee;
+    padding:25px;
+    height: auto;
+    padding-bottom: 75px;
+}
+.report-filter-icons i.fa,
+.report-filter-wrapper i.fa  {
+    float: right;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.report-filter-wrapper .report-filter-header {
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 1px dotted #dadada;
+    padding-bottom: 10px;
+}
+.report-filter-wrapper form .vertical-align label {
+    display:block;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.report-buttons-bottom {
+    position: fixed;
+    background-color: #fffeee;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-left: -25px;  
+    padding-bottom:20px;  
+    bottom:0px;
 }

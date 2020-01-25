@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var dataTableTools = new DataTableTools('#manage-account_group-datatable');
+    var dataTableTools = new DataTableTools('#manage-accountgroup-datatable');
     dataTableTools.init({
             "ajax": {url: "/Finance/accountgroup/getDataTable", data:{includeDeleted: false}},  
             "columns": [
@@ -9,25 +9,25 @@ $(document).ready(function() {
                 { "data": "account_class" }
             ],
             onRowEdit : function(data) {
-                var scope = angular.element("body[ng-controller='account_groupCtrl']").scope();
+                var scope = angular.element("body[ng-controller='accountgroupCtrl']").scope();
                 scope.load(data.account_group_id);
-                $('#Editaccount_group').modal('show');
+                $('div#EditAccountGroup').modal('show');
             }
         });
 
-    $("button#save-account_group").on('click', function() {
+    $("button#save-accountgroup").on('click', function() {
         debugger;   
     })
 });
 
-var ManageAccountclass = {
+var ManageAccountgroup = {
      account_group_id: null,
 }
 
-app.controller('account_groupCtrl', function($scope, $http) {
+app.controller('accountgroupCtrl', function($scope, $http) {
 
     $scope.Data = {
-            url : '/finance/account_group',
+            url : '/finance/accountgroup',
             account_group : {
                 account_group_id: "",
                 account_group: "",
@@ -45,7 +45,6 @@ app.controller('account_groupCtrl', function($scope, $http) {
     };
 
     $scope.load = function(account_group_id=null) {
-
         $scope.Data.account_group = {
             account_group_id: "",
             account_group: "",

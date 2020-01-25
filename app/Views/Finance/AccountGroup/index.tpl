@@ -1,6 +1,6 @@
 [[extends file="Finance/template.tpl"]]
 [[block name="ContentBody"]]
-      <table id="manage-account_group-datatable" class="data-table table table-striped" style="width:100%">
+      <table id="manage-accountgroup-datatable" class="data-table table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
@@ -42,7 +42,7 @@
 
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="save-account_group" ng-click="saveAccountGroup()">Save changes</button>
+            <button type="button" class="btn btn-primary" id="save-accountgroup" ng-click="saveAccountGroup()">Save changes</button>
         </div>
     </form>
 [[/block]]

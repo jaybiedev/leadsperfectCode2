@@ -193,5 +193,6 @@
     [[foreach from=$footer.javascripts item=file]]
         <script src="[[$file]]"></script>
     [[/foreach]]
+    [[block name="JavascriptBlock"]][[/block]]
 </body>
 </html>

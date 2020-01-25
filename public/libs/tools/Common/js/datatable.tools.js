@@ -33,6 +33,7 @@ function DataTableTools(selector) {
         ],
         "drawCallback": function( settings ) {
             $(settings.nTBody).show();
+            debugger;
         }
     };
 
@@ -48,9 +49,8 @@ function DataTableTools(selector) {
             //
             //}
             this.settings.fnCreatedRow = function(nRow, aData, iDataIndex ) {
-            // Bold the grade for all 'A' grade browsers
-            $(nRow).click(function(){
-                custom_settings.onRowEdit(aData);
+                 $(nRow).dblclick(function(){
+                    custom_settings.onRowEdit(aData);
                 });
             };
             /*

@@ -90,6 +90,7 @@ $routes->get('finance/branch', 'Finance/Branch::index');
 $routes->get('finance/user', 'Finance/User::index');
 $routes->get('finance/authenticate', 'Finance/Authenticate::index');
 $routes->get('finance/upgrade', 'Finance/Upgrade::index');
+$routes->get('finance/report', 'Finance/Report::index');
 
 
 $routes->get('payroll/deparment', 'Finance/Department::index');

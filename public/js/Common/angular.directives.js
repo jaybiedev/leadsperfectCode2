@@ -14,8 +14,8 @@ app.directive('switchEnabled', function ($compile) {
                     <input type='checkbox' ng-model='" + ngModel + "'>\
                     <span class='slider round'></span>\
                 </label>\</div>";
-            var e =$compile(html)(scope);
-            element.replaceWith(e);
+            //var e =$compile(html)(scope);
+            element.replaceWith(html);
         }
     };
   });

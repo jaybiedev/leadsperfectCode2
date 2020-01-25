@@ -2,10 +2,10 @@
 /*
  * Smarty plugin
  * -------------------------------------------------------------
- * File:     function.genderdropdown.php
+ * File:     function.branchdropdown.php
  * Type:     function
- * Name:     sitedropdown
- * Purpose:  widget for sitedropdown
+ * Name:     branchdropdown
+ * Purpose:  widget for branchdropdown
  * -------------------------------------------------------------
  */
 
@@ -25,6 +25,9 @@ function smarty_function_branchdropdown($params, $content)
             <select name="{$name}" class="bt-dropdown form-control">
 HTML;
 
+    if (isset($params['include_all']) && $params['include_all']) {
+        $html .= "<option value=''>All</option>";
+    }
     foreach ($branches AS $branch)
     {
         $branch->populate();

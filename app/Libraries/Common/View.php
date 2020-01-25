@@ -95,8 +95,7 @@ class View
 
     public function render($view, $data=array(), $return_as_string=false) 
     {
-        if (empty($data['menu'])) 
-        {
+        if (empty($data['menu'])) {
             $data['menu'] = null;
             $product = $this->getEnvironment()->product;
             if (!empty($product))
@@ -107,16 +106,14 @@ class View
         }
         //$data['Helper'] = $this->Helper;
 
-        if ($this->pageTitle == null) 
-        {
+        if ($this->pageTitle == null)  {
             if ($this->pageHeader != null)
                 $this->pageTitle = $this->pageHeader;
             else
                 $this->pageTitle = $this->getEnvironment()->product;
         }
 
-        if (empty($this->moduleID))
-        {
+        if (empty($this->moduleID)) {
             $this->moduleID = $this->getEnvironment()->module;
         }
 
