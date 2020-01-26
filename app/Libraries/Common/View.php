@@ -17,6 +17,7 @@ class View
     public $baseUrl;
     public $moduleID;
     public $productUrl;
+    public $hasData=false;
 
     private $Environment;
     private $stylesheets = [];
@@ -95,6 +96,9 @@ class View
 
     public function render($view, $data=array(), $return_as_string=false) 
     {
+        if (empty($data))
+            $this->hasData = false;
+
         if (empty($data['menu'])) {
             $data['menu'] = null;
             $product = $this->getEnvironment()->product;

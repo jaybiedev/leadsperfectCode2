@@ -46,7 +46,13 @@ body
     font-style: normal;
 }
 
-/* make scss */
+/* make colors scss */
+.color-primary {
+    color:#260643
+}
+.color-primary-light {
+    color:#5C3E76;
+}
 .btn-primary, 
 .page-item.active .page-link {
     background-color: #260643;
@@ -66,6 +72,8 @@ i.fa {
 i.fa:hover {
     color:#5C3E76;
 }
+
+/* end of colors */
 
 .navbar.navbar-bottom-bordered {
     border-bottom: 1px solid #ccc;

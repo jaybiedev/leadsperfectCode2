@@ -1,0 +1,15 @@
+<?php 
+namespace App\Helpers\Finance\ReportFilter\Finance;
+use App\Helpers\Finance\ReportFilter\BaseReportFilter;
+
+class LoanReleasesFilter extends BaseReportFilter
+{
+    public $criteriaBy;
+    public $date_from;
+    public $date_to;
+    public $control_number_from;
+    public $control_number_to;
+    public $account_class_id;
+    public $branch_id;
+    public $show_posted;
+}
