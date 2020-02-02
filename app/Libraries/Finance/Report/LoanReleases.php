@@ -8,10 +8,12 @@ use \App\Libraries\Finance\SysConfig;
 class LoanReleases extends BaseReport 
 {
     public function __construct() {
+
+        $this->previewFontSize = 13;
         parent::__construct();
     }
 
-    public function getReport($is_draft_printer=false) {
+    public function generatetReport($is_draft_printer=false) {
         // @todo: investigate why update on report action.
         /*
         $qu = "update releasing set account_group_id = account.account_group_id 
@@ -77,17 +79,20 @@ class LoanReleases extends BaseReport
         $q .= "	order by date, account";
         $query = $this->db->query($q);
 
-        $header = $this->getHeader();
+        $header = "\n";
         $detail = '';
 
-        $header .= Utils::center(rtrim($header), $reportWidth)."\n";
+        $header .= Utils::center($this->getHeader(), $reportWidth)."\n";
         $header .= Utils::center('SUMMARY OF LOAN RELEASES', $reportWidth)."\n";
         $header .= Utils::center($from.' To '.$to, $reportWidth)."\n";
         $header .= Utils::center('Printed '.date('m/d/Y g:ia'), $reportWidth)."\n\n";
         $header .= "---- -------- -------------------- --------------- ------------ ---------- ----------- ---------- ------------ ------------ ------------\n";
         $header .= "      DATE     ACCOUNT              GROUP           PRINCIPAL    SERVICE    CFEE/INS   AdvChg/OTH   PREVLOAN       OBLIG       RELEASED \n";
         $header .= "---- -------- -------------------- --------------- ------------ ---------- ----------- ---------- ------------ ------------ ------------\n";
-        $details = $details1 = '';
+        $details = '';
+
+        $this->content = '';
+
         $total_amount = $total_principal = $total_service_charge = $total_adv_interest = $total_insurance = 0;
         $total_collection_fee = $total_ocharge = $total_previous_balance = $total_gross = $total_released = 0;
         $total_advance_change = $total_printout = $total_atm_charge = $total_other_charges= $total_photo = 0;
@@ -210,11 +215,10 @@ class LoanReleases extends BaseReport
                 $total_prevint += $intapp;
                     
             }
-    
                         
             if ($lc>55 && $is_draft_printer)
             {
-                $details1 .= $header.$details;
+                $this->content .= $header.$details;
                 $details .= "<eject>";
                 
                 Utils::doPrint($header.$details);
@@ -224,7 +228,7 @@ class LoanReleases extends BaseReport
         }
         if ($lc>50 && $is_draft_printer)
         {
-            $details1 .= $header.$details;
+            $this->content .= $header.$details;
             $details .= "<eject>";
             
             Utils::doPrint($header.$details);
@@ -246,7 +250,7 @@ class LoanReleases extends BaseReport
     
             if ($lc>50 && $is_draft_printer)
             {
-                $details1 .= $header.$details;
+                $this->content .= $header.$details;
                 $details .= "<eject>";
                 
                 Utils::doPrint($header.$details);
@@ -305,14 +309,14 @@ class LoanReleases extends BaseReport
         //				Utils::adjustSize("Printout",25).Utils::adjustRight(number_format($total_printout,2),10)."\n"; 	
     
         $details .= "\n\n";
-        $details1 .= $header.$details;
+        $this->content .= $header.$details;
         if ($is_draft_printer)
         {
             $details .= "<eject><reset>";
             Utils::doPrint($header.$details);
-        }	        
-        $content = $header . $detail;
+        }	
 
-        return $content;
+        return  $this->content;
+
     }
 }

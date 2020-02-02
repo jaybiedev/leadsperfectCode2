@@ -7,7 +7,10 @@ function FinanceReport() {
 
     this.init = function(is_filter_shown) {
         // font-size slider
-        var slider = document.getElementById("report-font-size-slider");
+        var slider = document.getElementById("report-preview-font-size-slider");
+        if (slider &&  parseInt($(slider).val()) > 0) {
+            $("div.report-container").css('font-size', $(slider).val() + "px");
+        }
         slider.oninput = function() {
             $("div.report-container").css('font-size', this.value + "px");
         }

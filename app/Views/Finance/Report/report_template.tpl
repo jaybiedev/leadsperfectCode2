@@ -1,13 +1,13 @@
 [[extends file="Finance/template.tpl"]]
 [[block name="ContentBody"]]
     <div class="row float-right report-filter-icons">
-        <input type="range" min="10" max="80" value="18" title="Adjust font size" id="report-font-size-slider" alt="Adjust font size" [[if (!$View->hasData)]]disabled="true"[[/if]]>
+        <input type="range" min="8" max="80" value="[[if $Report->previewFontSize neq '']][[$Report->previewFontSize]][[else]]18[[/if]]" title="Adjust font size" id="report-preview-font-size-slider" alt="Adjust font size" [[if ($Report->content eq '')]]disabled="true"[[/if]]>
         <!-- <i id="report-star" class="fa fa-star report-icons" alt="Add to favorites" title="Add to favorites" data-toggle="tooltip"></i> -->
         <i id="report-print-draft" class="fa fa-print report-icons" alt="Print" title="Print" data-toggle="tooltip"></i>
         <i id="report-print" class="fa  fa-memory report-icons report-button-print-draft" alt="Print" title="Print Draft" data-toggle="tooltip"></i>
         <i id="report-filter" class="fa fa-filter report-icons report-button-print" alt="Filters"  title="Show report filter" data-toggle="tooltip"></i>
     </div>
-     <div class="float-right report-filter-wrapper"/>
+    <div class="float-right report-filter-wrapper"/>
         <div class="report-filter-header">
             <span class="report-filter-title">Report Filter</span>
             <i id="report-filter" class="fa fa-times" alt="Close dilters" 
