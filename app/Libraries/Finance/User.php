@@ -5,6 +5,10 @@ use App\Models\Finance\AdminRightsModel;
 
 class User 
 {
+    /**
+     * helper to retreive all admingrights permissions records
+     * @return array keyed by module
+     */
     public static function getAdminRights($User)
     {
         if (empty($User) || empty($User->admin_id)) {
@@ -26,6 +30,10 @@ class User
         return $adminrightsKeyed;
     }
 
+    /**
+     * retrieves all the branches this user is allowed
+     * @return array
+     */
     public static function getBranches($User)
     {
         if (empty($User) || empty($User->admin_id)) {

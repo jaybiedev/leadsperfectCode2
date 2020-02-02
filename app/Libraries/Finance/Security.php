@@ -17,7 +17,14 @@ class Security
 
     }
 
-    public static function isAdmin()
+    public static function getUserSessionInfo() {
+        if (!self::isLogged())
+            return null;
+        
+        return self::getSession()->get("User");
+    }
+
+    public static function isInUserGroup($usergroup=null)
     {
         if (!self::isLogged())
             return false;
@@ -25,28 +32,69 @@ class Security
         $Session = self::getSession();
         $UserInfo = $Session->get("User");
         
-        if (!empty($UserInfo['usergroup']) && in_array("A", $UserInfo['usergroup']))
+        if (!empty($UserInfo['usergroup']) && in_array($usergroup, $UserInfo['usergroup']))
             return true;
         
         return false;
     }
 
+    public static function isAdmin()
+    {
+        return self::isInUserGroup('A');
+    }
+
+    public static function isLegal()
+    {
+        return self::isInUserGroup('L');
+    }
+
+    public static function isAdminOrLegal() 
+    {
+        return (self::isInUserGroup('A') || self::isInUserGroup('L'));
+    }
+
+    /**
+     * helper method for hasPermission() with action='madd'
+     * @param string $module 
+     * @return bool
+     */
     public static function canAdd($module, $can_admin_override=true) {
         return self::hasPermission($module, 'madd', $can_admin_override);
     }
 
+    /**
+     * helper method for hasPermission() with action='medit'
+     * @param string $module 
+     * @return bool
+     */
     public static function canEdit($module, $can_admin_override=true) {
         return self::hasPermission($module, 'medit', $can_admin_override);
     }
 
+    /**
+     * helper method for hasPermission() with action='medelete'
+     * @param string $module 
+     * @return bool
+     */
     public static function canDelete($module, $can_admin_override=true) {
         return self::hasPermission($module, 'mdelete', $can_admin_override);
     }
 
+    /**
+     * helper method for hasPermission() with action='medelete'
+     * @param string $module 
+     * @return bool
+     */
     public static function canView($module, $can_admin_override=true) {
         return self::hasPermission($module, 'mview', $can_admin_override);
     }
 
+    /**
+     * @param string $module (eg branch, account)
+     * @param string $action (eg madd, medit, mdelete, mview)
+     * @param bool $can_admin_override (DEFAULT true - usergroup="A" always allows, false-check permission even usergroup='A')
+     * @return bool
+     */
     public static function hasPermission($module, $action, $can_admin_override=true) {
 
         $Session = self::getSession();

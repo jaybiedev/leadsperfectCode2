@@ -249,3 +249,7 @@ main.container {
     padding-bottom:20px;  
     bottom:0px;
 }
+
+.report-container {
+    font-size: 18px;
+}

@@ -1,7 +1,8 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
-use App\Helpers\Finance\Report\FactoryReport;
+use App\Libraries\Finance\Report\FactoryReport;
+use SebastianBergmann\CodeCoverage\Util;
 
 class Report extends FinanceBaseController
 {
@@ -14,14 +15,29 @@ class Report extends FinanceBaseController
     {
         $Report = FactoryReport::factory('LoanReleases');
 
-        $data = [];
-        if ($this->isPost()) {
-            $filters = $this->request->getPostGet('filter');
-            $Report->setFilters($filters);
-            var_dump($Report);
+        ///
+        /* $User = \App\Libraries\Finance\SysConfig::get('BUSINESS_ADDR');
+        var_dump($User);
+        die;
+        */
+        ///
 
-            die;
+        $data = [];
+
+        if ($this->isPost()) {
+
+            $data = ["content"=>''];
+            $details = "";
+            $filters = $this->request->getPostGet('filter');
+            $Report->setFilter($filters);
+            
+            $header = $Report->getHeader();
+            $details = $Report->getReport();
+
+            $data['content'] = $header . $details;
         }
+
+        $data['Filter'] = $Report->getFilter();
 
         $this->View->setPageHeader('Loan Releases Report');
         $this->View->setModalTitle('Loan Releases Report');

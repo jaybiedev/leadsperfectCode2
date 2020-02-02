@@ -1,5 +1,5 @@
 <?php 
-namespace App\Helpers\Finance\ReportFilter;
+namespace App\Libraries\Finance\Report\ReportFilter;
 
 abstract class BaseReportFilter
 {

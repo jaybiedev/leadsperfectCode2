@@ -96,8 +96,8 @@ class View
 
     public function render($view, $data=array(), $return_as_string=false) 
     {
-        if (empty($data))
-            $this->hasData = false;
+        if (!empty($data))
+            $this->hasData = true;
 
         if (empty($data['menu'])) {
             $data['menu'] = null;

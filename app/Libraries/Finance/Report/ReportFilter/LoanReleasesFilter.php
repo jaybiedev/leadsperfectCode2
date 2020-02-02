@@ -1,6 +1,5 @@
 <?php 
-namespace App\Helpers\Finance\ReportFilter\Finance;
-use App\Helpers\Finance\ReportFilter\BaseReportFilter;
+namespace App\Libraries\Finance\Report\ReportFilter;
 
 class LoanReleasesFilter extends BaseReportFilter
 {
