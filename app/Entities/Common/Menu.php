@@ -9,6 +9,7 @@ class Menu extends BaseEntity
     public $path;
     public $slug;
     public $parent_path;
+    public $module;
     public $sort_order;
 
     public $children;

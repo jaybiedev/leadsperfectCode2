@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS menu (
     description text,
     icon text,
     slug text,
+    module text,
     date_created timestamp without time zone DEFAULT now(),
     date_modified timestamp without time zone DEFAULT now(),
     date_deleted timestamp without time zone DEFAULT null,
@@ -65,14 +66,15 @@ INSERT INTO menu (menu, slug, path, sort_order) values ('SL Penalty Correction',
 
 INSERT INTO menu (menu, slug, path, sort_order) values ('Excess','/finance/excess.ledger', 'Top.Finance.Excess', '370');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Withdrawal/CA','/finance/excess.withdraw','Top.Finance.Excess.Excess_Withdrawal','380');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Ledger','/finance/excess.ledger','Top.Finance.Excess.Excess_Ledger','390');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Withdrawal List','/finance/report/wexcess2','Top.Finance.Excess.Withdrawal_List','400');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Excess','/finance/report/excess','Top.Finance.Excess.Summary_Excess','410');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Excess/Change Withdrawn Report','/finance/report/wexcess','Top.Finance.Excess.Excess_Change_Report','420');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Excess/Change Advances Summary','/finance/report/wexcessadvance','Top.Finance.Excess.Excess_Change_Summary','430');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Released Based on Starting Month','/finance/report/wexcessadvance2','Top.Finance.Excess.Released_Based_StrtMonth','440');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Ledger','/finance/excessledger','Top.Finance.Excess.Excess_Ledger','390');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Released','/finance/report/excessrelease','Top.Finance.Excess.Releases','400');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Excess','/finance/report/excesssummary  ','Top.Finance.Excess.Summary_Excess','410');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Excess/Change Report By Post Date','/finance/report/excessbypostdate','Top.Finance.Excess.Excess_Date_Posted','420');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Excess/Change Report By Month Advanced','/finance/report/excessmonthadvance','Top.Finance.Excess.Excess_Month_Advanced','430');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Released Based on Starting Month','/finance/report/excessstartmonth','Top.Finance.Excess.Released_Based_StartMonth','440');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Released for Specific Month Under Period Covered','/finance/report/excess_released','Top.Finance.Excess.Released_SpecificMonth','450');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Interbranch Excess Transactions','/finance/report/interbranch_excess','Top.Finance.Excess.Interbranch_Transactions','460');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Excess Balance','/finance/report/excessbalance','Top.Finance.Excess.Report_Balance','465');
 
 INSERT INTO menu (menu, slug, path, sort_order) values ('Loan Reports','', 'Top.Finance.Loan_Reports','470');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Account Ledger','/finance/report/accountledger_oldledger','Top.Finance.Loan_Reports.Account_Ledger','480');
@@ -81,10 +83,10 @@ INSERT INTO menu (menu, slug, path, sort_order) values ('Delinquent Accounts','/
 INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Loan Releases','/finance/report/releasing','Top.Finance.Loan_Reports.Summary_Loan_Releases','510');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Payments/Collection','/finance/report/paymentbranch','Top.Finance.Loan_Reports.Summary_Payments','520');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Branch Collection','/finance/report/collectbranch','Top.Finance.Loan_Reports.Summary_Branch','530');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Payment/Collection Calendar','/finance/report/wcalendar','Top.Finance.Loan_Reports.Payment_Collection_Cal','540');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Payment/Collection Calendar','/finance/report/collectioncalendar','Top.Finance.Loan_Reports.Payment_Collection_Cal','540');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Withdrawal Schedule/Date Summary','/finance/report/withdrawday','Top.Finance.Loan_Reports.Withdrawal_Date','550');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Periodic ATM Summary','/finance/report/wperiodic','Top.Finance.Loan_Reports.ATM_Summary','560');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Individual ATM Report','/finance/report/windividual','Top.Finance.Loan_Reports.ATM_Report','570');
+INSERT INTO menu (menu, slug, path, module, sort_order) values ('Periodic ATM Summary','/finance/report/withdrawperiodic','Top.Finance.Loan_Reports.ATM_Summary', 'payment', '560');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Individual ATM Report','/finance/report/withdrawindividual','Top.Finance.Loan_Reports.ATM_Report','570');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Uncollected Accounts for the Period','/finance/report/uncollected','Top.Finance.Loan_Reports.Uncollected_Accounts','580');
 INSERT INTO menu (menu, slug, path, sort_order) values ('In/Out of Passbook/ATM','/finance/atmmonitor','Top.Finance.Loan_Reports.In_Out_ATM','590');
 INSERT INTO menu (menu, slug, path, sort_order) values ('List of Active Accounts','/finance/report/activeaccount','Top.Finance.Loan_Reports.Active_Accounts','600');
@@ -95,10 +97,10 @@ INSERT INTO menu (menu, slug, path, sort_order) values ('Aging of Accounts','/fi
 INSERT INTO menu (menu, slug, path, sort_order) values ('Summary for Accounting Entry','/finance/report/accounting','Top.Finance.Loan_Reports.Summary_Account_Entry','650');
 INSERT INTO menu (menu, slug, path, sort_order) values ('List of Overrides','/finance/report/override','Top.Finance.Loan_Reports.List_Overrides','660');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Interest Income Straight Line','/finance/report/interest1','Top.Finance.Loan_Reports.Interest_Income_StraightLine','670');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Fund Transfer Report','/finance/report/fundxfer','Top.Finance.Loan_Reports.Fund_Transfer','680');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Receivable Listing w/ Penalty','/finance/report/receivable2','Top.Finance.Loan_Reports.Receivable_Penalty','690');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Fund Transfer Report','/finance/report/fundtransfer','Top.Finance.Loan_Reports.Fund_Transfer','680');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Receivable Listing w/ Penalty','/finance/report/receivablepenalty','Top.Finance.Loan_Reports.Receivable_Penalty','690');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Pensioner Listing w/ birthdate','/finance/report/customers','Top.Finance.Loan_Reports.Pensioner_Birthdate','700');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Receivable Listing Names Only','/finance/report/receivable3','Top.Finance.Loan_Reports.Receivable_Names','710');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Receivable Listing Names Only','/finance/report/receivablenames','Top.Finance.Loan_Reports.Receivable_Names','710');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Clients with no Transactions','/finance/report/nonmoving','Top.Finance.Loan_Reports.Clients_No_Transactions','720');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Customer Listing','/finance/report/customers2','Top.Finance.Loan_Reports.Customer_Listing','730');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Insurance Due','/finance/report/insuredue','Top.Finance.Loan_Reports.Insurance_Due','740');

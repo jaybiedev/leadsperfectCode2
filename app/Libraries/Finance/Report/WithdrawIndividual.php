@@ -5,7 +5,7 @@ use App\Helpers\Finance\FinanceUtils;
 use App\Libraries\Finance\Security;
 use \App\Libraries\Finance\SysConfig;
 
-class WPeriodic extends BaseReport 
+class WithdrawIndividual extends BaseReport 
 {
     public function __construct() {
 

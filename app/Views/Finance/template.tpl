@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/fontawesome/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="/libs/datatable/datatables.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="/libs/select2/css/select2.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/Common/style.css">
     <link rel="stylesheet" type="text/css" href="/css/Finance/style.css">
     <link rel="stylesheet" type="text/css" href="/css/Common/forms.css">
@@ -180,6 +181,7 @@
     <script src="/libs/popper/js/popper.min.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="/libs/datatable/datatables.min.js"></script>
+    <script src="/libs/select2/js/select2.min.js"></script>
     <script src="/libs/angular/angular.min.js"></script>
     <script src="/libs/angular/angular-animate.min.js"></script>
 

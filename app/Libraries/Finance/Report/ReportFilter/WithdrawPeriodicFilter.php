@@ -1,7 +1,7 @@
 <?php 
 namespace App\Libraries\Finance\Report\ReportFilter;
 
-class WPeriodicFilter extends BaseReportFilter
+class WithdrawPeriodicFilter extends BaseReportFilter
 {
     public $criteriaBy;
     public $date_from;

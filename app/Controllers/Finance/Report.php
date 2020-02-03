@@ -26,9 +26,9 @@ class Report extends FinanceBaseController
         return $this->View->render('Finance/Report/loan_release.tpl', $data);
     }
 
-    public function wperiodic()
+    public function withdrawperiodic()
     {
-        $Report = FactoryReport::factory('WPeriodic');
+        $Report = FactoryReport::factory('WithdrawPeriodic');
         $data = [];
 
         if ($this->isPost()) {
@@ -38,6 +38,22 @@ class Report extends FinanceBaseController
 
         $data['Report'] = $Report;
         $this->View->setPageHeader('ATM Periodic Withdrawal');
-        return $this->View->render('Finance/Report/wperiodic.tpl', $data);
+        return $this->View->render('Finance/Report/withdrawperiodic.tpl', $data);
     }
+
+    public function withdrawindividual()
+    {
+        $Report = FactoryReport::factory('WithdrawIndividual');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');            
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Individual Withdrawal Report');
+        return $this->View->render('Finance/Report/withdrawindividual.tpl', $data);
+    }
+    
 }
