@@ -1,4 +1,4 @@
-<?php namespace App\Models\Common;
+<?php namespace App\Models\Administration;
 use App\Models\BaseModel;
 
 class SysConfigModel extends BaseModel 

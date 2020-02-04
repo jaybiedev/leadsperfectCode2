@@ -75,12 +75,12 @@ $routes->setAutoRoute(true);
 $routes->get('', 'Common/Home::index');
 $routes->get('common/forms', 'Common/Standards::forms');
 
-$routes->get('administration', 'Common/Administration::index');
-$routes->get('administration/configuration', 'Common/Administration::configuration');
-$routes->post('administration/configuration', 'Common/Administration::configuration');
-$routes->get('administration/usergroup', 'Common/Administration::usergroup');
-$routes->get('administration/user', 'Common/Administration::user');
-$routes->get('administration/menu', 'Common/Administration::menu');
+$routes->get('administration', 'Administration/Administration::index');
+$routes->get('administration/configuration', 'Administration/Configuration::index');
+$routes->post('administration/configuration', 'Administration/Configuration::post');
+$routes->get('administration/usergroup', 'Administration/Usergroup::index');
+$routes->get('administration/user', 'Administration/User::index');
+$routes->get('administration/menu', 'Administration/Menu::index');
 
 
 $routes->get('cash', 'Finance/Home::index');
