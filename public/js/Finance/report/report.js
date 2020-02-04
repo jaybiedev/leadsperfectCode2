@@ -39,14 +39,5 @@ function FinanceReport() {
             $("report-buttons-bottom.button").prop('disabled', true);
             $("div.report-filter-form form").submit();
         })
-
-        // init select2
-        $("select.select2-ajax-dd").select2({
-            ajax: {
-              url: '/finance/account/get',
-              dataType: 'json'
-              // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-            }
-          });
     }
 }

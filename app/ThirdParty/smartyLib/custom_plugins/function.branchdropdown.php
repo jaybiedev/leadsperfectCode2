@@ -14,6 +14,7 @@ use App\Helpers\Utils;
 function smarty_function_branchdropdown($params, $content)
 {
     $name = isset($params['name']) ? $params['name'] : 'branch_id';
+    $id = isset($params['id']) ? $params['id'] : 'id';
     $selected = isset($params['selected']) ? $params['selected'] : 0;
     $user_id = isset($params['user_id']) ? $params['user_id'] : 0;
     $is_ignore_session = isset($params['is_ignore_session']) ? (bool)$params['is_ignore_session'] : false;
@@ -22,11 +23,15 @@ function smarty_function_branchdropdown($params, $content)
     $branches = $BranchModel->getBranches($user_id, $is_ignore_session);
 
     $html =<<<HTML
-            <select name="{$name}" class="bt-dropdown form-control">
+            <select name="{$name}" 
+                    id="{$id}"
+                    class="bt-dropdown form-control select2-dd" 
+                    placeholder="Select Branch" 
+                    selected="{$selected}">
 HTML;
 
     if (isset($params['include_all']) && $params['include_all']) {
-        $html .= "<option value=''>All</option>";
+        $html .= "<option value='0'>All</option>";
     }
     foreach ($branches AS $branch)
     {

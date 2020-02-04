@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS menu (
     description text,
     icon text,
     slug text,
-    module text,
+    module_id integer,
     date_created timestamp without time zone DEFAULT now(),
     date_modified timestamp without time zone DEFAULT now(),
     date_deleted timestamp without time zone DEFAULT null,
@@ -24,7 +24,7 @@ INSERT INTO menu (menu, slug, path, sort_order, description, icon) values ('Pens
 INSERT INTO menu (menu, slug, path, sort_order, description, icon) values ('Cash Position','/cash','Top.Cash','780', 'Cash Position and bank reconciliation', 'fa fa-money-bill-wave');
 INSERT INTO menu (menu, slug, path, sort_order, description, icon) values ('Payroll','/payroll','Top.Payroll','850', 'Payroll', 'fa fa-file-invoice');
 INSERT INTO menu (menu, slug, path, sort_order, description, icon) values ('Accounting','/accounting','Top.Accounting','850', 'Accounting', 'fa fa-table');
-INSERT INTO menu (menu, slug, path, sort_order, description, icon) values ('Administration','/admin','Top.System','1290', 'Systems administration', 'fa fa-landmark');
+INSERT INTO menu (menu, slug, path, sort_order, description, icon) values ('Administration','/administration','Top.Administration','1290', 'Systems administration', 'fa fa-landmark');
 
 INSERT INTO menu (menu, slug, path, sort_order) values ('File','', 'Top.Finance.File', '10');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Account Info','/finance/account','Top.Finance.File.Account_Info','20');
@@ -80,12 +80,12 @@ INSERT INTO menu (menu, slug, path, sort_order) values ('Loan Reports','', 'Top.
 INSERT INTO menu (menu, slug, path, sort_order) values ('Account Ledger','/finance/report/accountledger_oldledger','Top.Finance.Loan_Reports.Account_Ledger','480');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Receivable Listing','/finance/report/receivable','Top.Finance.Loan_Reports.Receivable_Listing','490');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Delinquent Accounts','/finance/report/delinquent','Top.Finance.Loan_Reports.Delinquent_Accounts','500');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Loan Releases','/finance/report/releasing','Top.Finance.Loan_Reports.Summary_Loan_Releases','510');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Loan Releases','/finance/report/loanreleases','Top.Finance.Loan_Reports.Summary_Loan_Releases','510');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Payments/Collection','/finance/report/paymentbranch','Top.Finance.Loan_Reports.Summary_Payments','520');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Branch Collection','/finance/report/collectbranch','Top.Finance.Loan_Reports.Summary_Branch','530');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Payment/Collection Calendar','/finance/report/collectioncalendar','Top.Finance.Loan_Reports.Payment_Collection_Cal','540');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Withdrawal Schedule/Date Summary','/finance/report/withdrawday','Top.Finance.Loan_Reports.Withdrawal_Date','550');
-INSERT INTO menu (menu, slug, path, module, sort_order) values ('Periodic ATM Summary','/finance/report/withdrawperiodic','Top.Finance.Loan_Reports.ATM_Summary', 'payment', '560');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Periodic ATM Summary','/finance/report/withdrawperiodic','Top.Finance.Loan_Reports.ATM_Summary', '560');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Individual ATM Report','/finance/report/withdrawindividual','Top.Finance.Loan_Reports.ATM_Report','570');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Uncollected Accounts for the Period','/finance/report/uncollected','Top.Finance.Loan_Reports.Uncollected_Accounts','580');
 INSERT INTO menu (menu, slug, path, sort_order) values ('In/Out of Passbook/ATM','/finance/atmmonitor','Top.Finance.Loan_Reports.In_Out_ATM','590');
@@ -115,3 +115,9 @@ INSERT INTO menu (menu, slug, path, sort_order) values ('Bank Master','/cash/ban
 INSERT INTO menu (menu, slug, path, sort_order) values ('Transaction','','Top.Cash.Transaction','820');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Branch Cash Position','/cash/cashpos','Top.Cash.Transaction.Branch_Cash','830');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Bank Reconciliation','/bcash/ankrecon','Top.Cash.Transaction.Brank_Reconciliation','840');
+
+INSERT INTO menu (menu, slug, path, sort_order) values ('File','','Top.Administration.File','1000');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Configuration','/administration/configuration','Top.Administration.File.Configuration','1010');
+INSERT INTO menu (menu, slug, path, sort_order) values ('User Groups','/administration/usergroup','Top.Administration.File.User_Group','1020');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Users','/administration/user','Top.Administration.File.Users','1030');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Menu','/administration/menu','Top.Administration.File.Menu','1030');

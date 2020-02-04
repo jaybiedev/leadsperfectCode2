@@ -1,9 +1,9 @@
 [[extends file="Finance/Report/report_template.tpl"]]
 [[block name="ReportFilter"]]
     <div>
-        <div>
-            <label for="account_class_id">Account</label>
-            [[accountdropdown id="account_id" name="filter[account_id]" selected="[[$Report->Filter->account_id]]"]]
+        <div class="vertical-align">
+            <label for="account_id">Account</label>
+            [[accountdropdown id="account_id" name="filter[account_id]" selected="[[$Report->Filter->account_id]]" placeholder="Search name, account or card"]]
         </div>    
         <div class="vertical-align">
             <label for="date_from">From</label>

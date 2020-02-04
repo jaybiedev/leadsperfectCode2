@@ -8,7 +8,7 @@ class Report extends FinanceBaseController
 {
 	public function index()
 	{   
-        die('Report Index');
+        $this->redirectTo("/finance");
     }
 
     public function loanreleases()
@@ -47,7 +47,7 @@ class Report extends FinanceBaseController
         $data = [];
 
         if ($this->isPost()) {
-            $filters = $this->request->getPostGet('filter');            
+            $filters = $this->request->getPostGet('filter');           
             $Report->setFilter($filters)->generatetReport();
         }
 

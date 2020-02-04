@@ -173,3 +173,30 @@ background: #4CAF50;
 cursor: pointer;
 }
 /** slider **/
+
+/** dropdown **/
+
+/** override select2 render to match bt dd **/
+.select2-container .select2-selection--single {
+    height: calc(1.5em + .75rem + 2px);
+}
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-top: 4px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    top: 65%;
+}
+
+/** messages **/
+.toast-generic {
+    display: inline-block;
+    min-width: 300px;
+    top: 10px;
+    position: fixed;
+    right: 10px;
+}
+
+.fade:not(.show) {
+    opacity: 0;
+    display: none;
+}

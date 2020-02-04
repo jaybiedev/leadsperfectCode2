@@ -58,11 +58,18 @@ body
     background-color: #260643;
     border-color: #260643;
 }
-
+.btn-primary i.fa,
+.btn-primary i.fa:hover {
+    color:#efefef;
+}
 .btn-primary:hover, 
 .page-item.active .page-link:hover {
     background-color: #5C3E76;
     border-color: #5C3E76;
+}
+
+.btn-outline:hover {
+    border-color: #260643;
 }
 
 i.fa {

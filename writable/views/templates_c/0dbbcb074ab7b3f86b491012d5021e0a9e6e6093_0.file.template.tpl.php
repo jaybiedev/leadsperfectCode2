@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-03 08:01:09
+/* Smarty version 3.1.34-dev-7, created on 2020-02-04 14:42:11
   from '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e3827a5c7f153_16857431',
+  'unifunc' => 'content_5e39d723c4b5d5_63866263',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0dbbcb074ab7b3f86b491012d5021e0a9e6e6093' => 
     array (
       0 => '/opt/lampp/htdocs/jgm/app/Views/Finance/template.tpl',
-      1 => 1580738468,
+      1 => 1580821485,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../Common/_recursive_ul.tpl' => 1,
   ),
 ),false)) {
-function content_5e3827a5c7f153_16857431 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e39d723c4b5d5_63866263 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -185,11 +185,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/user/preferences"><i class="fa fa-cog"></i> Preferences</a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-piggy-bank"></i> Finance</a></li>
+                        <li class="dropdown-item"><a href="/finance"><i class="fa fa-piggy-bank"></i> Finance</a></li>
                         <li class="dropdown-item"><a href="/penlogin"><i class="fa fa-ruble-sign"></i> Pensioner Login</a></li>
                         <li class="dropdown-item"><a href="/cash"><i class="fa fa-money-bill-wave"></i> Cash Position</a></li>
                         <li class="dropdown-item"><a href="/payroll"><i class="fa fa-file-invoice"></i> Payroll</a></li>
-                        <li class="dropdown-item"><a href="/admin"><i class="fa fa-landmark"></i> Administration</a></li>
+                        <li class="dropdown-item"><a href="/administration"><i class="fa fa-landmark"></i> Administration</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-item"><a href="/finance/authenticate/logout"><i class="fa fa-power-off"></i> Logout</a></li>
                     </ul>
@@ -208,7 +208,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
         <?php }?>
         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14852877435e3827a5c78b05_20980103', "ContentBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4414319995e39d723c45a26_06025258', "ContentBody");
 ?>
 
     </main>
@@ -227,7 +227,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14852877435e3827a5
                     </div>
                     <div class="modal-body">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6999615695e3827a5c7b566_47008494', "ModalBody");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13486600645e39d723c48556_95920512', "ModalBody");
 ?>
 
                     </div>
@@ -294,18 +294,18 @@ foreach ($_from as $_smarty_tpl->tpl_vars['file']->value) {
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9213109635e3827a5c7e723_42206225', "JavascriptBlock");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1030743085e39d723c4a757_23868619', "JavascriptBlock");
 ?>
 
 </body>
 </html><?php }
 /* {block "ContentBody"} */
-class Block_14852877435e3827a5c78b05_20980103 extends Smarty_Internal_Block
+class Block_4414319995e39d723c45a26_06025258 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ContentBody' => 
   array (
-    0 => 'Block_14852877435e3827a5c78b05_20980103',
+    0 => 'Block_4414319995e39d723c45a26_06025258',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -315,12 +315,12 @@ Content Area<?php
 }
 /* {/block "ContentBody"} */
 /* {block "ModalBody"} */
-class Block_6999615695e3827a5c7b566_47008494 extends Smarty_Internal_Block
+class Block_13486600645e39d723c48556_95920512 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'ModalBody' => 
   array (
-    0 => 'Block_6999615695e3827a5c7b566_47008494',
+    0 => 'Block_13486600645e39d723c48556_95920512',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -330,12 +330,12 @@ Modal Body Area<?php
 }
 /* {/block "ModalBody"} */
 /* {block "JavascriptBlock"} */
-class Block_9213109635e3827a5c7e723_42206225 extends Smarty_Internal_Block
+class Block_1030743085e39d723c4a757_23868619 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'JavascriptBlock' => 
   array (
-    0 => 'Block_9213109635e3827a5c7e723_42206225',
+    0 => 'Block_1030743085e39d723c4a757_23868619',
   ),
 );
 public $hide = 'true';

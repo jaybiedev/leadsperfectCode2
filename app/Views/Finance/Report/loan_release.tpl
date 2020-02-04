@@ -27,11 +27,11 @@
         </div>  
     </div>
     <div>
-        <label for="account_class_id">Classification</label>
+        <label for="account_class_id" class="lbl">Classification</label>
         [[accountclassificationdropdown id="account_class_id" name="filter[account_class_id]" selected="[[$Report->Filter->account_class_id]]" include_all=1]]
     </div>
     <div>
-        <label for="account_class_id">Branch</label>
+        <label for="branch_id" class="lbl" style="display:block;">Branch</label>
         [[branchdropdown id="branch_id" name="filter[branch_id]" include_all=1 selected="[[$Report->Filter->branch_id]]"]]
     </div>
 [[/block]]
