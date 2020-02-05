@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-    var dataTableTools = new DataTableTools('#manage-usergroup-datatable');
+    var dataTableTools = new DataTableTools('#manage-adminusergroup-datatable');
     dataTableTools.init({
-            "ajax": {url: "/administration/usergroup/getDataTable", data:{includeDeleted: false}},  
+            "ajax": {url: "/administration/adminusergroup/getDataTable", data:{includeDeleted: false}},  
             "columns": [
                 { "data": "adminusergroup_id", "visible": false },
                 { "data": "adminusergroup" },
@@ -10,13 +10,13 @@ $(document).ready(function() {
 
             ],
             onRowEdit : function(data) {
-                var scope = angular.element("body[ng-controller='usergroupCtrl']").scope();
+                var scope = angular.element("body[ng-controller='adminusergroupCtrl']").scope();
                 scope.load(data.adminusergroup_id);
                 $('#EditUserGroup').modal('show');
             }
         });
 
-    $("button#save-usergroup").on('click', function() {
+    $("button#save-adminusergroup").on('click', function() {
         debugger;   
     })
 });
@@ -25,11 +25,11 @@ var Manageusergroup = {
      adminusergroup_id: null,
 }
 
-app.controller('usergroupCtrl', function($scope, $http) {
+app.controller('adminusergroupCtrl', function($scope, $http) {
 
     $scope.Data = {
-            url : '/administration/usergroup',
-            usergroup : {
+            url : '/administration/adminusergroup',
+            adminusergroup : {
                 adminusergroup_id: "",
                 adminusergroup: "",
                 usergroup: "",
@@ -57,7 +57,7 @@ app.controller('usergroupCtrl', function($scope, $http) {
 
         $http({
             method: "get",
-            url   : $scope.Data.url + "/get/?usergroup_id=" + usergroup_id
+            url   : $scope.Data.url + "/get/?adminusergroup_id=" + usergroup_id
         }).then(
             function (response) {
                 if (typeof response.data.data == 'object')
@@ -65,13 +65,13 @@ app.controller('usergroupCtrl', function($scope, $http) {
                     if (response.data.data.date_deleted != null)
                         response.data.data['enabled'] = false;
 
-                    $scope.Data.usergroup = response.data.data;
+                    $scope.Data.adminusergroup = response.data.data;
             }
         );
     
     };
 
-    $scope.saveusergroup = function() {
+    $scope.saveAdminUserGroup = function() {
     	debugger;
     };
 });

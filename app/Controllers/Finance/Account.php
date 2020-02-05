@@ -127,7 +127,7 @@ class Account extends FinanceBaseController
 
         if (!empty($DataTable->searchValue))
         {
-            $data = $AccountModel->like($DataTable->getSearchableLike())
+            $data = $AccountModel->ilike($DataTable->getSearchableLike())
                                 ->join("account_group", "account.account_group_id=account_group.account_group_id")
                                 ->join("branch", "account.branch_id=branch.branch_id")
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)

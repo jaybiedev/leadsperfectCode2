@@ -118,6 +118,6 @@ INSERT INTO menu (menu, slug, path, sort_order) values ('Bank Reconciliation','/
 
 INSERT INTO menu (menu, slug, path, sort_order) values ('File','','Top.Administration.File','1000');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Configuration','/administration/configuration','Top.Administration.File.Configuration','1010');
-INSERT INTO menu (menu, slug, path, sort_order) values ('User Groups','/administration/usergroup','Top.Administration.File.User_Group','1020');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Users','/administration/user','Top.Administration.File.Users','1030');
+INSERT INTO menu (menu, slug, path, sort_order) values ('User Groups','/administration/adminusergroup','Top.Administration.File.User_Group','1020');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Users','/administration/admin','Top.Administration.File.Users','1030');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Menu','/administration/menu','Top.Administration.File.Menu','1030');

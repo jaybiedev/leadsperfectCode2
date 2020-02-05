@@ -78,8 +78,8 @@ $routes->get('common/forms', 'Common/Standards::forms');
 $routes->get('administration', 'Administration/Administration::index');
 $routes->get('administration/configuration', 'Administration/Configuration::index');
 $routes->post('administration/configuration', 'Administration/Configuration::post');
-$routes->get('administration/usergroup', 'Administration/Usergroup::index');
-$routes->get('administration/user', 'Administration/User::index');
+$routes->get('administration/adminusergroup', 'Administration/Adminusergroup::index');
+$routes->get('administration/admin', 'Administration/Admin::index');
 $routes->get('administration/menu', 'Administration/Menu::index');
 
 

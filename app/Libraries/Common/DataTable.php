@@ -69,16 +69,17 @@ class DataTable
             if (!$column['searchable'])
                 continue;
                         
+            $_clause = "";
             $field = $column['data'];
             // hacking this for now to prevent lower for numeric fields
             if (stripos($field, '_id') !== false)
                 continue;
             elseif (Utils::arrayStripos($field, array('_rate')) == false)
-                $searchable = ["LOWER({$field})" => '%' . strtolower($this->searchValue) . '%'];
+                $searchable["LOWER({$field})"] = '%' . strtolower($this->searchValue) . '%';
             else
-                $searchable = ["{$field}" => '%' . strtolower($this->searchValue) . '%'];
+                $searchable[$field] = '%' . strtolower($this->searchValue) . '%';
         }
-
+        
         return $searchable;
     }
 

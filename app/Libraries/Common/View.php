@@ -121,7 +121,6 @@ class View
             $this->moduleID = $this->getEnvironment()->module;
         }
 
-
         $data['View'] = $this;
         $data['page_id'] = basename($view, ".tpl");
 

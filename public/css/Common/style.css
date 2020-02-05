@@ -172,6 +172,11 @@ height: 25px;
 background: #4CAF50;
 cursor: pointer;
 }
+
+/** checkbox slider **/
+.slider.round  {
+    height: auto;
+}
 /** slider **/
 
 /** dropdown **/

@@ -1,27 +1,27 @@
 <?php namespace App\Controllers\Administration;
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
-use App\Models\Administration\UserGroupModel;
+use App\Models\Administration\AdminUserGroupModel;
 
-class Usergroup extends BaseController
+class Adminusergroup extends BaseController
 {
 	public function index()
 	{   
         $this->View->setPageHeader('Manage User Groups');
         $this->View->setModalTitle('Edit UserGroup');
-        return $this->View->render('Administration/UserGroup/index.tpl');
+        return $this->View->render('Administration/AdminUserGroup/index.tpl');
     }
     
     public function get()
     {
         $meta = $this->request->getGet();
 
-        $UserGroupModel = new UserGroupModel();   
+        $AdminUserGroupModel = new AdminUserGroupModel();   
         $data = [];
 
         if (!empty($meta['adminusergroup_id']))
         {
-            $data = $UserGroupModel->find((int)$meta['adminusergroup_id'])->populate();
+            $data = $AdminUserGroupModel->find((int)$meta['adminusergroup_id'])->populate();
         }
 
        return  $this->View->renderJsonSuccess(null, $data);
@@ -31,24 +31,24 @@ class Usergroup extends BaseController
     {
         $meta = $this->request->getGet();
 
-        $UserGroupModel = new UserGroupModel();   
-        $DataTable = new \App\Libraries\Common\DataTable($meta, $UserGroupModel, 'adminusergroup');
+        $AdminUserGroupModel = new AdminUserGroupModel();   
+        $DataTable = new \App\Libraries\Common\DataTable($meta, $AdminUserGroupModel, 'adminusergroup');
     
         $data = [];
 
         if (!empty($DataTable->searchValue))
         {
-            $data = $UserGroupModel->like($DataTable->getSearchableLike())
+            $data = $AdminUserGroupModel->like($DataTable->getSearchableLike())
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
-            $data = $UserGroupModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
+            $data = $AdminUserGroupModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 
-        $recordsTotal = $UserGroupModel->countAllResults();
+        $recordsTotal = $AdminUserGroupModel->countAllResults();
         
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
@@ -56,19 +56,19 @@ class Usergroup extends BaseController
     public function post()
     {
         $adminusergroup_id = $this->request->getPost('adminusergroup_id');
-        $UserGroupModel = new UserGroupModel();
+        $AdminUserGroupModel = new AdminUserGroupModel();
         
-        $UserGroup = $UserGroupModel->first($adminusergroup_id);
-        if (!empty($id) && empty($UserGroup->adminusergroup_id))
+        $AdminUserGroup = $AdminUserGroupModel->first($adminusergroup_id);
+        if (!empty($id) && empty($AdminUserGroup->adminusergroup_id))
         {
             return $this->View->renderJsonFail();
         }
 
-        $UserGroup = new \App\Entities\Finance\UserGroup();
+        $AdminUserGroup = new AdminUserGroup();
 
         $meta = $this->request->getPost();
-        $UserGroup->fill($meta);
-        $UserGroupModel->save($UserGroup);
+        $AdminUserGroup->fill($meta);
+        $AdminUserGroupModel->save($AdminUserGroup);
 
         return $this->View->renderJsonSuccess();
     }
@@ -81,8 +81,8 @@ class Usergroup extends BaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $UserGroupModel = new UserGroupModel();
-            $UserGroup = $UserGroupModel->delete($id);
+            $AdminUserGroupModel = new AdminUserGroupModel();
+            $AdminUserGroup = $AdminUserGroupModel->delete($id);
         });
         return $this->View->renderJsonSuccess();
     }
@@ -95,10 +95,10 @@ class Usergroup extends BaseController
             return $this->View->renderJsonFail();
 
         array_walk($ids, function($id) {
-            $UserGroup = new \App\Entities\Finance\UserGroup();
-            $UserGroup->date_deleted = null;
-            $UserGroupModel = new UserGroupModel();
-            $UserGroup = $UserGroupModel->save($UserGroup);
+            $AdminUserGroup = new AdminUserGroup();
+            $AdminUserGroup->date_deleted = null;
+            $AdminUserGroupModel = new AdminUserGroupModel();
+            $AdminUserGroup = $AdminUserGroupModel->save($AdminUserGroup);
         });
         return $this->View->renderJsonSuccess();
     }

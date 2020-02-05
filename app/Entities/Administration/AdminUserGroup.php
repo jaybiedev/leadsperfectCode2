@@ -2,7 +2,7 @@
 
 use App\Entities\BaseEntity;
 
-class UserGroup extends BaseEntity
+class AdminUserGroup extends BaseEntity
 {
     public $adminusergroup_id;
     public $adminusergroup;
