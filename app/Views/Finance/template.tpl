@@ -29,6 +29,9 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/Finance/favicon.ico/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/Finance/favicon.ico/favicon-16x16.png">
     <link rel="manifest" href="/assets/Finance/favicon.ico/manifest.json">
+    
+    [[block name="CssBlock" hide]][[/block]]
+
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/assets/Finance/favicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">    
@@ -49,7 +52,7 @@
                     <li class="nav-item [[if $entry->children neq null]]dropdown[[/if]]">
                         <a href="[[$entry->slug]]" class="nav-link dropdown-toggle" [[if $entry->children neq null]]data-toggle="dropdown" aria-haspopup="true"[[/if]]  aria-expanded="false" id="[[$entry->path]]">[[$entry->menu]]</a>
                         [[if $entry->children neq null]]
-                            [[include file="../Common/_recursive_ul.tpl" child=$entry->children parent=$entry depth=2]]
+                            [[include file="../Common/_recursive_ul_nav.tpl" child=$entry->children parent=$entry depth=2]]
                         [[/if]]
                     </li>
                 [[/foreach]]
