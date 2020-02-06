@@ -10,7 +10,7 @@
         </div>
         <div id="menutree" >
             <ul>
-                [[foreach name=entry item=entry from=$menu]]
+                [[foreach name=entry item=entry from=$menutree]]
                     <li id="[[$entry->id]]">
                         [[$entry->menu]]
                         [[if $entry->children neq null]]
@@ -22,7 +22,13 @@
         </div>
     </div>
     <div id="permission-pane" class="col-6 float-right report-filter-wrapper" style="position:fixed;border-top:1px solid #ccc">
-        <div style="display:none;">
+        <div class="vertical-align">
+            <p>
+            <label for="account_id">User Group</label>
+            [[adminusergroupdropdown id="adminusergroup_id" name="field[adminusergroup_id]" placeholder="Search user group"]]
+            </p>
+        </div>   
+        <div>
             <p>Selected items:</p>
             <ul id="output"></ul>
         </div>

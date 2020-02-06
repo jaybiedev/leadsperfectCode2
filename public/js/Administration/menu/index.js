@@ -22,7 +22,7 @@ $(document).ready(function() {
         var objects = data.instance.get_selected(true)
         var leaves = $.grep(objects, function (o) { return data.instance.is_leaf(o) })
         var list = $('#output');
-        
+        list.empty();
         Administration_Menu.selected_menu_ids = [];
 
         $.each(leaves, function (i, o) {

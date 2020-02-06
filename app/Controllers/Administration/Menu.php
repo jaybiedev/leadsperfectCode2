@@ -7,12 +7,12 @@ class Menu extends BaseController
 {
 	public function index()
 	{   
-        $data = ['menu'=>[]];
+        $data = ['menutree'=>[]];
         $this->View->setPageHeader('Manage Menu Permissions');
 
         $MenuModel = new MenuModel();
-        $data['menu'] = $MenuModel->getMenuTree('Top', '{1}');
-        unset($data['menu']['Accounting']);
+        $data['menutree'] = $MenuModel->getMenuTree('Top', '{1}');
+        unset($data['menutree']['Accounting']);
 
         return $this->View->render('Administration/Menu/index.tpl', $data);
     }
