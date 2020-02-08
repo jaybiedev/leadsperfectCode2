@@ -6,7 +6,7 @@ use App\Models\Administration\AdminModel;
 /**
  * Admin is the user module for JGM
  */
-class Admin extends BaseController
+class Admin extends AdministrationBaseController
 {
 	public function index()
 	{   

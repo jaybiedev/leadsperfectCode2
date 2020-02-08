@@ -75,11 +75,28 @@ class BaseController extends Controller
 		}
 	}
 
-	public function redirectTo($slug = null)
+	public function redirectTo($slug=null, $message=null)
 	{
 		$url = base_url() . "/" . $slug;
+		if (!empty($message))
+			$url .= "?message={$message}";
+
 		header("location: " . $url);
 		exit;
+	}
+
+	public function setFlashErrorMessage($message) {
+
+		if (empty($message))
+			return;
+
+		$flashError = $this->Session->getFlashdata('flashError');
+		if (empty($flashError))
+			$flashError = [];
+		
+		$flashError[] = $message;
+
+		$this->Session->setFlashData("flashError", $flashError);
 	}
 
 

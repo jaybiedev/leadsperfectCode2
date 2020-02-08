@@ -3,7 +3,7 @@ use App\Controllers\BaseController;
 use App\Libraries\Finance\Authenticate;
 use App\Models\Common\SysConfigModel;
 
-class Administration extends BaseController
+class Administration extends AdministrationBaseController
 {
     public function index() 
     {

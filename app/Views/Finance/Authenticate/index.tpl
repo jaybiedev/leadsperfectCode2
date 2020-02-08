@@ -10,7 +10,11 @@
             </div>
 			<div class="card-header">
 				<h3>Sign In</h3>
-				<div class="error" id="login-error"></div>
+				<div class="error" id="login-error">
+				[[foreach name=entry item=entry from=$flash_error_message]]
+					[[$entry]]
+				[[/foreach]]
+				</div>
                 <!--
 				<div class="d-flex justify-content-end social_icon">
 					<span><i class="fab fa-facebook-square"></i></span>

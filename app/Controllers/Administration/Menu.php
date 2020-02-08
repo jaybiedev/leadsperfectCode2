@@ -3,7 +3,7 @@ use App\Controllers\BaseController;
 use App\Helpers\Utils;
 use App\Models\Common\MenuModel;
 
-class Menu extends BaseController
+class Menu extends AdministrationBaseController
 {
 	public function index()
 	{   

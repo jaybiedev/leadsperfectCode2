@@ -3,7 +3,7 @@ use App\Controllers\BaseController;
 use App\Helpers\Utils;
 use App\Models\Administration\AdminUserGroupModel;
 
-class Adminusergroup extends BaseController
+class Adminusergroup extends AdministrationBaseController
 {
 	public function index()
 	{   

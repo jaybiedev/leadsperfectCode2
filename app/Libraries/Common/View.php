@@ -13,6 +13,8 @@ class View
     public $pageHeader;
     public $pageDescription;
     public $modalTitle;
+    public $Session;
+
     public $modalID;
     public $baseUrl;
     public $moduleID;
@@ -27,9 +29,14 @@ class View
 
     function __construct()
     {
+        $this->Session =  \Config\Services::session();
         $this->SmartyLib = new SmartyLib();
         $this->baseUrl = base_url();
         $this->productUrl = base_url() . "/" . $this->getEnvironment()->product;
+   }
+
+   public function getFlashErrorMessage() {
+       return $this->Session->getFlashData('flashError');
    }
 
     public function getEnvironment()
@@ -132,6 +139,8 @@ class View
         $data['footer'] =  array (
             'javascripts'=>$this->getJavascripts(),
         );
+
+        $data['flash_error_message'] = $this->getFlashErrorMessage();
 
         $is_smarty = strpos($view, '.tpl');
 
