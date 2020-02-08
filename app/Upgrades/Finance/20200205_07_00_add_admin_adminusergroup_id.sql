@@ -1,5 +1,5 @@
 ALTER TABLE ONLY public.adminusergroup
-    ADD CONSTRAINT IF NOT EXISTS adminusergroup_pkey UNIQUE (adminusergroup_id);
+    ADD CONSTRAINT adminusergroup_pkey UNIQUE (adminusergroup_id);
 
 ALTER TABLE admin ADD COLUMN IF NOT EXISTS adminusergroup_id INTEGER default NULL;
 
