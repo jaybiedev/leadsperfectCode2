@@ -8,10 +8,14 @@ class FinanceBaseController extends BaseController
 {
     private $authentication_exception_slugs = ["finance/authenticate", "finance/upgrade"];
 
+    protected $db;
+
 	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
-		parent::initController($request, $response, $logger);
+        parent::initController($request, $response, $logger);
+        
+        $this->db = \Config\Database::connect('default');
         
         if (AuthenticateLib::isLogged($this->Session) == false)
         {

@@ -42,7 +42,9 @@ function DataTableTools(selector) {
         var self = this;
         $.extend( this.settings, custom_settings);
 
-        this.settings.ajax.data.includeDeleted = this.isIncludeDeleted();
+        if (this.settings.ajax) {
+            this.settings.ajax.data.includeDeleted = this.isIncludeDeleted();
+        }
 
         if (typeof custom_settings.onRowEdit == 'function') {
             //this.settings.fnRowCallback = funftion(settings, json) {

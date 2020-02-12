@@ -19,7 +19,7 @@ function smarty_function_accountdropdown($params, $content)
 
     $html =<<<HTML
             <select name="{$name}" 
-                class="bt-dropdown form-control select2-ajax-dd-generic" 
+                class="bt-dropdown form-control select2-ajax-dd-account" 
                 placeholder="{$placeholder}"
                 selected="{$selected}"
                 data-ajax-url="/finance/account/get"

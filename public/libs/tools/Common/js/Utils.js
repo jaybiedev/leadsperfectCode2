@@ -18,6 +18,15 @@ var CommonUtils = {
              return null;
         }
         return results[1] || null;        
+    },
+
+    formatNumber : function(num, precision) {
+
+        var number = num;
+        if (typeof precision != "undefined" && parseInt(precision) > -1) {
+            number = parseFloat(num).toFixed(parseInt(precision));
+        }
+        return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 }
 

@@ -190,6 +190,7 @@
 
     <script src="/libs/tools/Finance/js/angular.app.js"></script>
     <script src="/libs/tools/Finance/js/angular.controller.js"></script>
+    <script src="/libs/tools/Finance/js/select2.helper.js"></script>
     <script src="/js/Common/angular.directives.js"></script>
     <script src="/libs/tools/Common/js/datatable.tools.js"></script>
     <script src="/libs/tools/Common/js/Utils.js"></script>

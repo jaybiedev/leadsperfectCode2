@@ -2,3 +2,4 @@ CREATE INDEX IF NOT EXISTS adminrights_admin_id_module_id_idx ON adminrights USI
 CREATE INDEX IF NOT EXISTS account_lower_account ON account USING btree (LOWER(account));
 CREATE INDEX IF NOT EXISTS account_clientbank_id_idx ON account USING btree (clientbank_id);
 CREATE INDEX IF NOT EXISTS clientbank_lower_clientbank_id ON clientbank USING btree (clientbank);
+CREATE INDEX IF NOT EXISTS ledger_releasing_status_type_idx ON public.ledger USING btree (releasing_id, status, type);

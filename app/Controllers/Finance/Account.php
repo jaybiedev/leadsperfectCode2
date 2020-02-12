@@ -3,6 +3,7 @@ use App\Controllers\BaseController;
 use App\Helpers\Utils;
 use App\Models\Finance\AccountModel;
 use App\Entities\Finance\Account as AccountEntity;
+use App\Models\Finance\ReleasingModel;
 
 class Account extends FinanceBaseController
 {
@@ -113,6 +114,43 @@ class Account extends FinanceBaseController
                 ->orderBy('account')
                 ->findAllArray($limit, $offset);
        
+        // this will slowdown and load high
+        if (!empty($meta['asOfDate'])) {
+
+            $asOfDate = $meta['asOfDate'] == 'NOW' ? '' : $meta['asOfDate'];
+            $asOfDate = Utils::getDate($asOfDate, 'Y-m-d');
+            $ReleasingModel = new ReleasingModel();
+            $LoanTypeModel = new \App\Models\Finance\LoanTypeModel();
+
+            foreach ($data as $dat) {
+                $Releasings = $ReleasingModel->where('account_id', $dat['account_id'])->findAll();
+                
+                if (!$Releasings)
+                    continue;
+
+                $amountDue = 0;
+                $mdata = [];
+                foreach ($Releasings as $Releasing) {
+                    if ($Releasing->status == 'C')
+                        continue;
+
+                    $Releasing->populate();
+                    if ($Releasing->balance <= 0)
+                        continue;
+
+                    $LoanType =  $LoanTypeModel->find($Releasing->loan_type_id)->populate();
+                    $amountDue = $ReleasingModel->getAmountDue($Releasing, $asOfDate);
+                    $dat['amount_due'] = round($amountDue['amount_due'], 2);
+                    $dat['Releasing'] = $Releasing;
+                    $dat['LoanType'] = $LoanType;
+                    $mdata[] = $dat;
+                }
+
+                $data = $mdata;
+                unset($mdata);
+            }
+        }
+
        return  $this->View->renderJsonSuccess(null, $data);
     }
 

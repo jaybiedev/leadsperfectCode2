@@ -4,7 +4,52 @@ use App\Helpers\Utils;
 
 class FinanceUtils
 {
-    
+    public static function mode($t)
+    {
+        $str='';
+        if ($t=='M')
+            $str = 'Monthly';
+        elseif ($t=='S')
+            $str = 'Semi-Monthly';
+        elseif ($t=='W')
+            $str = 'Weekly';
+        return $str;
+            
+    }
+
+    public static function status($t)
+    {
+        $str='';
+        if ($t=='S')
+            $str = 'Saved';
+        elseif ($t=='P')
+            $str = 'Printed';
+        elseif ($t=='C')
+            $str = 'Cancelled';
+        elseif ($t=='V')
+            $str = 'Voided';
+        elseif ($t=='R')
+            $str = 'Returned';
+        elseif ($t=='N' or $t=='')
+            $str = 'New';
+        elseif ($t=='M')
+            $str = 'Modified';
+        elseif ($t=='T')
+            $str = 'Posted';
+        elseif ($t=='U')
+            $str = 'UnPosted';
+        elseif ($t=='A')
+            $str = 'Active';
+        elseif ($t=='I')
+            $str = 'In-Active';
+        elseif ($t=='L')
+            $str = 'Legal';
+        elseif ($t=='O')
+            $str = 'Closed';
+        return $str;
+            
+    }
+
     // @todo: use time function
     public static function timeElapse($t1, $t2)
     {

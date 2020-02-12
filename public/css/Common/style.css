@@ -131,6 +131,13 @@ form .lbl {
     width: 80%!important;
     display:inline-block;
 }
+.form-inline input.datepicker {
+    width: 70%!important;
+} 
+.form-inline label, .form-inline button{
+    margin-right: 5px;
+}
+
 .ui-datepicker-trigger {
     background-color: transparent;
     border: none;

@@ -17,7 +17,7 @@
             <label><input type="checkbox" value="" id="manage-bank-datatable-includeDeleted"> Show deleted records</label>
         </div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#[[$View->modalID]]" ng-click="load()">
-            <i class="fa fa-home"></i> Add New
+            <i class="fa fa-plus"></i> Add New
         </button>
         <button type="button" class="btn btn-secondary">
             <i class="fa fa-trash-restore-alt"></i> Restore Selected

@@ -82,7 +82,6 @@ $routes->get('administration/adminusergroup', 'Administration/Adminusergroup::in
 $routes->get('administration/admin', 'Administration/Admin::index');
 $routes->get('administration/menu', 'Administration/Menu::index');
 
-
 $routes->get('cash', 'Finance/Home::index');
 $routes->get('cash/branch', 'Finance/Branch::index');
 $routes->get('cash/bank', 'Finance/Bank::index');
@@ -91,6 +90,10 @@ $routes->get('finance/account', 'Finance/Account::index');
 $routes->get('finance/accountclass', 'Finance/Accountclass::index');
 $routes->get('finance/accountgroup', 'Finance/Accountgroup::index');
 $routes->get('finance/loantype', 'Finance/Loantype::index');
+
+$routes->get('finance/payment', 'Finance/Payment::index');
+$routes->post('finance/payment', 'Finance/Payment::post');
+
 $routes->get('finance/partner', 'Finance/Partner::index');
 $routes->get('finance/collectionfee', 'Finance/Collectionfee::index');
 $routes->get('finance/clientbank', 'Finance/Clientbank::index');

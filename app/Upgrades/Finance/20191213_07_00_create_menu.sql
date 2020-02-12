@@ -55,13 +55,13 @@ INSERT INTO menu (menu, slug, path, sort_order) values ('Deposit Release Summary
 INSERT INTO menu (menu, slug, path, sort_order) values ('Interbranch Loan Transactions','/finance/report/interbranch_loan','Top.Finance.Loans.Interbranch_Transactions','270');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Releases Fully Paid in 5 months','/finance/report/paidin3','Top.Finance.Loans.Releases_PaidIn','280');
 
-INSERT INTO menu (menu, slug, path, sort_order) values ('Payment','/finance/payment.browse','Top.Finance.Payment', '290');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Payment Entry','/finance/payment.browse','Top.Finance.Payment.Entry','300');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Payment','/finance/payment/browse','Top.Finance.Payment', '290');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Payment Entry','/finance/payment/browse','Top.Finance.Payment.Entry','300');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Gawad/Redeem/Transfer','/finance/redeem','Top.Finance.Payment.Gawad_Redeem_Transfer','310');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Summary of Payments','/finance/report/payment','Top.Finance.Payment.Summary_Payments','320');
 INSERT INTO menu (menu, slug, path, sort_order) values ('Withdrawals Per Branch','/finance/report/paymentbranch','Top.Finance.Payment.Withdrawals_PerBranch','330');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Upload Data(From Branch)','/finance/payment.upload','Top.Finance.Payment.Upload_Data','340');
-INSERT INTO menu (menu, slug, path, sort_order) values ('Download Data(To Branch)','/finance/payment.download','Top.Finance.Payment.Download_Data','350');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Upload Data(From Branch)','/finance/payment/upload','Top.Finance.Payment.Upload_Data','340');
+INSERT INTO menu (menu, slug, path, sort_order) values ('Download Data(To Branch)','/finance/payment/download','Top.Finance.Payment.Download_Data','350');
 INSERT INTO menu (menu, slug, path, sort_order) values ('SL Penalty Correction','/finance/penaltyrestore','Top.Finance.Payment.SL_Penalty_Corr','360');
 
 INSERT INTO menu (menu, slug, path, sort_order) values ('Excess','/finance/excess.ledger', 'Top.Finance.Excess', '370');

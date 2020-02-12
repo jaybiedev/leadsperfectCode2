@@ -260,3 +260,16 @@ main.container {
 .report-container {
     font-size: 18px;
 }
+
+
+/** dropdowns **/
+.account-dd-head {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.account-dd-small {
+    font-size: 0.8em;
+    text-indent: 10px;
+}

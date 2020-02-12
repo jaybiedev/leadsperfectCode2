@@ -49,6 +49,28 @@ class Utils
         $s = str_pad($s,$size," ",STR_PAD_LEFT);
         return $s;
     }
+
+    public static function getDate($date='', $format='') {
+
+        $mdate = "";
+        if (DEFINED("DATE_FORMAT")) {
+            $format = DATE_FORMAT;
+        }
+
+        if (empty($format)) {
+            $format = 'm/d/Y';
+        }
+
+        if (empty($date)) {
+            $mdate = date($format);
+        }
+        else {
+            $mdate = date($format, strtotime($date));
+        }
+
+        return $mdate;
+
+    }
     
     // @todo: use date function
     public static function udate($ymd)
