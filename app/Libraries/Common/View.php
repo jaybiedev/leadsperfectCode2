@@ -73,6 +73,7 @@ class View
     public function setPageHeader($header) 
     {
         $this->pageHeader = $header;
+        return $this;
     }
 
     public function getPageHeader() 
@@ -83,6 +84,7 @@ class View
     public function setPageDescription($description) 
     {
         $this->pageDescription = $description;
+        return $this;
     }
 
     public function getPageDescription() 
@@ -90,10 +92,18 @@ class View
         return $this->pageDescription;
     }
 
+    public function setModalID($modalID) {
+        $this->modalID = str_replace(" ", "", $modalID);
+        return $this;        
+    }
+
     public function setModalTitle($modalTitle) 
     {
         $this->modalTitle = $modalTitle;
-        $this->modalID = str_replace(" ", "", $this->modalTitle);
+        if (empty($this->modalID))
+            $this->modalID = str_replace(" ", "", $this->modalTitle);
+        
+        return $this;
     }
 
     public function getModalTitle() 

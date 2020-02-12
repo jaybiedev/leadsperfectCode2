@@ -1,0 +1,6 @@
+form#frm-payment-entry div.form-group{
+    margin-bottom: 0.2rem;
+}
+form#frm-payment-entry label {
+    margin-bottom: 0.2rem;
+}

@@ -81,6 +81,15 @@ class Payment extends FinanceBaseController
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
 
+    public function entry() {
+        $data = ["date"=>date('m/d/Y'), "account_group_id"=>null];
+        $payment_id = $this->request->uri->getSegment(4);
+        $this->View->setPageHeader('Payment/Collection Entry');
+        $this->View->setModalTitle("Payment Detail");
+
+        return $this->View->render('Finance/Payment/entry.tpl', $data);
+    }
+
     public function post()
     {
         //

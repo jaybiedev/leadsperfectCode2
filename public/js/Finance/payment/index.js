@@ -10,4 +10,9 @@ $(document).ready(function() {
                 window.location.href="/finance/payment/";
             }
         });
+
+    $("button#btn-new-entry").on('click', function(e) {
+        e.preventDefault();
+        window.location.href="/finance/payment/entry";
+    })
 });
