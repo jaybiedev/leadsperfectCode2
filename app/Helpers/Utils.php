@@ -218,6 +218,11 @@ class Utils
         }
         return $wrdn;
     }
+
+    public static function getRawNumber($num) {
+        $number = (float)str_replace(",", "", $num);
+        return $number;
+    }
     
     public static function number_format2($n,$d)
     {

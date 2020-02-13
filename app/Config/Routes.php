@@ -92,7 +92,7 @@ $routes->get('finance/accountgroup', 'Finance/Accountgroup::index');
 $routes->get('finance/loantype', 'Finance/Loantype::index');
 
 $routes->get('finance/payment', 'Finance/Payment::index');
-$routes->post('finance/payment', 'Finance/Payment::post');
+$routes->post('finance/payment/entry', 'Finance/Payment::post');
 
 $routes->get('finance/partner', 'Finance/Partner::index');
 $routes->get('finance/collectionfee', 'Finance/Collectionfee::index');

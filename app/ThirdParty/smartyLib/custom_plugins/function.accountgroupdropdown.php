@@ -22,6 +22,7 @@ function smarty_function_accountgroupdropdown($params, $content)
 
     $html =<<<HTML
             <select name="{$name}" 
+                    id="{$id}"
                     class="bt-dropdown form-control select2-dd" 
                     placeholder="Select User Group" ">
 HTML;

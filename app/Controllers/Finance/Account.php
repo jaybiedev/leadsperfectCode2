@@ -108,12 +108,21 @@ class Account extends FinanceBaseController
         if (!empty($meta['searchField']))
             $fieldValuePair = array($meta['searchField']=>$searchKey);
 
-        $data = $AccountModel->ilike($fieldValuePair)
+        $Query = $AccountModel->ilike($fieldValuePair)
                 ->join("account_group", "account.account_group_id=account_group.account_group_id", "left")
-                ->join("branch", "account.branch_id=branch.branch_id", "left")
-                ->orderBy('account')
+                ->join("branch", "account.branch_id=branch.branch_id", "left");
+        
+        // filter account group
+        if (isset($meta['account_group_id'])) {
+            $account_group_id = intval($meta['account_group_id']);
+            if ($account_group_id)
+                $Query->where('account.account_group_id', $account_group_id);
+        }
+
+        $data = $Query->orderBy('account')
                 ->findAllArray($limit, $offset);
        
+        // filter accounts with balance, calculate balances
         // this will slowdown and load high
         if (!empty($meta['asOfDate'])) {
 

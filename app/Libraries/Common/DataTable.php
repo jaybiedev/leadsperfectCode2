@@ -61,7 +61,7 @@ class DataTable
     /*
     return array of  [field => value]
     */
-    public function getSearchableLike()
+    public function getSearchableLike($numerfields = [])
     {
         $searchable = [];
         foreach ((array)$this->meta['columns'] as $column)
@@ -72,10 +72,14 @@ class DataTable
             $_clause = "";
             $field = $column['data'];
             // hacking this for now to prevent lower for numeric fields
+            // should probably get the table column properties
+
             if (stripos($field, '_id') !== false)
                 continue;
             elseif (Utils::arrayStripos($field, array('_rate')) == false)
                 $searchable["LOWER({$field})"] = '%' . strtolower($this->searchValue) . '%';
+            elseif (in_array($field, $numerfields))
+                $searchable["{$field}::TEXT"] = '%' . strtolower($this->searchValue) . '%';
             else
                 $searchable[$field] = '%' . strtolower($this->searchValue) . '%';
         }

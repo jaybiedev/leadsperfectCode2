@@ -7,7 +7,6 @@ var FinanceDD =  {
     _formatAccountDD : function (data) {
 
         var render = '';
-        debugger;
         if (data && typeof data.item == 'object') {
             render = '<div class="select2-account-dd">' + 
                         '<div class="account-dd-head" title="' + data.text + '">' + data.text + '</div>' +
@@ -56,6 +55,7 @@ var FinanceDD =  {
                             var query = {
                                 searchKey: params.term,
                                 asOfDate: 'NOW',
+                                account_group_id: CommonUtils.getSelfAttribute(_item, 'account_group_id'),
                                 type: 'public'
                             }
                             // Query parameters will be ?search=[term]&type=public

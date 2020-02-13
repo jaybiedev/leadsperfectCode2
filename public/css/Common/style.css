@@ -212,3 +212,7 @@ cursor: pointer;
     opacity: 0;
     display: none;
 }
+
+.format-number {
+    text-align:right;
+}

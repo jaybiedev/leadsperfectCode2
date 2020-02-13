@@ -6,7 +6,7 @@
  * @subpackage PluginsModifier
  */
 /**
- * Smarty date_format modifier plugin
+ * Smarty record_status modifier plugin
  * Type:     modifier
  * Name:     record_status
  * Purpose:  format record_status to string

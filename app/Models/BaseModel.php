@@ -100,4 +100,26 @@ abstract class BaseModel extends Model
         return $this->like($field ,$match , $side, $escape, $insensitiveSearch);
     }
 
+    public function countResults($sql=null) {
+
+        if (empty($sql)) {
+            $lastQuery = $this->lastQuery->getQuery();
+            $orderPosition = stripos($lastQuery, 'ORDER BY');
+            if (!empty($orderPosition)) {
+                $sql = substr($lastQuery, 0, $orderPosition -1);
+            }
+        }
+
+        $sql = 'SELECT count(*) AS numrows  FROM (' . $sql . ') AS subsql';
+        $query = $this->db->query($sql, null, false);
+		if (empty($query->getResult()))
+		{
+			return 0;
+		}
+
+		$query = $query->getRow();
+
+		return (int) $query->numrows;
+    }
+
 }

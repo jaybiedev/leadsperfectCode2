@@ -60,7 +60,7 @@ class Admin extends AdministrationBaseController
 
     public function post()
     {
-        $adminAdmin_id = $this->request->getPost('admin_id');
+        $admin_id = $this->request->getPost('admin_id');
         $AdminModel = new AdminModel();
         
         $Admin = $AdminModel->first($admin_id);

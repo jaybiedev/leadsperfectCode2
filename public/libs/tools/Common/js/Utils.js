@@ -22,11 +22,32 @@ var CommonUtils = {
 
     formatNumber : function(num, precision) {
 
-        var number = num;
+        var number = num.replace(/,/g, "");
         if (typeof precision != "undefined" && parseInt(precision) > -1) {
-            number = parseFloat(num).toFixed(parseInt(precision));
+            number = parseFloat(num.replace(/,/g, "")).toFixed(parseInt(precision));
         }
+
         return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    },
+
+    formatDate : function(date, format) {
+        if (typeof format == 'undefined')
+            format = 'mm/dd/yy';
+
+        if (date.length == 10) {
+            date += ' 12:00 PST';
+        }
+        var _date = $.datepicker.formatDate(format, new Date(date))
+
+        return _date;
+   
+    },
+
+    getSelfAttribute : function(domElement, attribute) {
+        if ($(domElement).attr(attribute)) 
+            return $(domElement).attr(attribute);
+
+        retun;
     }
 }
 
@@ -68,6 +89,32 @@ var CommonPlugins = {
         self.initDD();
         self.initAjaxDD();
         self.initButtonEvents();
+        self.enterToTabEvent();
+        self.formatNumber();
+    },
+
+    formatNumber : function() {
+        $("input.format-number").focusout(function() {
+            var self = $(this);
+            var _val = self.val();
+            self.val(CommonUtils.formatNumber(_val, 2));
+        });
+    },
+    
+    enterToTabEvent : function() {
+        var formEnterToTab = $('form.key-enter-to-tab');
+        
+        if (formEnterToTab) {
+            $('input, select, textarea', formEnterToTab).on('keypress', function(event){
+                var self = $(this);
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13') {
+                    event.preventDefault();
+                    $('input, select, textarea, button', formEnterToTab)
+                    [$('input, select, textarea, button', formEnterToTab).index(this)+1].focus();
+                }
+            });
+        }
     },
 
     initDatePicker: function() {
@@ -75,6 +122,9 @@ var CommonPlugins = {
             dateFormat: "mm/dd/yy",
             showOn: "both", 
             buttonText: "<i class='fa fa-calendar-alt'></i>"
+        });
+        $('.datepicker-no-icon').datepicker({
+            dateFormat: "mm/dd/yy"
         });
     },
 
@@ -192,6 +242,7 @@ var CommonPlugins = {
             var form = element.closest("form.form-post-ajax-generic:visible").first();
             var data = form.serializeArray();
             var url = window.location.href;
+            var callback = "";
 
             if (form.attr('url'))
                 url = form.attr('url');
@@ -207,7 +258,7 @@ var CommonPlugins = {
                     }
 
                     if (!response.success) {
-                        CommonMessage.toast("Error", "Problem saving data! " + message);
+                        CommonMessage.toast(false, "Problem saving data! " + message);
                     }
                     else {
                         if (response.data.redirectTo) {
@@ -215,6 +266,12 @@ var CommonPlugins = {
                         }
                         else {
                             CommonMessage.toast(true, "Form as been successfully saved! " + message);
+                            if (callback) {
+                                if (typeof callback == 'function')
+                                    callback();
+                                else
+                                    eval(callback);
+                            }
                         }
                     }
                 },

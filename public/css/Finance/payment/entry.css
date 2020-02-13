@@ -1,6 +1,41 @@
+main.container {
+    padding:0;
+}
+form#frm-payment-entry div.row {
+    margin: 0;
+}
+form#frm-payment-entry label {
+    font-size: 0.9em;
+}
 form#frm-payment-entry div.form-group{
     margin-bottom: 0.2rem;
 }
 form#frm-payment-entry label {
     margin-bottom: 0.2rem;
 }
+
+div#payment-detail-entry .col,
+form#frm-payment-entry .col {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+div#payment-detail-entry .col.col-1_5 {
+    width: 12.5%;
+}
+div#payment-detail-entry .col.col-_5 {
+    width:0.4%;
+}
+h6.lined {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #eee; 
+    line-height: 0.1em;
+    margin: 20px 0; 
+ } 
+ 
+ h6.lined span { 
+     background:#fff; 
+     padding:0 10px; 
+     color: #888;
+ }
