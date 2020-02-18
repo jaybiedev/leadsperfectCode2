@@ -150,6 +150,18 @@ class View
             'javascripts'=>$this->getJavascripts(),
         );
 
+        if (true)  { // DEVELOPMENT
+            array_walk($data['footer']['javascripts'], function(&$value, $key) { 
+                $timestamp = time();
+                $value .= '?ts=' . $timestamp; 
+            } );
+            array_walk($data['header']['stylesheets'], function(&$value, $key) { 
+                $timestamp = time();
+                $value .= '?ts=' . $timestamp; 
+            } );
+        }
+        
+
         $data['flash_error_message'] = $this->getFlashErrorMessage();
 
         $is_smarty = strpos($view, '.tpl');

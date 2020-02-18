@@ -216,3 +216,10 @@ cursor: pointer;
 .format-number {
     text-align:right;
 }
+
+/***/
+.hidden {
+    display:none;
+    width:0;
+    opacity: 0;
+}

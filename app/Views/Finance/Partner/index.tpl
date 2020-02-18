@@ -29,19 +29,25 @@
 <!-- CRUD Modal -->
 [[block name="ModalBody"]]
     <!-- form entry -->
-    <form class="form" role="form" autocomplete="off"  novalidate="" method="POST" action="" />
+    <form class="form form-post-ajax-generic" role="form" autocomplete="off"  novalidate="" 
+        method="POST" url="/finance/partner/post"/>
         <div class="form-group">
             <label for="department">Partner</label>
-            <input type="text" class="form-control" name="partner" id="partner" required="" ng-model="Data.partner.partner">
+            <input type="text" name="partner_id" ng-model="Data.partner.partner_id"  class="hidden"/>
+            <input type="text" class="form-control" name="field[partner]" id="partner" required="" ng-model="Data.partner.partner">
             <div class="invalid-feedback">Please enter partner</div>
         </div>
         <div class="form-group">
-            <switch-enabled ng-model="Data.partner.enabled" />
+            <switch-enabled data-ng-model="Data.partner.enabled" name="enabled"/>
         </div>
 
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="save-partner" ng-click="savePartner()">Save changes</button>
+            <button type="button" class="btn btn-primary btn-form-post-ajax-generic" 
+                id="save-partner"
+                data-parent-modal="[[$View->modalID]]"
+                data-datatable-refresh="#manage-partner-datatable"
+                >Save changes</button>
         </div>
     </form>
 [[/block]]

@@ -72,6 +72,18 @@ body
     border-color: #260643;
 }
 
+.btn-secondary {
+    background-color: #FFC312;
+    color: #260643;
+    border-color:  rgb(219, 166, 8);
+}
+
+.btn-secondary:hover{
+    background-color: rgb(233, 217, 170);
+    color: #260643;
+    border-color: rgb(233, 217, 170);
+}
+
 i.fa {
     color:#260643;
 }
@@ -117,9 +129,7 @@ i.fa:hover {
     background-color: #f8f9fa;
 }
 
-.hidden {
-    display:none;
-}
+
 
 @media (min-width: 767px) {
     .navbar .dropdown-toggle:not(.nav-link)::after {

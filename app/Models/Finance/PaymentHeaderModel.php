@@ -41,10 +41,21 @@ class PaymentHeaderModel extends BaseModel
         
     protected $useTimestamps = false;
 
-    protected $validationRules    = [];
-    protected $validationMessages = [];       
-    
     protected $PaymentDetails = [];
+
+	protected $validationRules    = [
+		'date'     => 'required',
+		'account_group_id'  => 'required',
+	];
+
+	protected $validationMessages = [
+			'date'        => [
+					'required' => 'Payment Date is requried.'
+			],
+			'account_group_id'        => [
+				'required' => 'Payment account group is required.'
+			]			
+	];
 
     public function addPaymentDetails() {
         //

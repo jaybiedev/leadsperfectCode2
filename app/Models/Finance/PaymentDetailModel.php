@@ -34,8 +34,24 @@ class PaymentDetailModel extends BaseModel
 		'user_id_deleted'
         ];   
         
-    protected $useTimestamps = false;
+	protected $useTimestamps = false;
+	
+	protected $validationRules    = [
+		'date'     => 'required',
+		'account_id'     => 'required',
+		'payment_header_id'  => 'required',
+		'releasing_id'  => 'required',
+	];
 
-    protected $validationRules    = [];
-    protected $validationMessages = [];                 
+	protected $validationMessages = [
+		'account_id' => [
+			'required' => 'Payment account is required.'
+		],	
+		'payment_header_id' => [
+			'required' => 'Payment needs to belong in a payment group.'
+		],
+		'releasing_id' => [
+			'required' => 'Payment requires to be associated with loan releasing.'
+		],
+	];
 }

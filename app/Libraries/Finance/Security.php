@@ -24,6 +24,14 @@ class Security
         return self::getSession()->get("User");
     }
 
+    public static function getSessionUserId() {
+  
+        $UserSessionInfo = self::getUserSessionInfo();
+        if (empty($UserSessionInfo))
+            return null;
+        return $UserSessionInfo['id'];
+    }
+
     public static function isInUserGroup($usergroup=null)
     {
         if (!self::isLogged())

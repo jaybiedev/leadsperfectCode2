@@ -7,4 +7,5 @@ class CollectionFeeModel extends BaseModel
     protected $primaryKey = 'feetable_id';
     protected $allowedFields = ['afrom', 'ato', 'fee'];
     protected $returnType = 'App\Entities\Finance\CollectionFee';
+    
 }

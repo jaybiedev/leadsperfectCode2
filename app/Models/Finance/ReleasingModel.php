@@ -84,8 +84,27 @@ class ReleasingModel extends BaseModel
 
         protected $useTimestamps = false;
 
-        protected $validationRules    = [];
-        protected $validationMessages = [];
+        protected $validationRules    = [
+                'date'     => 'required',
+                'account_id' => 'required',
+                'loan_type_id' => 'required',
+                'principal' => 'required'
+        ];
+
+        protected $validationMessages = [
+                'date'        => [
+                        'required' => 'Loan date is required.'
+                ],
+                'account_id'        => [
+                        'required' => 'Loan account is required.'
+                ],
+                'loan_type_id'        => [
+                        'required' => 'Loan type is required.'
+                ],
+                'principal'        => [
+                        'required' => 'Loan principal is required.'
+                ],                
+        ];
 
         // @todo: cleanup, make sql efficient
         public function getAmountDue($Releasing, $mdate=null)

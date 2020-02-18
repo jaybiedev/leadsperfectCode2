@@ -24,7 +24,7 @@ $(document).ready(function() {
                         return CommonUtils.formatNumber(data);
                     }
                 },
-                { "data": "remarks" },
+                { "data": "remark" },
             ],
             onRowEdit : function(data) {
                 var scope = angular.element("body[ng-controller='paymentCtrl']").scope();
@@ -67,7 +67,7 @@ app.controller('paymentCtrl', function($scope, $http) {
                 withdrawn: "",
                 excess: "",
                 amount:"",
-                remarks:""
+                remark:""
             },
             yesno : [{
                 value : true,
@@ -89,7 +89,7 @@ app.controller('paymentCtrl', function($scope, $http) {
             withdrawn: "",
             excess: "",
             amount:"",
-            remarks:""
+            remark:""
         }
 
         $http({

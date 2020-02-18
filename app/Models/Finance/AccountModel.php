@@ -75,4 +75,14 @@ class AccountModel extends BaseModel
         'user_id_modified',
         'user_id_deleted',
     ];
+
+    protected $validationRules    = [
+        'account'     => 'required|alpha_numeric_space|min_length[3]',
+    ];
+
+    protected $validationMessages = [
+            'account'        => [
+                    'required' => 'Account name is required.'
+            ]
+    ];
 }

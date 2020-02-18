@@ -10,6 +10,15 @@ class BranchModel extends BaseModel
         'long', 'lati', 'swipe'];
     protected $returnType = 'App\Entities\Finance\Branch';
 
+    protected $validationRules    = [
+        'branch'     => 'required|min_length[3]'
+    ];
+
+    protected $validationMessages = [
+        'branch'        => [
+                'required' => 'Branch is required.'
+        ]
+    ];
 
     public function getBranches($user_id=0, $is_ignore_session = false)
     {

@@ -10,13 +10,14 @@ $(document).ready(function() {
             onRowEdit : function(data) {
                 var scope = angular.element("body[ng-controller='partnerCtrl']").scope();
                 scope.load(data.partner_id);
-                $('#Editpartner').modal('show');
+                $('#EditPartner').modal('show');
             }
         });
 
+    /*
     $("button#save-partner").on('click', function() {
         debugger;   
-    })
+    }) */
 });
 
 var ManagePartner = {
@@ -61,6 +62,11 @@ app.controller('partnerCtrl', function($scope, $http) {
                     if (response.data.data.date_deleted != null)
                         response.data.data['enabled'] = false;
 
+                    // hacking angularjs ng-model
+                    var checkBoxEnabled = $("div.modal-dialog").find("input[type='checkbox'].enable-switch");
+                    if (checkBoxEnabled && checkBoxEnabled.length > 0) {
+                        checkBoxEnabled.prop("checked", response.data.data['enabled']);
+                    }
                     $scope.Data.partner = response.data.data;
             }
         );

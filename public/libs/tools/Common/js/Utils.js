@@ -54,9 +54,12 @@ var CommonUtils = {
 var CommonMessage = {
 
     toast : function(success, message) {
+
+        var showTime = 30000;
         var _class = "alert-danger";
         if (success) {
             var _class = "alert-success";
+            showTime = 3000;
         }
 
         var element = $("body").find("div.toast-generic");
@@ -74,7 +77,7 @@ var CommonMessage = {
             element.addClass(_class);
             // element.find("div.toast-header").addClass(_class).html(title);
             element.find("div.toast-body").html(message);
-            element.toast({delay:2000});
+            element.toast({delay:showTime});
             element.toast('show');
         }
     }
@@ -89,7 +92,7 @@ var CommonPlugins = {
         self.initDD();
         self.initAjaxDD();
         self.initButtonEvents();
-        self.enterToTabEvent();
+        self.enterToTabEvent(); // enter to tab key
         self.formatNumber();
     },
 
@@ -243,6 +246,8 @@ var CommonPlugins = {
             var data = form.serializeArray();
             var url = window.location.href;
             var callback = "";
+            var modalDialog=element.attr('data-parent-modal');
+            var datatable=element.attr('data-datatable-refresh');
 
             if (form.attr('url'))
                 url = form.attr('url');
@@ -266,6 +271,15 @@ var CommonPlugins = {
                         }
                         else {
                             CommonMessage.toast(true, "Form as been successfully saved! " + message);
+
+                            if (modalDialog) {
+                                $("#" + modalDialog).find("button[data-dismiss='modal']").click();
+                            }
+
+                            if (datatable && window.DataTables && window.DataTables.loaded[datatable]) {
+                                window.DataTables.loaded[datatable].refresh();
+                            }
+
                             if (callback) {
                                 if (typeof callback == 'function')
                                     callback();

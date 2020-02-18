@@ -15,9 +15,9 @@ $(document).ready(function() {
             }
         });
 
-    $("button#save-accountgroup").on('click', function() {
-        debugger;   
-    })
+    // $("button#save-accountgroup").on('click', function() {
+    //     debugger;   
+    // })
 });
 
 var ManageAccountgroup = {

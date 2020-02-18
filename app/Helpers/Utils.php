@@ -224,6 +224,21 @@ class Utils
         return $number;
     }
     
+    public static function arrayKeyValueImplode($glue=",", $input=[], $operator="=") {
+
+        $output = implode($glue, array_map(
+            function ($v, $k) { 
+                return sprintf("%s [operator] '%s'", $k, $v); 
+            },
+            $input,
+            array_keys($input)
+        ));
+
+        $output = str_replace("[operator]", $operator, $output);
+
+        return $output;
+    }
+
     public static function number_format2($n,$d)
     {
         if ($n == 0)

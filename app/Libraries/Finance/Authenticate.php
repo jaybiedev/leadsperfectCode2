@@ -29,6 +29,7 @@ class Authenticate
     {
         
         $UserInfo = ["id"=>$User->admin_id, 
+                    "admin_id"=>$User->admin_id, 
                     "username" => $User->username, 
                     "name" => $User->name,
                     "usergroup"=>[$User->usergroup],

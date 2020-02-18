@@ -5,8 +5,11 @@ use App\Entities\Finance\PaymentHeader;
 use App\Helpers\Utils;
 use App\Models\Finance\BankModel;
 use App\Libraries\Finance\Report\FactoryReport;
+use App\Libraries\Finance\Security;
+use App\Models\Finance\LedgerModel;
 use App\Models\Finance\PaymentDetailModel;
 use App\Models\Finance\PaymentHeaderModel;
+use App\Models\Finance\ReleasingModel;
 
 class Payment extends FinanceBaseController
 {
@@ -66,18 +69,28 @@ class Payment extends FinanceBaseController
         $DataTable = new \App\Libraries\Common\DataTable($meta, $Model, 'payment_detail');
     
         $data = [];
+        $recordsTotal = 0;
 
         if (!empty((int)$meta['payment_header_id'])) {
 
             $payment_header_id =  (int)$meta['payment_header_id'];
             
             if (!empty($DataTable->searchValue)) {
-                $data = $Model->ilike($DataTable->getSearchableLike(['withdrawn', 'amount', 'excess']))
-                                    ->asArray()
-                                    ->join("account", "account.account_id=payment_detail.account_id")
-                                    ->where('payment_header_id', $payment_header_id)
-                                    ->orderBy('payment_detail_id', 'desc')
-                                    ->findAll($DataTable->limit, $DataTable->offset);
+                // sql statement for now
+                $ilike = $DataTable->getSearchableLike(['withdrawn', 'amount', 'excess']);
+                $ilike_sql = Utils::arrayKeyValueImplode(" OR ", $ilike, 'ilike');
+
+                $sql = "SELECT pd.*,
+                                account.account
+                            FROM payment_detail AS pd 
+                            LEFT JOIN account ON account.account_id=pd.account_id
+                            WHERE
+                                pd.payment_header_id={$payment_header_id}
+                                AND ($ilike_sql)
+                        ";
+                 
+                $data = $Model->db->query($sql)->getResultArray();
+                $recordsTotal = $Model->countResults($sql);
             }
             else {
                 $data = $Model->orderBy('payment_detail_id', 'desc')
@@ -85,12 +98,9 @@ class Payment extends FinanceBaseController
                                     ->join("account", "account.account_id=payment_detail.account_id")
                                     ->where('payment_header_id', $payment_header_id)
                                     ->findAll($DataTable->limit, $DataTable->offset);
+                $recordsTotal = $Model->countResults();
             }
         }
-
-        $recordsTotal = $Model->countResults();
-
-
         
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
@@ -125,6 +135,7 @@ class Payment extends FinanceBaseController
      */
     public function post()
     {
+        $data = [];
         $header = $this->request->getPostGet('header');
         $detail = $this->request->getPostGet('detail');
 
@@ -143,39 +154,19 @@ class Payment extends FinanceBaseController
             unset($detail['payment_detail_id']);
         }
 
-        $header['total_amount'] = Utils::getRawNumber($header['total_amount']);
-        $header['date'] = Utils::getDate($header['date'], 'Y-m-d');
-        $detail['ddate'] = Utils::getDate($detail['ddate'], 'Y-m-d');        
-
-        $detail['withdrawn'] = Utils::getRawNumber($detail['withdrawn']);
-        if ($detail['amountdistribution'] == 1) {
-            $detail['ammort'] = $detail['withdrawn'];
-        }
-        elseif ($detail['amountdistribution'] == 2) {
-            $detail['excess'] = $detail['withdrawn'];
-        }
-        else {
-            // auto distribute amounts
-        }
-
         $this->db->transStart();
         try {
-            $PaymentHeaderModel = new PaymentHeaderModel();
-            $PaymentDetailModel = new PaymentDetailModel();
-            $PaymentHeaderModel->save($header);
 
-            if (empty($header['payment_header_id'])) {
-                $header['payment_header_id'] = $PaymentHeaderModel->getInsertID();
-            }
-            $detail['payment_header_id'] = $header['payment_header_id'];
-    
-            $PaymentDetailModel->save($detail);
-            if (empty($detail['payment_detail_id'])) {
-                $detail['payment_detail_id'] = $PaymentDetailModel->getInsertID();
-            }
+            $UserInfo = Security::getUserSessionInfo();
 
-            $data['detail'] = $detail;
-            $data['header'] = $header;
+            $PaymentHeader = new \App\Entities\Finance\PaymentHeader();
+            $PaymentHeader->fill($header);
+            $PaymentHeader->UserInfo['id'];
+
+            $PaymentDetail = new \App\Entities\Finance\PaymentDetail();
+            $PaymentDetail->fill($detail);
+
+            \App\Libraries\Finance\Logic\Payment::PostPayment($PaymentHeader, $PaymentDetail, $UserInfo);
         }
         catch (\Exception $e) {
             return $this->View->renderJsonFail($e->getMessage(), $data);

@@ -55,20 +55,38 @@ class Partner extends FinanceBaseController
 
     public function post()
     {
-        $partner_id = $this->request->getPost('partner_id');
         $PartnerModel = new PartnerModel();
-        
-        $Partner = $PartnerModel->first($partner_id);
-        if (!empty($id) && empty($Partner->partner_id))
-        {
-            return $this->View->renderJsonFail();
+
+        $enabled = $this->request->getPost('enabled', FILTER_VALIDATE_INT);
+        $partner_id = $this->request->getPost('partner_id', FILTER_VALIDATE_INT);
+
+        try {
+            $fields = $this->request->getPost('field');
+            
+            if (!empty((int)$partner_id)) {
+                $fields['partner_id'] = $partner_id;
+            }
+
+            if (!isset($enabled) && !empty($partner_id)) {
+                $PartnerModel->delete($partner_id);
+            }
+            else {
+
+                if (empty($partner_id)) {
+                    $Partner = $PartnerModel->onlyDeleted()->where('LOWER(partner)', strtolower($fields['partner']))->first();
+
+                    if (is_object($Partner) && $Partner->populate()) {
+                        $fields['date_deleted'] = null;
+                        $fields['partner_id'] = $Partner->partner_id;
+                    }
+                }
+
+                $PartnerModel->save($fields);
+            }
         }
-
-        $Partner = new \App\Entities\Finance\Partner();
-
-        $meta = $this->request->getPost();
-        $Partner->fill($meta);
-        $PartnerModel->save($Partner);
+        catch (\Exception $e) {
+            return $this->View->renderJsonFail($e->getMessage());
+        }
 
         return $this->View->renderJsonSuccess();
     }

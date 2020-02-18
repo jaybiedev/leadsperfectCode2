@@ -12,6 +12,12 @@ class BaseEntity extends Entity
     public $user_id_modified;
     public $user_id_deleted;
 
+    protected $dates = [
+		'date_created',
+		'date_modified',
+		'date_deleted',
+	];
+
     public function __construct(array $data = null)
     {
         parent::__construct($data);

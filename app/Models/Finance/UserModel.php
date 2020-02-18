@@ -14,6 +14,17 @@ class UserModel extends BaseModel
 
         protected $useTimestamps = false;
 
-        protected $validationRules    = [];
-        protected $validationMessages = [];
-}
+        protected $validationRules    = [
+                'username'     => 'required|min_length[5]',
+                'password'     => 'required|min_length[8]',
+        ];
+
+        protected $validationMessages = [
+                'username'        => [
+                        'required' => 'Username is required. Please use at least 5 letters or numbers .'
+                ],
+                'password'        => [
+                        'required' => 'Password is required. Please use at least 8 letters or numbers .'
+                ]
+        ];
+}        

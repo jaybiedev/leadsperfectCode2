@@ -1,3 +1,5 @@
+window.DataTables = {loaded: []};
+
 function DataTableTools(selector) {
 
     this.datatable = null;
@@ -33,7 +35,6 @@ function DataTableTools(selector) {
         ],
         "drawCallback": function( settings ) {
             $(settings.nTBody).show();
-            debugger;
         }
     };
 
@@ -70,6 +71,7 @@ function DataTableTools(selector) {
         }
 
         this.datatable = $(this.selector).DataTable(this.settings);
+        window.DataTables.loaded[this.selector] = this;
         this.toggleIncludeDeleted();
         $(self.selector + " tbody").show();
     }
