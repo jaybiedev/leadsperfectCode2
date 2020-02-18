@@ -8,8 +8,15 @@ $(document).ready(function() {
                 { "data": "partner" }
             ],
             onRowEdit : function(data) {
-                var scope = angular.element("body[ng-controller='partnerCtrl']").scope();
-                scope.load(data.partner_id);
+                var scope = angular.element("body[ng-controller='genericCtrl']").scope();
+                scope.Data.url = '/finance/partner';
+                scope.Data.record_id = data.partner_id;
+                scope.Data.fields = {
+                        partner_id: "",
+                        partner: "",
+                        enabled: true
+                    };
+                scope.loadRecord(data.partner_id);
                 $('#EditPartner').modal('show');
             }
         });
@@ -18,62 +25,4 @@ $(document).ready(function() {
     $("button#save-partner").on('click', function() {
         debugger;   
     }) */
-});
-
-var ManagePartner = {
-     partner_id: null,
-}
-
-app.controller('partnerCtrl', function($scope, $http) {
-
-    $scope.Data = {
-            url : '/finance/partner',
-            partner : {
-                partner_id: "",
-                partner: "",
-                enabled: true
-            },
-            yesno : [{
-                value : true,
-                label : 'Yes'
-            },{
-                value : false,
-                label : 'No'
-            }],
-    		alert : '',
-    		Messages : {error:null, warning:null, success:null}
-    };
-
-    $scope.load = function(partner_id=null) {
-
-        $scope.Data.partner = {
-            partner_id: "",
-            partner: "",
-            enabled: true
-        }
-
-        $http({
-            method: "get",
-            url   : $scope.Data.url + "/get/?partner_id=" + partner_id
-        }).then(
-            function (response) {
-                if (typeof response.data.data == 'object')
-                    response.data.data['enabled'] = true;
-                    if (response.data.data.date_deleted != null)
-                        response.data.data['enabled'] = false;
-
-                    // hacking angularjs ng-model
-                    var checkBoxEnabled = $("div.modal-dialog").find("input[type='checkbox'].enable-switch");
-                    if (checkBoxEnabled && checkBoxEnabled.length > 0) {
-                        checkBoxEnabled.prop("checked", response.data.data['enabled']);
-                    }
-                    $scope.Data.partner = response.data.data;
-            }
-        );
-    
-    };
-
-    $scope.savePartner = function() {
-    	debugger;
-    };
 });

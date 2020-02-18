@@ -15,6 +15,7 @@ namespace App\Controllers;
  */
 
 use App\Libraries\Common\Environment;
+use App\Models\BaseModel;
 use CodeIgniter\Controller;
 
 class BaseController extends Controller
@@ -99,5 +100,85 @@ class BaseController extends Controller
 		$this->Session->setFlashData("flashError", $flashError);
 	}
 
+	/**
+	 * generic get method accepts $id as primaryKey
+	 */
+	public function get() {
+		
+		$id = $this->request->getGet('id', FILTER_VALIDATE_INT);
+		$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
+		if (!is_object($Model))
+			throw new \Exception("Invalid model, unable to save.");
+		
+		$data = [];
+
+		if (!empty($id))
+		{
+			$data = $Model->find($id)->populate();
+		}
+
+		return  $this->View->renderJsonSuccess(null, $data);
+	
+	}
+
+	/* generic post method with jason response
+	* for updating single record on single table
+	* requires Model, primaryKey, enabled.
+	* $enabled has to be sent as FALSE or 0 for record to be deleted
+	*/
+	public function post() {
+
+		try {
+			$data = [];
+
+			$enabled = $this->request->getPost('enabled');
+			if ($enabled === null || $enabled === '') {
+				$enabled = true;
+			}
+			$enabled = (bool)$enabled;
+
+			$id = $this->request->getPost('partner_id', FILTER_VALIDATE_INT);
+			$fields = $this->request->getPost('field');
+
+			$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
+			if (!is_object($Model))
+				throw new \Exception("Invalid model, unable to save.");
+			
+
+			$primaryKey = $Model->getPrimaryKey();
+			$restoreIdentityKey = $Model->getRestoreIdentityKey();
+			if (empty($restoreIdentityKey) && isset($fields[$Model->table])) {
+				$restoreIdentityKey = $Model->table; // by design usually the identifier is same as table name
+			}
+
+			if (!empty((int)$id)) {
+				$fields[$primaryKey] = $id;
+			}
+
+			if (!$enabled) {
+				if (!empty((int)$id))
+					$Model->delete($id);
+
+				return $this->View->renderJsonSuccess();	
+			}
+
+			if (empty($id) && !empty($restoreIdentityKey) && !empty($fields[$restoreIdentityKey])) {
+				// restore previously deleted record if found using restoreIdentityKey
+				$Entity = $Model->onlyDeleted()->where("LOWER({$restoreIdentityKey})", strtolower($fields[$restoreIdentityKey]))->first();
+
+				if (is_object($Entity) && $Entity->populate()) {
+					$fields['date_deleted'] = null;
+					$fields[$primaryKey] = $Entity->$primaryKey;
+				}
+			}
+
+			$Model->save($fields);
+		}
+        catch (\Exception $e) {
+            return $this->View->renderJsonFail($e->getMessage());
+        }
+
+        return $this->View->renderJsonSuccess();			
+	}
 
 }

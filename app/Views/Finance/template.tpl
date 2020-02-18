@@ -36,7 +36,7 @@
     <meta name="msapplication-TileImage" content="/assets/Finance/favicon.ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">    
 </head>
-<body ng-app="FinanceApplication" ng-controller="[[$View->moduleID]]Ctrl" ng-cloak>
+<body ng-app="FinanceApplication" ng-controller="[[$View->ngController]]Ctrl" ng-cloak>
     <div id="main-nav" class="navbar navbar-expand-md navbar-bottom-bordered mb-4" role="navigation">
         <a class="navbar-brand" href="[[$View->productUrl]]">
             <div class="logo wrapper">
@@ -192,6 +192,7 @@
     <script src="/libs/tools/Finance/js/angular.controller.js"></script>
     <script src="/libs/tools/Finance/js/select2.helper.js"></script>
     <script src="/js/Common/angular.directives.js"></script>
+    <script src="/js/Common/angular.controller.generic.js"></script>
     <script src="/libs/tools/Common/js/datatable.tools.js"></script>
     <script src="/libs/tools/Common/js/Utils.js"></script>
     <script src="/js/Finance/nav.js"></script>

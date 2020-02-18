@@ -29,13 +29,22 @@ class Environment
         }
     }
 
-    public function getProductModulePath()
+    public function getProductModulePath($is_product_upper=true, $is_module_upper=false)
     {
-        $path = ucwords($this->product) . '/' . $this->module;
+        $product = $this->product;
+        $module = $this->module;
 
         // hack to handle cashposition
         if (strtolower($this->product) == 'cash')
-            $path = 'Finance/' . $this->module;
+            $product = 'finance';
+
+        if ($is_product_upper)
+            $product = ucwords($product);
+        
+        if ($is_module_upper) 
+            $module = ucwords($module);
+
+        $path = $product . '/' . $module;
 
         return $path;
     }

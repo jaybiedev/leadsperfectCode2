@@ -244,6 +244,11 @@ var CommonPlugins = {
             var element = $(this);
             var form = element.closest("form.form-post-ajax-generic:visible").first();
             var data = form.serializeArray();
+            
+            $('input:checkbox', form).each(function() {
+                data.push({name:this.name, value:this.checked?1:0})
+            })
+
             var url = window.location.href;
             var callback = "";
             var modalDialog=element.attr('data-parent-modal');

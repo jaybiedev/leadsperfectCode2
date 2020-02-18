@@ -18,6 +18,7 @@ class View
     public $modalID;
     public $baseUrl;
     public $moduleID;
+    public $ngController='generic';
     public $productUrl;
     public $hasData=false;
 
@@ -67,6 +68,13 @@ class View
 
     public function getPageTitle() 
     {
+        if ($this->pageTitle == null)  {
+            if ($this->pageHeader != null)
+                $this->pageTitle = $this->pageHeader;
+            else
+                $this->pageTitle = $this->getEnvironment()->product;
+        }
+
         return $this->pageTitle;
     }
 
@@ -97,6 +105,11 @@ class View
         return $this;        
     }
 
+    public function setNgController($ngController) {
+        $this->ngController = $ngController;
+        return $this;        
+    }
+
     public function setModalTitle($modalTitle) 
     {
         $this->modalTitle = $modalTitle;
@@ -110,6 +123,20 @@ class View
     {
         return $this->modalTitle;
     }
+
+    public function getModuleID() 
+    {
+        if (empty($this->moduleID)) {
+            $this->moduleID = $this->getEnvironment()->module;
+        }
+
+        return $this->moduleID;
+    }
+    
+    public function getNgController() 
+    {
+        return $this->ngController;
+    }    
 
     public function render($view, $data=array(), $return_as_string=false) 
     {
@@ -127,16 +154,9 @@ class View
         }
         //$data['Helper'] = $this->Helper;
 
-        if ($this->pageTitle == null)  {
-            if ($this->pageHeader != null)
-                $this->pageTitle = $this->pageHeader;
-            else
-                $this->pageTitle = $this->getEnvironment()->product;
-        }
-
-        if (empty($this->moduleID)) {
-            $this->moduleID = $this->getEnvironment()->module;
-        }
+        $this->pageTitle = $this->getPageTitle();
+        $this->moduleID = $this->getModuleID();
+        $this->ngController = $this->getNgController();
 
         $data['View'] = $this;
         $data['page_id'] = basename($view, ".tpl");

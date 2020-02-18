@@ -1,3 +1,35 @@
+/**
+     * Inline slider switch
+     * @usage: <switch-enabled   data-element="vm.data.text"></switch-enabled>
+     */
+app.directive('switchEnabledxxxx', function ($compile) {
+
+        function link(scope, element, attrs) {
+
+            scope.checkedAttribute = '';
+            scope.name = attrs.name;
+            scope.dataNgModel = attrs.element;
+            debugger;
+
+            scope.sw = function(sc, el) {
+                this.checkedAttribute = "checked='checked'"
+            }
+            
+        }
+
+        return {
+            restrict: 'E', // element
+            scope   : {
+                dataElement: '='
+            },
+            templateUrl: "/libs/tools/Finance/js/directives/templates/switchEnabled.html",
+            link    : link,
+            replace : true
+        };
+
+});
+
+
 
 app.directive('switchEnabled', function ($compile) {
     return {
@@ -5,7 +37,7 @@ app.directive('switchEnabled', function ($compile) {
         require: "ngModel",
         scope: {
             dataNgModel: '='
-          },        
+          },   
         link: function (scope, element, attrs, ngModel) {
 
             var html = '<label>Enabled</label><div>\

@@ -18,6 +18,7 @@ abstract class BaseModel extends Model
 
     protected $DBGroup = 'default';
     protected $primaryKey = 'branch_id';
+    protected $restoreIdentityKey = '';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = true;
@@ -36,6 +37,30 @@ abstract class BaseModel extends Model
             die("No allowed fields defined for " . __CLASS__);
 
         parent::__construct();
+    }
+
+    /**
+     * @param string $name - should be based on Models/ directory
+     */
+    public static function factory($name) {
+
+        $Model = null;
+        $classFileName = APPPATH . "Models/{$name}Model.php";
+       
+        if (file_exists($classFileName)) {
+            $class = "App\\Models\\" . str_replace("/", "\\", $name) . 'Model';
+            $Model = new $class();
+        }
+
+        return $Model;
+    }
+
+    public function getPrimaryKey() {
+        return $this->primaryKey;
+    }
+
+    public function getRestoreIdentityKey() {
+        return $this->restoreIdentityKey;
     }
 
     public function findAllArray($limit=null, $offset=null)

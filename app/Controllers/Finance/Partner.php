@@ -12,16 +12,16 @@ class Partner extends FinanceBaseController
         return $this->View->render('Finance/Partner/index.tpl');
     }
     
-    public function get()
+    public function getxxx()
     {
-        $meta = $this->request->getGet();
+        $partner_id = $this->request->getGet('id', FILTER_VALIDATE_INT);
 
-        $PartnerModel = new PartnerModel();   
+        $PartnerModel = new PartnerModel();
         $data = [];
 
-        if (!empty($meta['partner_id']))
+        if (!empty($partner_id))
         {
-            $data = $PartnerModel->find((int)$meta['partner_id'])->populate();
+            $data = $PartnerModel->find($partner_id)->populate();
         }
 
        return  $this->View->renderJsonSuccess(null, $data);
@@ -53,7 +53,7 @@ class Partner extends FinanceBaseController
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
 
-    public function post()
+    public function postXXX()
     {
         $PartnerModel = new PartnerModel();
 
@@ -62,6 +62,7 @@ class Partner extends FinanceBaseController
 
         try {
             $fields = $this->request->getPost('field');
+            //parent::saveRecordGeneric($PartnerModel, $partner_id, $fields, $enabled);
             
             if (!empty((int)$partner_id)) {
                 $fields['partner_id'] = $partner_id;
