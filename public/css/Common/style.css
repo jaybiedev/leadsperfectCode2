@@ -217,9 +217,23 @@ cursor: pointer;
     text-align:right;
 }
 
-/***/
+/*** utils **/
 .hidden {
     display:none;
     width:0;
     opacity: 0;
+}
+
+.pill {
+    padding: 0.01rem 0.25rem;
+    border-radius: 0.35em;
+    font-size: 0.75em;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+.pill.deleted {
+    border: 1px solid #9c5057;
+    background-color: #b47279;
+    color: #f8d7da;
+;
 }

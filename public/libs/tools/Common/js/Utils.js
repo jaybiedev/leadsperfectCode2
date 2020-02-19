@@ -48,6 +48,13 @@ var CommonUtils = {
             return $(domElement).attr(attribute);
 
         retun;
+    },
+
+    renderDataInSpan : function(data, is_deleted_pill) {
+        var html = '<span>' + data + '</span>';
+        if (is_deleted_pill != 'undefined' && is_deleted_pill)
+            html += '<span class="pill deleted">deleted</span>';
+        return html;
     }
 }
 

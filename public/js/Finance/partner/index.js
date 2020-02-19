@@ -5,7 +5,11 @@ $(document).ready(function() {
             "ajax": {url: "/Finance/partner/getDataTable", data:{includeDeleted: false}},  
             "columns": [
                 { "data": "partner_id", "visible": false },
-                { "data": "partner" }
+                { "data": "partner" , 
+                  "render": function(data, type, row, meta) {
+                                return CommonUtils.renderDataInSpan(data, row.date_deleted)
+                            }
+                }
             ],
             onRowEdit : function(data) {
                 var scope = angular.element("body[ng-controller='genericCtrl']").scope();
