@@ -183,6 +183,7 @@
     <script src="/libs/jquery/js/jquery-ui.min.js"></script>
     <script src="/libs/popper/js/popper.min.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/libs/bootbox/bootbox.all.min.js"></script>
     <script src="/libs/datatable/datatables.min.js"></script>
     <script src="/libs/select2/js/select2.min.js"></script>
     <script src="/libs/angular/angular.min.js"></script>

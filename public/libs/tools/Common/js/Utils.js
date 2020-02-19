@@ -83,6 +83,94 @@ var CommonMessage = {
     }
 }
 
+var CommonDialog = {
+
+    alert : function(title, message) {
+        return CommonDialog.fullAlert({'title': title, message: message});
+    },
+
+    fullAlert : function (options) {
+        var title = 'Alert';
+        var message = '';
+        var titleClass = '';
+
+        if (typeof options == 'undefined')
+            var options = {};
+
+        if (typeof options['title'] != 'undefined')
+            title = options['title'];
+        if (typeof options['message'] != 'undefined')
+            message = options['message'];
+        if (typeof options['titleClass'] != 'undefined')
+        	titleClass = options['titleClass'];
+        
+        options['btnClass'] = 'btn-primary';
+        return bootbox.alert({
+            title: title,
+            message: content,
+            titleClass: titleClass,
+        });
+    },
+
+    /**
+     * {
+            title: 'Confirm!',
+            content: 'Simple confirm!',
+            buttons: {
+                confirm: function () {
+                       //
+                },
+                cancel: function () {
+                    //
+                }
+            }
+        }
+     * @param options
+     */
+    confirm : function(options) {
+
+        var message = 'Please confirm';
+        var title = 'Confirm';
+        var callback = function(result) {console.log('Unhandled confirmation.' + result) };
+        var buttons = {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm'
+                }
+            };
+
+        if (typeof options['buttons'] == 'object') {
+            buttons = options['buttons'];
+        }
+
+        if (typeof options['message'] != 'undefined') {
+            message = options['message'];
+        }
+
+        if (typeof options['title'] != 'undefined') {
+            title = options['title'];
+        }
+
+        if (typeof options['callback'] == 'function') {
+            callback = options['callback'];
+        }
+
+        bootbox.confirm({
+            title: title,
+            message: message,
+            buttons: buttons,
+            callback: function (result) {
+                if (result) {
+                    callback(result);
+                }
+            }
+        });
+    }
+
+}
+
 var CommonPlugins = {
 
     init : function() {

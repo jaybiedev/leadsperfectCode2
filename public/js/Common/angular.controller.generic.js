@@ -89,38 +89,45 @@ app.controller('genericCtrl', function($scope, $http, $location) {
             ids.push(a[primaryKey]);
         });
 
-        $http({
-            method: "get",
-            url   : $scope.Data.url + "/delete/?ids=" + ids
-        }).then(
-            function (response) {
-                if (typeof response.data.data == 'object') {
-                    var message = '';
-                    if (response.data.message != null) {
-                        message = response.data.message;
-                    }
-                    if (response.data.success) {
-                        CommonMessage.toast(true, "Records successfully deleted! " + message);
+        // prompt user
+        CommonDialog.confirm({
+            title: 'Delete',
+            message: ' Are you sure you want to delete these records?',
+            callback : function(result) {
+                $http({
+                    method: "get",
+                    url   : $scope.Data.url + "/delete/?ids=" + ids
+                }).then(
+                    function (response) {
+                        if (typeof response.data.data == 'object') {
+                            var message = '';
+                            if (response.data.message != null) {
+                                message = response.data.message;
+                            }
 
-                        if (datatable) {
-                            datatable.refresh();
+                            if (response.data.success) {
+                                CommonMessage.toast(true, "Records successfully deleted! " + message);
+
+                                if (datatable) {
+                                    datatable.refresh();
+                                }
+                            }
+                            else {
+                                CommonMessage.toast(false, "Error: Unable to delete records." + message);
+                            }
                         }
+                        else {
+                            // error
+                            CommonMessage.toast(false, "Error: Unable to delete records. No response from server.");
+                        }
+                            
                     }
-                    else {
-                        CommonMessage.toast(false, "Error: Unable to delete records." + message);
-                    }
-                }
-                else {
-                    // error
-                    CommonMessage.toast(false, "Error: Unable to delete records. No response from server.");
-                }
-                    
+                ); 
             }
-        );        
+        });       
     };
 
     $scope.restoreRecords = function() {
-        // prompt user
         
         // get selected rows from dataTable
         var btnElement = $(event.currentTarget);
@@ -147,32 +154,42 @@ app.controller('genericCtrl', function($scope, $http, $location) {
             ids.push(a[primaryKey]);
         });
 
-        $http({
-            method: "get",
-            url   : $scope.Data.url + "/restore/?ids=" + ids
-        }).then(
-            function (response) {
-                if (typeof response.data.data == 'object') {
-                    var message = '';
-                    if (response.data.message != null) {
-                        message = response.data.message;
-                    }
-                    if (response.data.success) {
-                        CommonMessage.toast(true, "Records successfully restored! " + message);
-                        if (datatable) {
-                            datatable.refresh();
+        // prompt user
+        CommonDialog.confirm({
+            title: 'Restore',
+            message: ' Are you sure you want to restore these records?',
+            callback : function(result) {
+                $http({
+                    method: "get",
+                    url   : $scope.Data.url + "/restore/?ids=" + ids
+                }).then(
+                    function (response) {
+                        if (typeof response.data.data == 'object') {
+                            var message = '';
+                            if (response.data.message != null) {
+                                message = response.data.message;
+                            }
+                            
+                            if (response.data.success) {
+                                CommonMessage.toast(true, "Records successfully restored! " + message);
+                                if (datatable) {
+                                    datatable.refresh();
+                                }
+                            }
+                            else {
+                                CommonMessage.toast(false, "Error: Unable to restore records." + message);
+                            }
                         }
+                        else {
+                            // error
+                            CommonMessage.toast(false, "Error: Unable to restore records. No response from server.");
+                        }
+                            
                     }
-                    else {
-                        CommonMessage.toast(false, "Error: Unable to restore records." + message);
-                    }
-                }
-                else {
-                    // error
-                    CommonMessage.toast(false, "Error: Unable to restore records. No response from server.");
-                }
-                    
-            }
-        );        
-    }    
+                );                        
+                    //
+            } // end of callback
+        }); // end of dialog  
+            
+    }; // end of restore   
 });
