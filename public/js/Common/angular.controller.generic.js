@@ -2,10 +2,12 @@
 * Controller for generic CRUD pages with browser, Create, Update, Delete
 */
 app.controller('genericCtrl', function($scope, $http, $location) {
-debugger;
+
     $scope.Data = {
             url : $location.$$absUrl,
+            primaryKey: '',
             record_id: 0,
+            data: {},
             fields : {
                 enabled: true
             },
@@ -24,10 +26,19 @@ debugger;
     $scope.loadRecord = function(record_id=null) {
 
        $scope.Data.record_id = record_id;
+       var includeDeleted = false;
+
+       if (typeof $scope.Data.data == 'object' && $scope.Data.data.date_deleted) {
+            includeDeleted = ($scope.Data.data.date_deleted != null);
+       }
+       // also check the record
+       if (!includeDeleted && $('input[type="checkbox"].includeDeleted')) {
+            includeDeleted = $('input[type="checkbox"].includeDeleted').prop('checked');    
+       }
 
         $http({
             method: "get",
-            url   : $scope.Data.url + "/get/?id=" + record_id
+            url   : $scope.Data.url + "/get/?id=" + record_id + '&includeDeleted=' + includeDeleted
         }).then(
             function (response) {
                 if (typeof response.data.data == 'object')
@@ -45,4 +56,123 @@ debugger;
         );
     
     };
+
+    $scope.saveRecord  = function() {
+        // this is currently handled by jquery (Utils.js) generic ajax form post 
+    };
+
+    $scope.deleteRecords = function() {
+        // prompt user
+        
+        // get selected rows from dataTable
+        var btnElement = $(event.currentTarget);
+        var datatableSelector = btnElement.attr('data-datatable-refresh');
+        if (!datatableSelector) {
+            var dt = btnElement.parentsUntil('table.data-table').find('table.data-table')
+            if (dt.length > 0) {
+                datatableSelector = "#" + dt.attr('id');
+            }
+        }
+        var datatable = window.DataTables.loaded[datatableSelector];
+
+        if (!datatable) {
+            return CommonMessage.toast(false, "No items selected.");
+        }
+
+        var primaryKey = datatable.settings.primaryKey;
+        if (!primaryKey)
+            primaryKey = datatable.settings.columns[0].data;
+
+        var ids = [];
+        var rows = datatable.datatable.rows( { selected: true }).data();
+        rows.each(function(a, b) {
+            ids.push(a[primaryKey]);
+        });
+
+        $http({
+            method: "get",
+            url   : $scope.Data.url + "/delete/?ids=" + ids
+        }).then(
+            function (response) {
+                if (typeof response.data.data == 'object') {
+                    var message = '';
+                    if (response.data.message != null) {
+                        message = response.data.message;
+                    }
+                    if (response.data.success) {
+                        CommonMessage.toast(true, "Records successfully deleted! " + message);
+
+                        if (datatable) {
+                            datatable.refresh();
+                        }
+                    }
+                    else {
+                        CommonMessage.toast(false, "Error: Unable to delete records." + message);
+                    }
+                }
+                else {
+                    // error
+                    CommonMessage.toast(false, "Error: Unable to delete records. No response from server.");
+                }
+                    
+            }
+        );        
+    };
+
+    $scope.restoreRecords = function() {
+        // prompt user
+        
+        // get selected rows from dataTable
+        var btnElement = $(event.currentTarget);
+        var datatableSelector = btnElement.attr('data-datatable-refresh');
+        if (!datatableSelector) {
+            var dt = btnElement.parentsUntil('table.data-table').find('table.data-table')
+            if (dt.length > 0) {
+                datatableSelector = "#" + dt.attr('id');
+            }
+        }
+        var datatable = window.DataTables.loaded[datatableSelector];
+
+        if (!datatable) {
+            return CommonMessage.toast(false, "No items selected.");
+        }
+
+        var primaryKey = datatable.settings.primaryKey;
+        if (!primaryKey)
+            primaryKey = datatable.settings.columns[0].data;
+
+        var ids = [];
+        var rows = datatable.datatable.rows( { selected: true }).data();
+        rows.each(function(a, b) {
+            ids.push(a[primaryKey]);
+        });
+
+        $http({
+            method: "get",
+            url   : $scope.Data.url + "/restore/?ids=" + ids
+        }).then(
+            function (response) {
+                if (typeof response.data.data == 'object') {
+                    var message = '';
+                    if (response.data.message != null) {
+                        message = response.data.message;
+                    }
+                    if (response.data.success) {
+                        CommonMessage.toast(true, "Records successfully restored! " + message);
+                        if (datatable) {
+                            datatable.refresh();
+                        }
+                    }
+                    else {
+                        CommonMessage.toast(false, "Error: Unable to restore records." + message);
+                    }
+                }
+                else {
+                    // error
+                    CommonMessage.toast(false, "Error: Unable to restore records. No response from server.");
+                }
+                    
+            }
+        );        
+    }    
 });

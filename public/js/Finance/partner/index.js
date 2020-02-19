@@ -10,6 +10,7 @@ $(document).ready(function() {
             onRowEdit : function(data) {
                 var scope = angular.element("body[ng-controller='genericCtrl']").scope();
                 scope.Data.url = '/finance/partner';
+                scope.Data.data = data;
                 scope.Data.record_id = data.partner_id;
                 scope.Data.fields = {
                         partner_id: "",

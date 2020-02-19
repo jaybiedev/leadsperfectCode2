@@ -20,6 +20,7 @@ function DataTableTools(selector) {
             style: 'os',
             selector: 'td:first-child'
         },
+        primaryKey: '',
         buttons: [
             /*
                 {   text: 'Add',

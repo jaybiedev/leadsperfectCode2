@@ -11,15 +11,15 @@
 
     <div class="datatable-action-control-wrapper">
         <div class="checkbox">
-            <label><input type="checkbox" value="" id="manage-partner-datatable-includeDeleted"> Show deleted records</label>
+            <label><input type="checkbox" value="" id="manage-partner-datatable-includeDeleted" class="includeDeleted"> Show deleted records</label>
         </div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#[[$View->modalID]]" ng-click="loadRecord()">
             <i class="fa fa-plus"></i> Add New
         </button>
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary" ng-click="restoreRecords()" data-datatable-refresh="#manage-partner-datatable">
             <i class="fa fa-trash-restore-alt"></i> Restore Selected
         </button>
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary" ng-click="deleteRecords()" data-datatable-refresh="#manage-partner-datatable">
             <i class="fa fa-trash-alt"></i> Delete Selected
         </button>
     </div>

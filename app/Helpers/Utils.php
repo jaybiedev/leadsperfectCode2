@@ -50,6 +50,20 @@ class Utils
         return $s;
     }
 
+    public static function getBoolean($val) 
+    {
+        if ($val === false)
+            return $val;
+        if ($val === true)
+            return true;
+        
+        $upper = strtoupper($val);
+        if (empty($val) || $val == '0' || $upper == 'FALSE' || $upper == 'F')
+            return false;
+        
+        return true;
+    }
+
     public static function getDate($date='', $format='') {
 
         $mdate = "";

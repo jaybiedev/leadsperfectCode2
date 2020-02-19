@@ -63,6 +63,10 @@ abstract class BaseModel extends Model
         return $this->restoreIdentityKey;
     }
 
+    public function getTable() {
+        return $this->table;
+    }
+    
     public function findAllArray($limit=null, $offset=null)
     {
         if ($this->returnType == 'array')

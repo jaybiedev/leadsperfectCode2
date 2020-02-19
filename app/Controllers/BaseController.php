@@ -17,6 +17,7 @@ namespace App\Controllers;
 use App\Libraries\Common\Environment;
 use App\Models\BaseModel;
 use CodeIgniter\Controller;
+use App\Helpers\Utils;
 
 class BaseController extends Controller
 {
@@ -106,20 +107,114 @@ class BaseController extends Controller
 	public function get() {
 		
 		$id = $this->request->getGet('id', FILTER_VALIDATE_INT);
+		$includeDeleted = Utils::getBoolean($this->request->getGet('includeDeleted'));
+
 		$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
 		if (!is_object($Model))
 			throw new \Exception("Invalid model, unable to save.");
 		
 		$data = [];
 
-		if (!empty($id))
-		{
+		if (!empty($id)) {
+			if ($includeDeleted) {
+				$Model->withDeleted();
+			}
 			$data = $Model->find($id)->populate();
 		}
 
 		return  $this->View->renderJsonSuccess(null, $data);
 	
 	}
+
+    public function getDataTable()
+    {
+		$meta = $this->request->getGet();
+		
+		$includeDeleted = false;
+		
+		if (isset($meta['includeDeleted'])) {
+			$includeDeleted = Utils::getBoolean($meta['includeDeleted']);
+		}
+		
+		$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
+		if (!is_object($Model))
+			throw new \Exception("Invalid model.");
+
+        $DataTable = new \App\Libraries\Common\DataTable($meta, $Model, $Model->getTable());
+    
+        $data = [];
+
+        if (!empty($DataTable->searchValue))
+        {
+            $Model->like($DataTable->getSearchableLike())
+								   ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection);
+			
+			if ($includeDeleted)
+				$Model->withDeleted();
+
+			$data = $Model->findAllArray($DataTable->limit, $DataTable->offset);
+        }
+        else
+        {
+			$Model->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection);
+			if ($includeDeleted)
+				$Model->withDeleted();
+
+			$data = $Model->findAllArray($DataTable->limit, $DataTable->offset);
+        }
+
+        $recordsTotal = $Model->countAllResults();
+        
+        return $this->View->renderJsonDataTable($data, $recordsTotal);
+    }
+
+	/**
+	 * soft delete set of records based on ids
+	 * @param array $ids
+	 */
+    public function delete()
+    {
+		$ids = explode(',', $this->request->getGetPost('ids'));
+        
+        if (empty($ids) || !is_array($ids))
+			return $this->View->renderJsonFail();
+			
+		$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
+		if (!is_object($Model))
+			throw new \Exception("Invalid model.");
+
+        array_walk($ids, function($id) {
+			$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
+
+			$Model->delete((int)$id);
+        });
+        return $this->View->renderJsonSuccess();
+    }
+
+	/**
+	 * retore set of records based on ids
+	 * @param array $ids
+	 */
+    public function restore()
+    {
+		$ids = explode(',', $this->request->getGetPost('ids'));
+        
+        if (empty($ids) || !is_array($ids))
+			return $this->View->renderJsonFail();
+			
+		$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
+		if (!is_object($Model))
+			throw new \Exception("Invalid model.");
+	
+
+        array_walk($ids, function($id) {
+			$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			
+
+			$fields = [$Model->getPrimaryKey()=>$id, 'date_deleted' => null];
+            $Model->save($fields);
+        });
+        return $this->View->renderJsonSuccess();
+    }	
 
 	/* generic post method with jason response
 	* for updating single record on single table
@@ -129,13 +224,9 @@ class BaseController extends Controller
 	public function post() {
 
 		try {
-			$data = [];
+			// $data = [];
 
-			$enabled = $this->request->getPost('enabled');
-			if ($enabled === null || $enabled === '') {
-				$enabled = true;
-			}
-			$enabled = (bool)$enabled;
+			$enabled = Utils::getBoolean($this->request->getPost('enabled'));
 
 			$id = $this->request->getPost('partner_id', FILTER_VALIDATE_INT);
 			$fields = $this->request->getPost('field');
@@ -160,6 +251,9 @@ class BaseController extends Controller
 					$Model->delete($id);
 
 				return $this->View->renderJsonSuccess();	
+			}
+			else {
+				$fields['date_deleted'] = null;
 			}
 
 			if (empty($id) && !empty($restoreIdentityKey) && !empty($fields[$restoreIdentityKey])) {

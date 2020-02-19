@@ -121,14 +121,18 @@ var CommonPlugins = {
     },
 
     initDatePicker: function() {
-        $('.datepicker').datepicker({
-            dateFormat: "mm/dd/yy",
-            showOn: "both", 
-            buttonText: "<i class='fa fa-calendar-alt'></i>"
-        });
-        $('.datepicker-no-icon').datepicker({
-            dateFormat: "mm/dd/yy"
-        });
+        var dateElements = $('.datepicker, .datepicker-no-icon');
+
+        if (dateElements.length > 0) {
+            $('.datepicker').datepicker({
+                dateFormat: "mm/dd/yy",
+                showOn: "both", 
+                buttonText: "<i class='fa fa-calendar-alt'></i>"
+            });
+            $('.datepicker-no-icon').datepicker({
+                dateFormat: "mm/dd/yy"
+            });
+        }
     },
 
     /**
@@ -244,9 +248,15 @@ var CommonPlugins = {
             var element = $(this);
             var form = element.closest("form.form-post-ajax-generic:visible").first();
             var data = form.serializeArray();
-            
+
+            // add checkboxes to the array. add if not in the array
             $('input:checkbox', form).each(function() {
-                data.push({name:this.name, value:this.checked?1:0})
+                var item = $.grep(data, function( a) { 
+                    return a.name == 'enabled';
+                  });
+                if (!item || item.length == 0) {
+                    data.push({name:this.name, value:this.checked?1:0})
+                }
             })
 
             var url = window.location.href;
