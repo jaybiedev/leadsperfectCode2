@@ -228,7 +228,7 @@ class BaseController extends Controller
 
 			$enabled = Utils::getBoolean($this->request->getPost('enabled'));
 
-			$id = $this->request->getPost('partner_id', FILTER_VALIDATE_INT);
+			$id = $this->request->getPost('id', FILTER_VALIDATE_INT);
 			$fields = $this->request->getPost('field');
 
 			$Model = BaseModel::factory($this->View->getEnvironment()->getProductModulePath(true, true));			

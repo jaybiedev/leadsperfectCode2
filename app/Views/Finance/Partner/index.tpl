@@ -1,10 +1,10 @@
 [[extends file="Finance/template.tpl"]]
 [[block name="ContentBody"]]
-      <table id="manage-partner-datatable" class="data-table table table-striped" style="width:100%">
+      <table id="manage-partner-datatable" class="data-table table table-striped generic-data-table" style="width:100%">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Partner</th>
+                <th data-field="partner_id" data-primaryKey="true" data-hidden="true">Id</th>
+                <th data-field="partner">Partner</th>
             </tr>
         </thead>
     </table>
@@ -33,7 +33,7 @@
         method="POST" url="/finance/partner/post"/>
         <div class="form-group">
             <label for="department">Partner</label>
-            <input type="text" name="partner_id" ng-model="Data.fields.partner_id"  class="hidden"/>
+            <input type="text" name="id" ng-model="Data.fields.partner_id"  class="hidden"/>
             <input type="text" class="form-control" name="field[partner]" id="partner" required="" ng-model="Data.fields.partner">
             <div class="invalid-feedback">Please enter partner</div>
         </div>
@@ -44,7 +44,6 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary btn-form-post-ajax-generic" 
-                id="save-partner"
                 data-parent-modal="[[$View->modalID]]"
                 data-datatable-refresh="#manage-partner-datatable"
                 >Save changes</button>

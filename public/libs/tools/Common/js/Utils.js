@@ -183,6 +183,7 @@ var CommonPlugins = {
     init : function() {
         var self = this;
 
+        self.initGenericDataTable();
         self.initDatePicker();
         self.initDD();
         self.initAjaxDD();
@@ -338,6 +339,15 @@ var CommonPlugins = {
             element.closest("form.form-post-generic:visible").first().submit();
         });
 
+        /**
+         * form should have class="form.form-post-ajax-generic"
+         * form should have attribute of "url=/product/module/post" if using getPost, else Router shoudl have ->post()
+         * form should have input for id and enable, and field[]
+         * save button should have class="btn-form-post-ajax-generic"
+         * save button should have data-parent-modal if on modal and should be closed
+         * save button should have attribute data-datatable-refresh="#manage-partner-datatable"
+         * 
+         */
         // ajax post form with class form-post-post-generic
         $("button.btn-form-post-ajax-generic").on('click', function() {
             var element = $(this);
@@ -354,10 +364,16 @@ var CommonPlugins = {
                 }
             })
 
-            var url = window.location.href;
+            var url = window.location.pathname;
             var callback = "";
             var modalDialog=element.attr('data-parent-modal');
-            var datatable=element.attr('data-datatable-refresh');
+            var datatableSelector=element.attr('data-datatable-refresh');
+            if (!datatableSelector) {
+                var genericDataTable = $("table.data-table.generic-data-table");
+                if (genericDataTable) {
+                    datatableSelector = "#" + genericDataTable.attr('id');
+                }
+            }
 
             if (form.attr('url'))
                 url = form.attr('url');
@@ -386,8 +402,8 @@ var CommonPlugins = {
                                 $("#" + modalDialog).find("button[data-dismiss='modal']").click();
                             }
 
-                            if (datatable && window.DataTables && window.DataTables.loaded[datatable]) {
-                                window.DataTables.loaded[datatable].refresh();
+                            if (datatableSelector && window.DataTables && window.DataTables.loaded[datatableSelector]) {
+                                window.DataTables.loaded[datatableSelector].refresh();
                             }
 
                             if (callback) {
@@ -417,5 +433,66 @@ var CommonPlugins = {
                 window.location.href = "/";
             }
         });
+    },
+
+    /**
+     * table should have class="table.data-table.generic-data-table"
+     * table should have thead and th with attributes: data-field, data-primaryKey, data-hidden
+     */
+    initGenericDataTable : function() {
+
+        $("table.data-table.generic-data-table").each(function(a, b) {
+            var genericDataTable = $(this);
+            var genericDataTableID = genericDataTable.attr('id');
+            // loop
+            if (!genericDataTableID)
+                return true;
+            
+            var columns = [];
+            var primaryKey = '';
+            var fields = {enable: true};
+        
+            // build columns setting
+            genericDataTable.find('thead th').each(function(iterator, el) {
+                var th = $(this);
+                var field = th.attr('data-field');
+                var column = {data: field};
+    
+                if (th.attr('data-primaryKey')) {
+                    primaryKey = th.attr('data-field');
+                }
+
+                if (th.attr('data-hidden')) {
+                    column['visible'] = false;
+                }
+    
+                if (primaryKey == '' && iterator == 0) {
+                    primaryKey = field;
+                }
+
+                if (iterator == 1) {
+                    column['render'] = function(data, type, row, meta) {
+                        return CommonUtils.renderDataInSpan(data, row.date_deleted)
+                    };
+                }
+    
+                columns.push(column);
+                fields[field] = "";
+            });
+            
+            var dataTableTools = new DataTableTools('#' + genericDataTableID);
+            dataTableTools.init({
+                    "ajax": {url: window.location.pathname + "/getDataTable", data:{includeDeleted: false}},  
+                    "columns": columns,
+                    onRowEdit : function(data) {
+                        var scope = angular.element("body[ng-controller='genericCtrl']").scope();
+                        scope.Data.data = data;
+                        scope.Data.record_id = data.partner_id;
+                        scope.Data.fields = fields;
+                        scope.loadRecord(data[primaryKey]);
+                        $('#GenericModal').modal('show');
+                    }
+                });
+        });     
     }
 }

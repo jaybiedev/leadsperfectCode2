@@ -7,7 +7,7 @@ class BranchModel extends BaseModel
     protected $primaryKey = 'branch_id';
     protected $allowedFields = ['branch', 'branch_code', 'branch_address', '
         local', 'init_balance', 'printer_type', 'province', 'partners', 'court', 'location',
-        'long', 'lati', 'swipe'];
+        'long', 'lati', 'swipe', 'date_deleted'];
     protected $returnType = 'App\Entities\Finance\Branch';
 
     protected $validationRules    = [

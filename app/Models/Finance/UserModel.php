@@ -10,7 +10,7 @@ class UserModel extends BaseModel
         protected $returnType = 'App\Entities\Finance\User';
         protected $useSoftDeletes = true;
 
-        protected $allowedFields = ['name', 'username', 'mpassword', 'usergroup', 'sessionid', 'enable'];
+        protected $allowedFields = ['name', 'username', 'mpassword', 'usergroup', 'sessionid', 'enable', 'date_deleted'];
 
         protected $useTimestamps = false;
 

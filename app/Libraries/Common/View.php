@@ -15,7 +15,7 @@ class View
     public $modalTitle;
     public $Session;
 
-    public $modalID;
+    public $modalID = 'GenericModal';
     public $baseUrl;
     public $moduleID;
     public $ngController='generic';
@@ -105,6 +105,10 @@ class View
         return $this;        
     }
 
+    public function getModalID() {
+        return $this->modalID;
+    }
+
     public function setNgController($ngController) {
         $this->ngController = $ngController;
         return $this;        
@@ -113,8 +117,6 @@ class View
     public function setModalTitle($modalTitle) 
     {
         $this->modalTitle = $modalTitle;
-        if (empty($this->modalID))
-            $this->modalID = str_replace(" ", "", $this->modalTitle);
         
         return $this;
     }

@@ -44,9 +44,18 @@ abstract class BaseModel extends Model
      */
     public static function factory($name) {
 
+        // remap
+        switch ($name) {
+            case 'Finance/Accountgroup':
+                $name = 'Finance/AccountGroup';
+            break;
+            case 'Finance/Accountclass':
+                $name = 'Finance/AccountClass';
+            break;
+        }
         $Model = null;
         $classFileName = APPPATH . "Models/{$name}Model.php";
-       
+
         if (file_exists($classFileName)) {
             $class = "App\\Models\\" . str_replace("/", "\\", $name) . 'Model';
             $Model = new $class();

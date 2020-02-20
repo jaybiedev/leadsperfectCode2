@@ -4,7 +4,7 @@
 app.controller('genericCtrl', function($scope, $http, $location) {
 
     $scope.Data = {
-            url : $location.$$absUrl,
+            url : window.location.pathname,
             primaryKey: '',
             record_id: 0,
             data: {},

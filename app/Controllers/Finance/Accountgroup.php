@@ -14,14 +14,18 @@ class AccountGroup extends FinanceBaseController
     
     public function get()
     {
-        $meta = $this->request->getGet();
+        $id = $this->request->getGet('id', FILTER_VALIDATE_INT);
+		$includeDeleted = Utils::getBoolean($this->request->getGet('includeDeleted'));
 
         $AccountGroupModel = new AccountGroupModel();   
         $data = [];
 
-        if (!empty($meta['account_group_id']))
+        if (!empty($id))
         {
-            $data = $AccountGroupModel->find((int)$meta['account_group_id'])->populate();
+            if ($includeDeleted) {
+				$AccountGroupModel->withDeleted();
+			}
+            $data = $AccountGroupModel->find((int)$id)->populate();
         }
 
        return  $this->View->renderJsonSuccess(null, $data);
@@ -39,14 +43,14 @@ class AccountGroup extends FinanceBaseController
         if (!empty($DataTable->searchValue))
         {
             $data = $AccountGroupModel->like($DataTable->getSearchableLike())
-                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id")
+                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id", "left")
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
             $data = $AccountGroupModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
-                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id")
+                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id",  "left")
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 
@@ -54,56 +58,4 @@ class AccountGroup extends FinanceBaseController
         
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
-
-    public function post()
-    {
-        $AccountClass_id = $this->request->getPost('accountclass_id');
-        $AccountGroupModel = new AccountGroupModel();
-        
-        $AccountGroup = $AccountGroupModel->first($accountclass_id);
-        if (!empty($id) && empty($AccountGroup->accountclass_id))
-        {
-            return $this->View->renderJsonFail();
-        }
-
-        $AccountGroup = new \App\Entities\Finance\AccountGroup();
-
-        $meta = $this->request->getPost();
-        $AccountGroup->fill($meta);
-        $AccountGroupModel->save($AccountGroup);
-
-        return $this->View->renderJsonSuccess();
-    }
-
-    public function delete()
-    {
-        $ids = $this->request->getPost('ids');
-        
-        if (empty($ids) || !is_array($ids))
-            return $this->View->renderJsonFail();
-
-        array_walk($ids, function($id) {
-            $AccountGroupModel = new AccountGroupModel();
-            $AccountGroup = $AccountGroupModel->delete($id);
-        });
-        return $this->View->renderJsonSuccess();
-    }
-
-    public function restore()
-    {
-        $ids = $this->request->getPost('ids');
-        
-        if (empty($ids) || !is_array($ids))
-            return $this->View->renderJsonFail();
-
-        array_walk($ids, function($id) {
-            $AccountGroup = new \App\Entities\Finance\AccountGroup();
-            $AccountGroup->date_deleted = null;
-            $AccountGroupModel = new AccountGroupModel();
-            $AccountGroup = $AccountGroupModel->save($AccountGroup);
-        });
-        return $this->View->renderJsonSuccess();
-    }
-	//--------------------------------------------------------------------
-
 }
