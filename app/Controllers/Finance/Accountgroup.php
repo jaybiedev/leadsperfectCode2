@@ -34,6 +34,11 @@ class AccountGroup extends FinanceBaseController
     public function getDataTable()
     {
         $meta = $this->request->getGet();
+		$includeDeleted = false;
+		
+		if (isset($meta['includeDeleted'])) {
+			$includeDeleted = Utils::getBoolean($meta['includeDeleted']);
+		}        
 
         $AccountGroupModel = new AccountGroupModel();   
         $DataTable = new \App\Libraries\Common\DataTable($meta, $AccountGroupModel, 'account_group');
@@ -42,15 +47,21 @@ class AccountGroup extends FinanceBaseController
 
         if (!empty($DataTable->searchValue))
         {
-            $data = $AccountGroupModel->like($DataTable->getSearchableLike())
-                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id", "left")
+            $AccountGroupModel->like($DataTable->getSearchableLike());
+            if ($includeDeleted)
+                $AccountGroupModel->withDeleted();
+
+            $data = $AccountGroupModel->join("account_class", "account_class.account_class_id=account_group.account_class_id", "left")
                                 ->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
         else
         {
-            $data = $AccountGroupModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
-                                ->join("account_class", "account_class.account_class_id=account_group.account_class_id",  "left")
+            $data = $AccountGroupModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection);
+            if ($includeDeleted)
+                $AccountGroupModel->withDeleted();
+
+            $data = $AccountGroupModel->join("account_class", "account_class.account_class_id=account_group.account_class_id",  "left")
                                 ->findAllArray($DataTable->limit, $DataTable->offset);
         }
 

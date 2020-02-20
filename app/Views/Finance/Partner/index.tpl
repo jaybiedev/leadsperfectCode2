@@ -29,10 +29,9 @@
 <!-- CRUD Modal -->
 [[block name="ModalBody"]]
     <!-- form entry -->
-    <form class="form form-post-ajax-generic" role="form" autocomplete="off"  novalidate="" 
-        method="POST" url="/finance/partner/post"/>
+    <form class="form form-post-ajax-generic" role="form" autocomplete="off"  novalidate="" url="/finance/partner/post"/>
         <div class="form-group">
-            <label for="department">Partner</label>
+            <label for="partner">Partner</label>
             <input type="text" name="id" ng-model="Data.fields.partner_id"  class="hidden"/>
             <input type="text" class="form-control" name="field[partner]" id="partner" required="" ng-model="Data.fields.partner">
             <div class="invalid-feedback">Please enter partner</div>

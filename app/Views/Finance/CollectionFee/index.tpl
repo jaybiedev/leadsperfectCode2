@@ -1,27 +1,27 @@
 [[extends file="Finance/template.tpl"]]
 [[block name="ContentBody"]]
-      <table id="manage-collectionfee-datatable" class="data-table table table-striped" style="width:100%">
+      <table id="manage-collectionfee-datatable" class="data-table table table-striped generic-data-table" style="width:100%">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Fee</th>
+                <th data-field="feetable_id" data-primaryKey="true" data-hidden="true">Id</th>
+                <th data-field="afrom">From</th>
+                <th data-field="ato">To</th>
+                <th data-field="fee">Fee</th>
             </tr>
         </thead>
     </table>
 
     <div class="datatable-action-control-wrapper">
         <div class="checkbox">
-            <label><input type="checkbox" value="" id="manage-collectionfee-datatable-includeDeleted"> Show deleted records</label>
+            <label><input type="checkbox" value="" id="manage-collectionfee-datatable-includeDeleted" class="includeDeleted"> Show deleted records</label>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#[[$View->modalID]]" ng-click="load()">
-            <i class="fa fa-home"></i> Add New
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#[[$View->modalID]]" ng-click="loadRecord()">
+            <i class="fa fa-plus"></i> Add New
         </button>
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary" ng-click="restoreRecords()" data-datatable-refresh="#manage-collectionfee-datatable">
             <i class="fa fa-trash-restore-alt"></i> Restore Selected
         </button>
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary"  ng-click="deleteRecords()" data-datatable-refresh="#manage-collectionfee-datatable">
             <i class="fa fa-trash-alt"></i> Delete Selected
         </button>
     </div>
@@ -31,29 +31,33 @@
 <!-- CRUD Modal -->
 [[block name="ModalBody"]]
     <!-- form entry -->
-    <form class="form" role="form" autocomplete="off"  novalidate="" method="POST" action="" />
+    <form class="form form-post-ajax-generic" role="form" autocomplete="off"  novalidate="" url="/finance/collectionfee/post"/>
         <div class="form-group">
-            <label for="department">From</label>
-            <input type="number" class="form-control" name="afrom" id="afrom" required="" ng-model="Data.collectionfee.afrom">
+            <input type="text" name="id" ng-model="Data.fields.feetable_id"  class="hidden"/>
+            <label for="afrom">From</label>
+            <input type="number" class="form-control" name="field[afrom]" id="afrom" required="" ng-model="numberify(Data.fields.afrom)" ng-model-options="{ getterSetter: true }">
             <div class="invalid-feedback">Please enter "from" amount</div>
         </div>
         <div class="form-group">
             <label for="department">To</label>
-            <input type="number" class="form-control" name="ato" id="ato" required="" ng-model="Data.collectionfee.ato">
+            <input type="number" class="form-control" name="field[ato]" id="ato" required="" ng-model="numberify(Data.fields.ato)" ng-model-options="{ getterSetter: true }">
             <div class="invalid-feedback">Please enter "to" amount</div>
         </div>
         <div class="form-group">
             <label for="department">Fee</label>
-            <input type="number" class="form-control" name="fee" id="afrom" required="" ng-model="Data.collectionfee.fee">
+            <input type="number" class="form-control" name="fee" id="field[afrom]" required="" ng-model="numberify(Data.fields.fee)" ng-model-options="{ getterSetter: true }">
             <div class="invalid-feedback">Please enter fee amount</div>
         </div>
         <div class="form-group">
-            <switch-enabled ng-model="Data.collectionfee.enabled" />
+            <switch-enabled data-ng-model="Data.fields.enabled" name="enabled"/>
         </div>
 
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="save-collectionfee" ng-click="savefeetable()">Save changes</button>
+            <button type="button" class="btn btn-primary btn-form-post-ajax-generic" 
+                data-parent-modal="[[$View->modalID]]"
+                data-datatable-refresh="#manage-collectionfee-datatable"
+                >Save changes</button>
         </div>
     </form>
 [[/block]]

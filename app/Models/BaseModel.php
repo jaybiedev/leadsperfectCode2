@@ -44,7 +44,7 @@ abstract class BaseModel extends Model
      */
     public static function factory($name) {
 
-        // remap
+        // remap -- hacking for finance
         switch ($name) {
             case 'Finance/Accountgroup':
                 $name = 'Finance/AccountGroup';
@@ -52,6 +52,12 @@ abstract class BaseModel extends Model
             case 'Finance/Accountclass':
                 $name = 'Finance/AccountClass';
             break;
+            case 'Finance/Clientbank':
+                $name = 'Finance/ClientBank';
+            break;
+            case 'Finance/Collectionfee':
+                $name = 'Finance/CollectionFee';
+            break;            
         }
         $Model = null;
         $classFileName = APPPATH . "Models/{$name}Model.php";

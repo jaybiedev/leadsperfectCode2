@@ -22,6 +22,9 @@ app.controller('genericCtrl', function($scope, $http, $location) {
     		Messages : {error:null, warning:null, success:null}
     };
 
+    $scope.numberify = function(numstring) {
+        return parseFloat(numstring);
+    };
 
     $scope.loadRecord = function(record_id=null) {
 
