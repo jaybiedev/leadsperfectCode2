@@ -197,6 +197,7 @@
     <script src="/libs/tools/Common/js/datatable.tools.js"></script>
     <script src="/libs/tools/Common/js/Utils.js"></script>
     <script src="/js/Finance/nav.js"></script>
+    <script src="/js/Finance/finance.js"></script>
 
     [[foreach from=$footer.javascripts item=file]]
         <script src="[[$file]]"></script>

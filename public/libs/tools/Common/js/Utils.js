@@ -470,9 +470,15 @@ var CommonPlugins = {
                     primaryKey = field;
                 }
 
-                if (iterator == 1) {
+                if (iterator == 1 && !th.attr('render')) {
                     column['render'] = function(data, type, row, meta) {
                         return CommonUtils.renderDataInSpan(data, row.date_deleted)
+                    };
+                }
+
+                if (th.attr('render')) {
+                    column['render'] = function(data, type, row, meta) {
+                        return eval(th.attr('render'));
                     };
                 }
     

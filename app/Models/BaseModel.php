@@ -58,6 +58,9 @@ abstract class BaseModel extends Model
             case 'Finance/Collectionfee':
                 $name = 'Finance/CollectionFee';
             break;            
+            case 'Finance/Loantype':
+                $name = 'Finance/LoanType';
+            break;            
         }
         $Model = null;
         $classFileName = APPPATH . "Models/{$name}Model.php";
