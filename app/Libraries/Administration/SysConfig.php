@@ -1,7 +1,7 @@
-<?php namespace App\Libraries\Finance;
+<?php namespace App\Libraries\Administration;
 
 use CodeIgniter\Session\Session;
-use App\Models\Finance\SysConfigModel;
+use App\Models\Administration\SysConfigModel;
 
 class SysConfig 
 {

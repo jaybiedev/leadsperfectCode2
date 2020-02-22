@@ -94,6 +94,15 @@ i.fa:hover {
 
 /* end of colors */
 
+#main-nav.navbar {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    background-color: #efefef;
+    z-index: 1030;
+    opacity: 0.97;
+}
 .navbar.navbar-bottom-bordered {
     border-bottom: 1px solid #ccc;
     line-height: 1;
@@ -142,6 +151,10 @@ i.fa:hover {
         border-top: .3em solid transparent;
         border-left: .3em solid;
     }
+
+    main.container {
+        margin-top:65px;
+    }
 }
 
 .navbar-brand {
@@ -187,6 +200,7 @@ a {
 
 .page-title {
     font-size: 1.25em;
+    min-height: 30px;
 }
 .page-description {
     font-size: 1em;
@@ -228,7 +242,7 @@ main.container {
 .report-filter-wrapper {
     min-width:400px;
     border-left: 2px solid #ccc;
-    position: absolute;
+    position: fixed;
     right: 0;
     min-height: 100%;
     top: 51px;

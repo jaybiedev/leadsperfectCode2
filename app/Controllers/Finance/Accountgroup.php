@@ -1,7 +1,7 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
-use App\Models\Finance\AccountGroupModel;
+use App\Models\Finance\AccountgroupModel;
 
 class AccountGroup extends FinanceBaseController
 {
@@ -17,7 +17,7 @@ class AccountGroup extends FinanceBaseController
         $id = $this->request->getGet('id', FILTER_VALIDATE_INT);
 		$includeDeleted = Utils::getBoolean($this->request->getGet('includeDeleted'));
 
-        $AccountGroupModel = new AccountGroupModel();   
+        $AccountGroupModel = new AccountgroupModel();   
         $data = [];
 
         if (!empty($id))
@@ -40,7 +40,7 @@ class AccountGroup extends FinanceBaseController
 			$includeDeleted = Utils::getBoolean($meta['includeDeleted']);
 		}        
 
-        $AccountGroupModel = new AccountGroupModel();   
+        $AccountGroupModel = new AccountgroupModel();   
         $DataTable = new \App\Libraries\Common\DataTable($meta, $AccountGroupModel, 'account_group');
     
         $data = [];

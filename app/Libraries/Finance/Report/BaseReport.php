@@ -1,7 +1,7 @@
 <?php 
 namespace App\Libraries\Finance\Report;
 
-use App\Libraries\Finance\SysConfig;
+use App\Libraries\Administration\SysConfig;
 abstract class BaseReport
 {
     protected $db;

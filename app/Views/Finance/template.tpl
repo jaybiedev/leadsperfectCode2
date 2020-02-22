@@ -152,9 +152,7 @@
     </div>
 
     <main role="main" class="container">
-        [[if $View->pageHeader != null]]
-            <div class="page-title">[[$View->pageHeader]]</div>
-        [[/if]]
+        <div class="page-title">[[$View->getPageHeader()]]</div>
         [[if $View->pageDescription != null]]
             <div class="page-description hidden">[[$View->pageDescription]]</div>
         [[/if]]

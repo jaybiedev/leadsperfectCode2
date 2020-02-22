@@ -1,7 +1,7 @@
 <?php namespace App\Models\Finance;
 use App\Models\BaseModel;
 
-class AccountClassModel extends BaseModel 
+class AccountclassModel extends BaseModel 
 {
     protected $table = 'account_class';
     protected $primaryKey = 'account_class_id';

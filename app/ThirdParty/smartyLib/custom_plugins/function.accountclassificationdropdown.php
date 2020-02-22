@@ -17,7 +17,7 @@ function smarty_function_accountclassificationdropdown($params, $content)
     $id = isset($params['id']) ? $params['id'] : 'account_class_id';
     $selected = isset($params['selected']) ? $params['selected'] : 0;
 
-    $Model = new \App\Models\Finance\AccountClassModel();
+    $Model = new \App\Models\Finance\AccountclassModel();
     $items = $Model->findAll();
 
     $html =<<<HTML

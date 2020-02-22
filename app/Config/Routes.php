@@ -96,6 +96,7 @@ $routes->post('finance/payment/entry', 'Finance/Payment::post');
 
 $routes->get('finance/partner', 'Finance/Partner::index');
 $routes->get('finance/collectionfee', 'Finance/Collectionfee::index');
+$routes->get('finance/servicecharge', 'Finance/Servicecharge::index');
 $routes->get('finance/clientbank', 'Finance/Clientbank::index');
 $routes->get('finance/branch', 'Finance/Branch::index');
 $routes->get('finance/user', 'Finance/User::index');

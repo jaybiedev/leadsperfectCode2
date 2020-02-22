@@ -3,7 +3,7 @@ namespace App\Libraries\Finance\Report;
 use App\Helpers\Utils;
 use App\Helpers\Finance\FinanceUtils;
 use App\Libraries\Finance\Security;
-use \App\Libraries\Finance\SysConfig;
+use \App\Libraries\Administration\SysConfig;
 
 class LoanReleases extends BaseReport 
 {
@@ -29,14 +29,14 @@ class LoanReleases extends BaseReport
 
         $q = "SELECT *
                 FROM 
-                    account,
-                    releasing,
-                    account_group,
-                    account_class
-                WHERE 
-                    account.account_id=releasing.account_id AND
-                    account_group.account_group_id=releasing.account_group_id AND
-                    account_class.account_class_id=account_group.account_class_id";
+                    releasing
+                LEFT JOIN
+                    account ON releasing.account_id=account.account_id
+                LEFT JOIN
+                    account_group ON account_group.account_group_id=releasing.account_group_id 
+                LEFT JOIN
+                    account_class ON account_class.account_class_id=account_group.account_class_id
+                WHERE 1=1 ";
         
         if ($this->Filter->criteriaBy == 'date') {
             $from = $this->Filter->date_from;
@@ -57,7 +57,7 @@ class LoanReleases extends BaseReport
             $q .= " AND account_class.account_class_id='{$this->Filter->account_class_id}'";
         }
 
-        if ($this->Filter->branch_id != '')
+        if (!empty($this->Filter->branch_id))
         {
             $q .= " AND branch_id='{$this->Filter->branch_id}'";
         }
@@ -238,7 +238,7 @@ class LoanReleases extends BaseReport
     
         $details .= "---------- ----------------------- --------------- ------------ ---------- ----------- ---------- ------------ ------------ ------------\n";
         
-        $details .= Utils::space(40).Utils::adjustSize('TOTAL :',10).' '.
+        $details .= Utils::space(40).Utils::adjustSize('TOTAL :',9).' '.
                         Utils::adjustRight(number_format($total_principal,2),12).' '.
                         Utils::adjustRight(number_format($total_service_charge,2),10).' '.
                         Utils::adjustRight(number_format($total_collection_fee,2),11).' '.

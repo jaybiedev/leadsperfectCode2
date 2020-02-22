@@ -18,6 +18,7 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');
+            $this->View->disablePageHeader();
             $Report->setFilter($filters)->generatetReport();
         }
 

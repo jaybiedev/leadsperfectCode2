@@ -27,6 +27,7 @@ class View
     private $javascripts = [];
     private $global_stylesheets = [];
     private $global_javascripts = [];
+    private $isPageHeaderEnabled = true;
 
     function __construct()
     {
@@ -60,7 +61,10 @@ class View
         return $this->SmartyLib->fetch('eval:' . $content);
     }
     
-    
+    public function disablePageHeader() {
+        $this->isPageHeaderEnabled = false;
+    }
+
     public function setPageTitle($title) 
     {
         $this->pageTitle = $title;
@@ -86,6 +90,9 @@ class View
 
     public function getPageHeader() 
     {
+        if ($this->isPageHeaderEnabled == false)
+            return '';
+
         return $this->pageHeader;
     }
 

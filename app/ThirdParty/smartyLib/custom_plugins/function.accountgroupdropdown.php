@@ -17,7 +17,7 @@ function smarty_function_accountgroupdropdown($params, $content)
     $id = isset($params['id']) ? $params['id'] : 'account_group_id';
     $selected = isset($params['selected']) ? $params['selected'] : 0;
 
-    $Model = new \App\Models\Finance\AccountGroupModel();
+    $Model = new \App\Models\Finance\AccountgroupModel();
     $items = $Model->orderby("LOWER(account_group)", "asc")->findAll();
 
     $html =<<<HTML

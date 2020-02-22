@@ -1,14 +1,14 @@
 <?php namespace App\Controllers\Finance;
 use App\Controllers\BaseController;
 use App\Helpers\Utils;
-use App\Models\Finance\CollectionFeeModel;
+use App\Models\Finance\CollectionfeeModel;
 
 class CollectionFee extends FinanceBaseController
 {
 	public function index()
 	{   
-        $this->View->setPageHeader('Manage Fees');
-        $this->View->setModalTitle('Edit Fees');
+        $this->View->setPageHeader('Manage Collection Fees');
+        $this->View->setModalTitle('Edit Collection Fee');
         return $this->View->render('Finance/CollectionFee/index.tpl');
     }
     
@@ -22,33 +22,34 @@ class CollectionFee extends FinanceBaseController
 			$includeDeleted = Utils::getBoolean($meta['includeDeleted']);
 		}        
 
-        $CollectionFeeModel = new CollectionFeeModel();   
+        $CollectionFeeModel = new CollectionfeeModel();   
         $DataTable = new \App\Libraries\Common\DataTable($meta, $CollectionFeeModel, 'afrom', 'numeric');
     
         $data = [];
 
         if (!empty($DataTable->searchValue))
         {
-            $CollectionFeeModel->like($DataTable->getSearchableLike());
+            $CollectionFeeModel->like($DataTable->getSearchableLike(['ato', 'afrom', 'fee']));
 
             if ($includeDeleted)
                 $CollectionFeeModel->withDeleted();
 
             $data = $CollectionFeeModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection)
-                                ->findAllArray($DataTable->limit, $DataTable->offset);
+                                ->asArray()
+                                ->findAll($DataTable->limit, $DataTable->offset);
         }
         else
         {
-            $CollectionFeeModel->where("type", "C")->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection);
+            $CollectionFeeModel->orderBy($DataTable->getOrderByLower(), $DataTable->orderDirection);
 
             if ($includeDeleted)
                 $CollectionFeeModel->withDeleted();
                 
-            $data = $CollectionFeeModel->findAllArray($DataTable->limit, $DataTable->offset);
+            $data = $CollectionFeeModel->asArray()->findAll($DataTable->limit, $DataTable->offset);
         }
 
-        $recordsTotal = $CollectionFeeModel->countAllResults();
-        
+        $recordsTotal = $CollectionFeeModel->countResults();
+
         return $this->View->renderJsonDataTable($data, $recordsTotal);
     }
 
