@@ -57,4 +57,33 @@ class Report extends FinanceBaseController
         return $this->View->render('Finance/Report/withdrawindividual.tpl', $data);
     }
     
+    public function aging()
+    {
+        $Report = FactoryReport::factory('Aging');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Aging of Accounts Report');
+        return $this->View->render('Finance/Report/aging.tpl', $data);
+    }
+
+    public function example()
+    {
+        $Report = FactoryReport::factory('Example');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Example Report');
+        return $this->View->render('Finance/Report/example.tpl', $data);
+    }
 }
