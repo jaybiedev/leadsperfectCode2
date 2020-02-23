@@ -86,4 +86,109 @@ class Report extends FinanceBaseController
         $this->View->setPageHeader('Example Report');
         return $this->View->render('Finance/Report/example.tpl', $data);
     }
+
+    public function activeaccount()
+    {
+        $Report = FactoryReport::factory('ActiveAccount');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Active Account Report');
+        return $this->View->render('Finance/Report/activeaccount.tpl', $data);
+    }
+
+    public function accountledger_oldledger()
+    {
+        $Report = FactoryReport::factory('AccountLedger');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Account Ledger Report');
+        return $this->View->render('Finance/Report/accountledger_oldledger.tpl', $data);
+    }
+
+    public function nonmoving()
+    {
+        $Report = FactoryReport::factory('NonMoving');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Non-Moving Report');
+        return $this->View->render('Finance/Report/nonmoving.tpl', $data);
+    }
+
+    public function customers2()
+    {
+        $Report = FactoryReport::factory('CustomerListing');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Customer Listing Report');
+        return $this->View->render('Finance/Report/customers2.tpl', $data);
+    }
+
+    public function delinquent()
+    {
+        $Report = FactoryReport::factory('Delinquent');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Delinquent Accounts Report');
+        return $this->View->render('Finance/Report/delinquent.tpl', $data);
+    }
+
+    public function fundtransfer()
+    {
+        $Report = FactoryReport::factory('FundTransfer');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Fund Transfer Report');
+        return $this->View->render('Finance/Report/fundtransfer.tpl', $data);
+    }
+
+    public function atmmonitor()
+    {
+        $Report = FactoryReport::factory('ATMMonitor');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $Report->setFilter($filters)->generatetReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('ATM Monitor Report');
+        return $this->View->render('Finance/Report/atmmonitor.tpl', $data);
+    }
 }
