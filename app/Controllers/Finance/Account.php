@@ -129,7 +129,7 @@ class Account extends FinanceBaseController
             $asOfDate = $meta['asOfDate'] == 'NOW' ? '' : $meta['asOfDate'];
             $asOfDate = Utils::getDate($asOfDate, 'Y-m-d');
             $ReleasingModel = new ReleasingModel();
-            $LoanTypeModel = new \App\Models\Finance\LoanTypeModel();
+            $LoanTypeModel = new \App\Models\Finance\LoantypeModel();
 
             foreach ($data as $dat) {
                 $Releasings = $ReleasingModel->where('account_id', $dat['account_id'])->findAll();

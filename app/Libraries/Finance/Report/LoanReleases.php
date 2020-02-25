@@ -13,7 +13,7 @@ class LoanReleases extends BaseReport
         parent::__construct();
     }
 
-    public function generatetReport($is_draft_printer=false) {
+    public function generateReport($is_draft_printer=false) {
         // @todo: investigate why update on report action.
         /*
         $qu = "update releasing set account_group_id = account.account_group_id 
@@ -216,7 +216,7 @@ class LoanReleases extends BaseReport
                     
             }
                         
-            if ($lc>55 && $is_draft_printer)
+            if ($lc > $this->pageLength && $is_draft_printer)
             {
                 $this->content .= $header.$details;
                 $details .= "<eject>";
@@ -226,8 +226,7 @@ class LoanReleases extends BaseReport
                 $details = '';
             }			
         }
-        if ($lc>50 && $is_draft_printer)
-        {
+        if ($lc > $this->pageLength - 5 && $is_draft_printer) {
             $this->content .= $header.$details;
             $details .= "<eject>";
             
@@ -248,15 +247,14 @@ class LoanReleases extends BaseReport
                         Utils::adjustRight($total_released,12)."\n";
         $details .= "---------- ----------------------- --------------- ------------ ---------- ----------- ---------- ------------ ------------ ------------\n";
     
-            if ($lc>50 && $is_draft_printer)
-            {
-                $this->content .= $header.$details;
-                $details .= "<eject>";
-                
-                Utils::doPrint($header.$details);
-                $lc=6;
-                $details = '';
-            }			
+        if ($lc > $this->pageLength - 5 && $is_draft_printer) {
+            $this->content .= $header.$details;
+            $details .= "<eject>";
+            
+            Utils::doPrint($header.$details);
+            $lc=6;
+            $details = '';
+        }		
     
         $details .= Utils::space(20).'Total Obligation : '.Utils::adjustRight(number_format($total_gross,2),14).Utils::space(10).
                         'Total Deduction : '.Utils::adjustRight(number_format($total_deduction,2),14).Utils::space(10)."\n";

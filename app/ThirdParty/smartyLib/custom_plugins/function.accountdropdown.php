@@ -19,8 +19,8 @@ function smarty_function_accountdropdown($params, $content)
     $selected = isset($params['selected']) ? $params['selected'] : 0;
 
     $filter = "";
-    if (!empty($params['account_group_id'])) {
-        $filter .= "data-account-group-id='" . $params['account_group_id'] . "'";
+    if (!empty($params['account_id'])) {
+        $filter .= "data-account-id='" . $params['account_id'] . "'";
     }
 
     $html =<<<HTML

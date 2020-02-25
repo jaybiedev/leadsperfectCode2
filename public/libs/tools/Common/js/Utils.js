@@ -1,5 +1,10 @@
 $(document).ready(function() {
     CommonPlugins.init();
+
+    window.onscroll = function() {
+        ScrollTop.scrollFunction();
+    };
+    $("button#btn-scroll-top").click(function() {ScrollTop.topFunction()});
 });
 
 var CommonUtils = {
@@ -22,9 +27,9 @@ var CommonUtils = {
 
     formatNumber : function(num, precision) {
 
-        var number = num.replace(/,/g, "");
+        var number = String(num).replace(/,/g, "");
         if (typeof precision != "undefined" && parseInt(precision) > -1) {
-            number = parseFloat(num.replace(/,/g, "")).toFixed(parseInt(precision));
+            number = parseFloat(String(num).replace(/,/g, "")).toFixed(parseInt(precision));
         }
 
         return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -47,7 +52,7 @@ var CommonUtils = {
         if ($(domElement).attr(attribute)) 
             return $(domElement).attr(attribute);
 
-        retun;
+        return '';
     },
 
     renderDataInSpan : function(data, is_deleted_pill) {
@@ -501,4 +506,27 @@ var CommonPlugins = {
                 });
         });     
     }
+}
+
+var ScrollTop = {
+    //Get the button:
+    mybutton : $("button#btn-scroll-top"), //document.getElementById("btn-scroll-top"),
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    scrollFunction: function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            // ScrollTop.mybutton.style.display = "block";
+            ScrollTop.mybutton.show();
+        } 
+        else {
+            // ScrollTop.mybutton.style.display = "none";
+            ScrollTop.mybutton.hide();
+        }
+    },
+
+    // When the user clicks on the button, scroll to the top of the document
+    topFunction:function() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }        
 }

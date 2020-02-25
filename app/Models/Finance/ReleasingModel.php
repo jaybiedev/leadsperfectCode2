@@ -1,6 +1,8 @@
 <?php namespace App\Models\Finance;
 
 use App\Models\BaseModel;
+use App\Helpers\Utils;
+use App\Libraries\Common\DateLib;
 
 class ReleasingModel extends BaseModel
 {
@@ -106,103 +108,122 @@ class ReleasingModel extends BaseModel
                 ],                
         ];
 
+        public function Recalculate($Releasing) {
+
+                $releasing_id = $Releasing->releasing_id;
+                if (empty($releasing_id))
+                        return;
+
+                $sql = "SELECT sum(debit) as debit, sum(credit) as credit
+                        FROM
+                                ledger
+                        WHERE
+                                releasing_id ='{$releasing_id}' 
+                                AND status!='C'";
+                $Query = $this->db->query($sql);
+                $result = $Query->getRow();
+
+                $meta = ['releasing_id'=>$releasing_id, 'balance'=>($result->debit - $result->credit)];
+                $this->save($meta);
+                
+                return $meta;
+        }
+
         // @todo: cleanup, make sql efficient
         public function getAmountDue($Releasing, $mdate=null)
         {
-                $credit = 0;
-                $penalty = 0;
+                if (!$Releasing)
+                        return null;
+
+                $DateAsOf = new DateLib($mdate);
+                $ReleasingDate = new DateLib($Releasing->date);
+                $this->content = '';
+
                 // hack
-                $aAd = (array) $Releasing;
+                $aAd = is_object($Releasing) ? (array) $Releasing : [];
                 $aAd['credit'] = 0;
                 $aAd['debit'] = 0;
                 $aAd['lastpay'] = null;
-
+                $aAd['paid_due'] = 0;
+                $aAd['remaining_due'] = 0;
+                $aAd['amount_due'] = 0;
+                $aAd['months_due'] = 0;
+                $aAd['actual_due'] = 0;
+                $aAd['credit'] = 0;
+                $aAd['penalty'] = 0;
+                $aAd['today'] = null;
+                
+                // @todo: need to make these block of three ledger calls efficient
                 // $LedgerModel = new LedgerModel();
                 // $Ledger = $LedgerModel->where($ledgerWhere)
-                $sql = "SElECT sum(credit) as credit, sum(debit) as debit 
+                $sql = "SElECT 
+                                (CASE 
+                                        WHEN type = 'P' THEN SUM(debit)
+                                END) as penalty,
+                                (CASE 
+                                        WHEN type != 'P' THEN SUM(debit)
+                                END) as debit,
+                                (CASE 
+                                        WHEN type != 'P' THEN SUM(credit)
+                                END) as credit
                         FROM 
                                 ledger 
                         WHERE 
                                 status!='C' 
-                                AND type='P' 
                                 AND releasing_id='{$Releasing->releasing_id}'";
         
-                if ($mdate !='') {
-                        $sql .= " AND date <= '{$mdate}'";
+                if (!empty($mdate)) {
+                        // standardize date format
+                        $sql .= " AND date <= '{$DateAsOf->format('Y-m-d')}'";
+                }
+                $sql .= "GROUP BY type";
+
+                $LedgerQuery = $this->db->query($sql);
+                foreach ($LedgerQuery->getResult() as $Ledger) {
+                        $aAd['penalty'] += $Ledger->penalty;
+                        $aAd['credit'] += $Ledger->credit;
+                        $aAd['debit'] += $Ledger->debit;
                 }
 
-                $Ledgers = $this->db->query($sql)->getResult();
-                foreach ((array)$Ledgers  as $Ledger) {
-                        $penalty = $Ledger->debit;
-                }
-
-                $aAd['penalty'] = $penalty;
-        
-                $sql = "SELECT sum(credit) AS credit, sum(debit) AS debit 
-                                FROM 
-                                        ledger 
-                                WHERE
-                                        status!='C' 
-                                        AND releasing_id='{$Releasing->releasing_id}'";
-                if ($mdate !='') {
-                        $sql .= " AND date <= '{$mdate}'";
-                }
-        
-                $Ledger = $this->db->query($sql)->getResult();
-                foreach ((array)$Ledgers AS $Ledger) {
-                        $credit += $Ledger->credit;	
-                        $aAd['credit'] = $Ledger->credit;
-                        $aAd['debit']= $Ledger->debit;
-                }
-        
+                // @todo: optimize
                 $sql = "SELECT date 
                                 FROM 
                                         ledger 
                                 WHERE
                                         status!='C' and credit > 0 
                                         AND releasing_id='{$Releasing->releasing_id}'";
-                if ($mdate !='') {
-                        $sql .= " AND date <= '{$mdate}'";
+                if (!empty($mdate)) {
+                        $sql .= " AND date <= '{$DateAsOf->format('Y-m-d')}'";
                 }
-                $sql .= "order by date DESC";
-                $Ledgers = $this->db->query($sql)->getResult();
-                foreach ((array)$Ledgers as $Ledger) {
-                        $aAd['lastpay'] = $Ledger->date;
-                }
+                $sql .= " ORDER BY date DESC";
+                $Ledger = $this->db->query($sql)->getRow();
+                $aAd['lastpay'] = is_object($Ledger) ? $Ledger->date : null;
+                // end of ledger calls
                 
-                $releasing_date= $Releasing->date;
-                $ald = explode('-',$releasing_date);
                 $withdraw_day = $Releasing->withdraw_day;
         
-                if ($withdraw_day < '1') {
-                        $withdraw_day = $ald[2];
+                if (empty($withdraw_day)) {
+                        $withdraw_day = $ReleasingDate->format('j'); //$ald[2];
                 }
         
                 $term = $aAd['term'];
                 $mode = $aAd['mode'];	
         
-                if ($mdate == '') {
-                        $today = date('Y-m-d');
-                }
-                else {
-                        $today = $mdate;
-                }
-                $a2d =explode('-',$today);
-        
-                if ($ald[1] == 12 and $a2d[0] == $ald[0]+1 and $a2d[1] == 12 and $ald[0] >= 2013 )
-                {
-                        $ald[1] = 1;
-                        $ald[0] ++;
+                $dueMonth = $ReleasingDate->getMonth();
+                $dueYear = $ReleasingDate->getYear();
+                if ($ReleasingDate->isYear('2013', '>=') && $DateAsOf->isMonth('12') && $DateAsOf->isYear((int)$ReleasingDate->format('Y') + 1)) {
+                        $dueMonth = 1;
+                        $dueYear++;
                 }
                 
-                $months_due = ($a2d[0] - $ald[0])*12;	//--year to months
-                $months_due += $a2d[1] - $ald[1] ; //--months
+                $months_due = ($DateAsOf->getYear() - $dueYear)*12;	//--year to months
+                $months_due += $DateAsOf->getMonth() - $dueMonth ; //--months
         
-                if ($a2d[2]< $withdraw_day) {
+                if ($DateAsOf->getDay() < $withdraw_day) {
                          $months_due--;
                 }
                 
-                if ($withdraw_day > $ald[2] and $ald[1] != 12) {
+                if ($withdraw_day > $ReleasingDate->getDay() && $dueMonth != 12) {
                         //-- if loan date is after withdrawal date
                         $months_due++;
                 }
@@ -210,21 +231,18 @@ class ReleasingModel extends BaseModel
                 if ($months_due < $Releasing->term)  {
         
                         $termDue = $months_due*$aAd['ammort']; //-- due as of today
-                        $aAd['paid_due'] = intval($credit/$aAd['ammort']);
+                        $aAd['paid_due'] = intval($aAd['credit']/$aAd['ammort']);
                         
-                        if ($months_due >= 1)
-                        {
-                                $aAd['amount_due'] = $termDue - $credit + $penalty;
+                        if ($months_due >= 1) {
+                                $aAd['amount_due'] = $termDue - $aAd['credit'] + $aAd['penalty'];
         
-                                $md = $months_due - $credit/$aAd['ammort'];
+                                $md = $months_due - $aAd['credit']/$aAd['ammort'];
         
-                                if ($md > intval($months_due - $credit/$aAd['ammort']))
-                                {
-                                        $md = intval($months_due - $credit/$aAd['ammort'])+1;
+                                if ($md > intval($months_due - $aAd['credit']/$aAd['ammort'])) {
+                                        $md = intval($months_due - $aAd['credit']/$aAd['ammort'])+1;
                                 }
-                                else 
-                                {
-                                        $md = intval($months_due - $credit/$aAd['ammort']);
+                                else  {
+                                        $md = intval($months_due - $aAd['credit']/$aAd['ammort']);
                                 }
                         }
                         else {
@@ -238,16 +256,14 @@ class ReleasingModel extends BaseModel
         
                 }
                 else {
-                        $aAd['paid_due'] = intval($credit/$aAd['ammort']);
+                        $aAd['paid_due'] = intval($aAd['credit']/$aAd['ammort']);
                         $aAd['remaining_due'] = 0;
                         $aAd['amount_due'] = $Releasing->balance;
-                        $aAd['months_due'] = intval($aAd['term'] - $credit/$aAd['ammort']);
+                        $aAd['months_due'] = intval($aAd['term'] - $aAd['credit']/$aAd['ammort']);
                         $aAd['actual_due'] = $months_due;
                 }
         
-                $aAd['credit'] = $credit;
-                $aAd['penalty'] = $penalty;
-                $aAd['today'] = $today;
+                $aAd['today'] = $DateAsOf->format('Y-m-d');
         
                 if ($aAd['amount_due'] < 0) 
                         $aAd['amount_due'] = 0;

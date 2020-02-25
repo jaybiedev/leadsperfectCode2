@@ -7,12 +7,14 @@ var FinanceDD =  {
     _formatAccountDD : function (data) {
 
         var render = '';
+
         if (data && typeof data.item == 'object') {
             render = '<div class="select2-account-dd">' + 
                         '<div class="account-dd-head" title="' + data.text + '">' + data.text + '</div>' +
                         '<div class="account-dd-small">Loan...' + CommonUtils.formatNumber(data.item.Releasing.gross, 2) + '</div>' +
                         '<div class="account-dd-small">&nbsp;&nbsp;' + data.item.LoanType.loan_type + ' on ' + data.item.Releasing.date + '</div>' + // type / date / amount / 
-                        '<div class="account-dd-small">Due (Balance) ' + CommonUtils.formatNumber(data.item.amount_due, 2) + ' of ' + CommonUtils.formatNumber(data.item.Releasing.balance, 2) + '</div>' 
+                        '<div class="account-dd-small">Due (Balance) ' + CommonUtils.formatNumber(data.item.amount_due, 2) + ' of ' + 
+                            CommonUtils.formatNumber(data.item.Releasing.balance, 2) + '</div>' 
                     '</div>';
             return $(render);
         }

@@ -13,6 +13,6 @@ class CustomerListing extends BaseReport
         parent::__construct();
     }
 
-    public function generatetReport($is_draft_printer=false) {
+    public function generateReport($is_draft_printer=false) {
     }
 }

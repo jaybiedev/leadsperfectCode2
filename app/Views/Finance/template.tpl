@@ -157,6 +157,7 @@
             <div class="page-description hidden">[[$View->pageDescription]]</div>
         [[/if]]
         [[block name="ContentBody"]]Content Area[[/block]]
+        <button id="btn-scroll-top" title="Go to top">Top</button>
     </main>
 
     [[if $View->modalID neq null]]

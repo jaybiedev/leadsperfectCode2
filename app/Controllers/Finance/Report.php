@@ -11,6 +11,22 @@ class Report extends FinanceBaseController
         $this->redirectTo("/finance");
     }
 
+    public function example()
+    {
+        $Report = FactoryReport::factory('Example');
+        $data = [];
+
+        if ($this->isPost()) {
+            $filters = $this->request->getPostGet('filter');           
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
+        }
+
+        $data['Report'] = $Report;
+        $this->View->setPageHeader('Example Report');
+        return $this->View->render('Finance/Report/example.tpl', $data);
+    }
+
     public function loanreleases()
     {
         $Report = FactoryReport::factory('LoanReleases');
@@ -19,7 +35,7 @@ class Report extends FinanceBaseController
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');
             $this->View->disablePageHeader();
-            $Report->setFilter($filters)->generatetReport();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -34,7 +50,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');            
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -49,7 +66,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -60,31 +78,18 @@ class Report extends FinanceBaseController
     public function aging()
     {
         $Report = FactoryReport::factory('Aging');
+        $Report->Filter->date_to = Utils::getDate();
         $data = [];
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
         $this->View->setPageHeader('Aging of Accounts Report');
         return $this->View->render('Finance/Report/aging.tpl', $data);
-    }
-
-    public function example()
-    {
-        $Report = FactoryReport::factory('Example');
-        $data = [];
-
-        if ($this->isPost()) {
-            $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
-        }
-
-        $data['Report'] = $Report;
-        $this->View->setPageHeader('Example Report');
-        return $this->View->render('Finance/Report/example.tpl', $data);
     }
 
     public function activeaccount()
@@ -94,7 +99,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -102,19 +108,30 @@ class Report extends FinanceBaseController
         return $this->View->render('Finance/Report/activeaccount.tpl', $data);
     }
 
-    public function accountledger_oldledger()
+    public function accountledger()
     {
         $Report = FactoryReport::factory('AccountLedger');
+        $this->View->disablePageHeader();
         $data = [];
 
         if ($this->isPost()) {
-            $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            try {
+                $filters = $this->request->getPostGet('filter');     
+                $Report->setFilter($filters);
+                if ($Report->validate()) {
+                    $Report->generateReport();
+                    $this->View->disablePageHeader();
+                }
+            }
+            catch(\Exception $e) {
+                echo $e->getMessage();
+               die();
+            }
         }
 
         $data['Report'] = $Report;
         $this->View->setPageHeader('Account Ledger Report');
-        return $this->View->render('Finance/Report/accountledger_oldledger.tpl', $data);
+        return $this->View->render('Finance/Report/accountledger.tpl', $data);
     }
 
     public function nonmoving()
@@ -124,7 +141,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -139,7 +157,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -154,7 +173,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -169,7 +189,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;
@@ -184,7 +205,8 @@ class Report extends FinanceBaseController
 
         if ($this->isPost()) {
             $filters = $this->request->getPostGet('filter');           
-            $Report->setFilter($filters)->generatetReport();
+            $this->View->disablePageHeader();
+            $Report->setFilter($filters)->generateReport();
         }
 
         $data['Report'] = $Report;

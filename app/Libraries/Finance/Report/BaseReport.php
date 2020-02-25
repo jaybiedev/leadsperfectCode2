@@ -2,6 +2,8 @@
 namespace App\Libraries\Finance\Report;
 
 use App\Libraries\Administration\SysConfig;
+use App\Helpers\Utils;
+
 abstract class BaseReport
 {
     protected $db;
@@ -9,6 +11,7 @@ abstract class BaseReport
     public $previewFontSize=18;
     public $Filter;
     public $content;
+    public $pageLength = 55;
 
     public function __construct() {
         $filerClassName = str_replace("\Report\\", "\Report\ReportFilter\\", get_called_class()) . "Filter";
@@ -17,7 +20,7 @@ abstract class BaseReport
         $this->db = \Config\Database::connect('default', false);
     }
 
-    abstract function generatetReport();
+    abstract function generateReport();
 
     public function getHeader() {
         return SysConfig::get("BUSINESS_NAME");
@@ -39,5 +42,16 @@ abstract class BaseReport
 
     public function getContent() {
         return $this->content;
+    }
+
+    public function validate() {
+        if ($this->Filter->getRequiredFilters()) {
+            foreach ($this->Filter->getRequiredFilters() as $filter) {
+                if ($this->Filter->get($filter) === null)
+                    throw new \Exception("Missing required filter " . $filter);
+            }
+        }
+
+        return true;
     }
 }
