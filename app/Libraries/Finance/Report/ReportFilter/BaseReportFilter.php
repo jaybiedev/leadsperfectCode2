@@ -5,6 +5,10 @@ abstract class BaseReportFilter
 {
     protected $requiredFilters = [];
 
+    public function __construct() {
+        //
+    }
+
     public function load($meta) {
         foreach ($meta as $key=>$value) {
             if (property_exists($this, $key))
