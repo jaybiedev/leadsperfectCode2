@@ -261,6 +261,16 @@ class Utils
             return number_format($n,$d);
     }
 
+    public function monthDiff($d1,$d2)
+    {
+        $a1 = explode('/',$d1);
+        $a2 = explode('/',$d2);
+        
+        //must be modified
+        $diff = $a2[0] - $a1[0];
+        return $diff;
+    }
+
     public static function doPrint($pln)
     {
         // global $SYSCONF;
