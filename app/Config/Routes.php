@@ -32,8 +32,11 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
 
+$bundle = getenv("siteBundle");
+if ($bundle == 'psales') {
+	$routes->get('/', 'Legacy/Psales::index');	
+}
 /*
 
 $routes->get('', 'Common/Home::index');
