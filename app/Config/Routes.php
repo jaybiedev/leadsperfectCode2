@@ -72,6 +72,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
 $routes->get('', 'Common/Home::index');
 $routes->get('common/forms', 'Common/Standards::forms');
 
@@ -123,4 +124,10 @@ $routes->get('payroll/deparment', 'Finance/Department::index');
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+
+if (file_exists(APPPATH . 'Config/Legacy/PsalesRoutes.php'))
+{
+	require APPPATH . 'Config/Legacy/PsalesRoutes.php';
 }
